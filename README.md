@@ -11,13 +11,12 @@ Links:
 
 
 ### Overview of the Project
-overview here
-
+The CIT-U Student Organization Management System is a web application designed to streamline the management and coordination of student organizations within Cebu Institute of Technology - University. This web app serves as a centralized hub for members, enabling effective communication, organization, tasks assignment, and participation in various activities and events.
 ---
 
 
 ### List of Features
-1. Feature one
-2. Feature two
-3. Feature three
-4. Feature four
+1. Task Management
+2. Organization Management
+3. Attendance Tracking
+4. Assign Events
