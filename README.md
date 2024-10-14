@@ -19,3 +19,4 @@ Links:
 2. Organization Management
 3. Attendance Tracking
 4. Assign Events
+5. Announcements/Reminders
