@@ -1,0 +1,173 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="author" content="Felraine Cataos" />
+    <meta name="Dashboard" content="Dashboard Screen" />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'calendar_app/calendarStyles.css' %}"
+    />
+
+    <title>Dashboard</title>
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="{% static 'calendar_app/images/CIT_logo.png' %}"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="sidebar">
+      <div class="top">
+        <div class="logo">
+          <img
+            src="{% static 'calendar_app/images/CIT_logo.png' %}"
+            alt="logo"
+            class="logo"
+          />
+          <span class="orgName">CSS</span>
+        </div>
+        <i class="bx bx-menu" id="btn"></i>
+        <div class="user">
+          <img
+            src="{% static 'calendar_app/images/profile.jpg' %}"
+            alt="user"
+            class="user"
+          />
+          <div class="name">
+            <p class="username">Jane Doe</p>
+            <p class="role">User Role</p>
+          </div>
+        </div>
+        <ul>
+          <li>
+            <a href="#">
+              <img
+                src="{% static 'calendar_app/images/home.png' %}"
+                alt="home"
+                class="icon home-icon"
+              />
+              <span class="nav-item">Dashboard</span>
+            </a>
+            <span class="tooltip">Dashboard</span>
+          </li>
+          <li>
+            <a href="{% url 'calendar' %}">
+              <img
+                src="{% static 'calendar_app/images/calendar.png' %}"
+                alt="calendar"
+                class="icon calendar-icon"
+              />
+              <span class="nav-item">Calendar</span>
+            </a>
+            <span class="tooltip">Calendar</span>
+          </li>
+          <li>
+            <a href="#">
+              <img
+                src="{% static 'calendar_app/images/group.png' %}"
+                alt="Members List"
+                class="icon member-icon"
+              />
+              <span class="nav-item">Members</span>
+            </a>
+            <span class="tooltip">Members</span>
+          </li>
+          <li>
+            <a href="#">
+              <img
+                src="{% static 'calendar_app/images/logout.png' %}"
+                alt="logout"
+                class="icon logout-icon"
+              />
+              <span class="nav-item">Logout</span>
+            </a>
+            <span class="tooltip">Logout</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="main-content">
+      <div class="container">
+        <h1>Calendar</h1>
+      </div>
+      <div id="calendar"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>
+    <script>
+      let btn = document.querySelector("#btn");
+      let sidebar = document.querySelector(".sidebar");
+      let calendarEl = document.getElementById("calendar");
+
+      let calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: "dayGridMonth",
+        events: "/calendar/events/",
+      });
+
+      calendar.render();
+
+      btn.onclick = function () {
+        sidebar.classList.toggle("active");
+      };
+
+      const listItems = document.querySelectorAll("li");
+
+      listItems.forEach((listItem) => {
+        listItem.addEventListener("mouseover", function () {
+          const homeIcon = this.querySelector(".home-icon");
+          const calendarIcon = this.querySelector(".calendar-icon");
+          const memberIcon = this.querySelector(".member-icon");
+          const logoutIcon = this.querySelector(".logout-icon");
+
+          if (homeIcon) {
+            homeIcon.src = "{% static 'calendar_app/images/home2.png' %}";
+          }
+          if (calendarIcon) {
+            calendarIcon.src =
+              "{% static 'calendar_app/images/calendar2.png' %}";
+          }
+          if (memberIcon) {
+            memberIcon.src = "{% static 'calendar_app/images/group2.png' %}";
+          }
+          if (logoutIcon) {
+            logoutIcon.src = "{% static 'calendar_app/images/logout2.png' %}";
+          }
+        });
+
+        listItem.addEventListener("mouseout", function () {
+          const homeIcon = this.querySelector(".home-icon");
+          const calendarIcon = this.querySelector(".calendar-icon");
+          const memberIcon = this.querySelector(".member-icon");
+          const logoutIcon = this.querySelector(".logout-icon");
+
+          if (homeIcon) {
+            homeIcon.src = "{% static 'calendar_app/images/home.png' %}";
+          }
+          if (calendarIcon) {
+            calendarIcon.src =
+              "{% static 'calendar_app/images/calendar.png' %}";
+          }
+          if (memberIcon) {
+            memberIcon.src = "{% static 'calendar_app/images/group.png' %}";
+          }
+          if (logoutIcon) {
+            logoutIcon.src = "{% static 'calendar_app/images/logout.png' %}";
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
