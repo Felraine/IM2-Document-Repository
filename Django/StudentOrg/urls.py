@@ -5,11 +5,8 @@ from register_app.views import register_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('register/',include('register_app.urls')), #login/logout
-    path('', register_view, name='register'), 
-    
+    path('register/', include('register_app.urls')),  # Login/logout
+    path('', register_view, name='register'),  # Landing page for registration
     path('calendar/', include('calendar_app.urls')),  
-    path('calendar/', calendar_view, name='calendar'), 
-
-    #path('',include("django.contrib.auth.urls")), # auth url for login/logout
+    path('settings/', include('settings_app.urls')),  # This line includes settings_app urls
 ]
