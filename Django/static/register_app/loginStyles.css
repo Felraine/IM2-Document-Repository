@@ -10,6 +10,11 @@ body {
   
 }
 
+.error{
+  color: red;
+
+}
+
 .title{
   color:#8a252c;
   margin-bottom: 3rem;
