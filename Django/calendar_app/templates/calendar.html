@@ -87,6 +87,17 @@
           <li>
             <a href="#">
               <img
+                src="{% static 'calendar_app/images/settings.png' %}"
+                alt="Settings"
+                class="icon settings-icon"
+              />
+              <span class="nav-item">Settings</span>
+            </a>
+            <span class="tooltip">Settings</span>
+          </li>
+          <li>
+            <a href="#">
+              <img
                 src="{% static 'calendar_app/images/logout.png' %}"
                 alt="logout"
                 class="icon logout-icon"
@@ -130,6 +141,7 @@
           const homeIcon = this.querySelector(".home-icon");
           const calendarIcon = this.querySelector(".calendar-icon");
           const memberIcon = this.querySelector(".member-icon");
+          const settingsIcon = this.querySelector(".settings-icon");
           const logoutIcon = this.querySelector(".logout-icon");
 
           if (homeIcon) {
@@ -142,6 +154,10 @@
           if (memberIcon) {
             memberIcon.src = "{% static 'calendar_app/images/group2.png' %}";
           }
+          if (settingsIcon) {
+            settingsIcon.src =
+              "{% static 'calendar_app/images/settings2.png' %}";
+          }
           if (logoutIcon) {
             logoutIcon.src = "{% static 'calendar_app/images/logout2.png' %}";
           }
@@ -151,6 +167,7 @@
           const homeIcon = this.querySelector(".home-icon");
           const calendarIcon = this.querySelector(".calendar-icon");
           const memberIcon = this.querySelector(".member-icon");
+          const settingsIcon = this.querySelector(".settings-icon");
           const logoutIcon = this.querySelector(".logout-icon");
 
           if (homeIcon) {
@@ -162,6 +179,10 @@
           }
           if (memberIcon) {
             memberIcon.src = "{% static 'calendar_app/images/group.png' %}";
+          }
+          if (settingsIcon) {
+            settingsIcon.src =
+              "{% static 'calendar_app/images/settings.png' %}";
           }
           if (logoutIcon) {
             logoutIcon.src = "{% static 'calendar_app/images/logout.png' %}";
