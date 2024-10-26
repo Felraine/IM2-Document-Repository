@@ -74,8 +74,12 @@ WSGI_APPLICATION = 'StudentOrg.wsgi.application'
 # Database
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'SOMS_db',
+        'USER': 'root',
+        'PASSWORD': 'qwertyuiop',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
 
