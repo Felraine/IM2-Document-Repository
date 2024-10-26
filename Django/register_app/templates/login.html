@@ -1,25 +1,45 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'loginStyles.css' %}">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'register_app/loginStyles.css' %}" />
     <title>Login</title>
-</head>
-<body>
- 
-    <form method = "post" class="from-group">
-        {%csrf_token%}
-        <img src="{% static 'register_images/CIT_logo.png' %}" alt="Logo" class="logo"> <br>
-        <input type="text" id="email" name="email" placeholder="Institutional Email"> <br>
-        <input type="password" id="password" name="email" placeholder="Password"> <br>
-        <button type="submit" class="btn btn-success">Login </button> <br>
-        <a href="{% url 'calendar' %}">Create Account</a>
+    <style>
+      body {
+        background-image: url("{% static 'images/background.jpg' %}");
+        background-size: cover;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+        background-color: transparent;
+      }
+    </style>
+  </head>
+  <body>
+    <form method="post" class="from-group">
+      {% csrf_token %}
+      <img src="{% static 'images/CIT_logo.png' %}" alt="Logo" class="logo" />
+      <br />
+      <input
+        type="text"
+        id="email"
+        name="email"
+        placeholder="Institutional Email"
+      />
+      <br />
+      <input
+        type="password"
+        id="password"
+        name="password"
+        placeholder="Password"
+      />
+      <br />
+      <button type="submit" class="btn btn-success">Login</button> <br />
+      <a href="{% url 'calendar' %}">Create Account</a>
     </form>
-    
-</body>
+  </body>
 </html>
-
-
-
