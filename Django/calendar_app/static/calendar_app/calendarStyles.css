@@ -133,109 +133,77 @@
   display: flex;
   align-items: center;
   text-decoration: none;
-  border-radius: 0.8rem;
-  margin-top: 0.5rem;
-  padding-left: 4px;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+  height: 100%;
+  padding: 0 1rem;
 }
 
 .sidebar ul li a:hover {
-  background-color: #fed534;
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
-.sidebar ul li a:hover .nav-item {
-  background-color: #fed534 !important;
-  color: black !important;
-}
-
-.sidebar ul li a img {
-  min-width: 1.5rem;
-  height: 1.5rem;
-  margin-left: 8px;
-}
-
-.home:hover {
-  content: url("images/home2.png");
-}
-
-.sidebar .nav-item {
-  opacity: 0;
-  margin-left: 1rem;
-}
-
-.sidebar.active .nav-item {
-  opacity: 1;
-}
-
-.sidebar ul li .tooltip {
+.tooltip {
   position: absolute;
-  left: 125px;
+  left: 100%;
   top: 50%;
-  transform: translate(-50%, -50%);
-  box-shadow: 0 0.5rem 0.8rem rgba(0, 0, 0, 0.2);
-  border-radius: 0.6rem;
-  padding: 0.4rem 1.2rem;
-  line-height: 1.8rem;
-  z-index: 20;
+  transform: translateY(-50%);
+  padding: 0.5rem;
+  background-color: #8a252c;
+  color: #fff;
+  border-radius: 0.5rem;
+  white-space: nowrap;
   opacity: 0;
-  color: white;
+  transition: opacity 0.3s ease;
   pointer-events: none;
 }
 
 .sidebar ul li:hover .tooltip {
   opacity: 1;
-  background-color: #8a252c;
-  margin-left: 1rem;
-}
-
-.sidebar.active ul li .tooltip {
-  display: none;
 }
 
 .main-content {
-  position: relative;
-  min-height: 100vh;
+  position: absolute;
   top: 0;
   left: 80px;
-  transition: all 0.5s ease;
+  height: 100vh;
   width: calc(100% - 80px);
-  padding: 0;
-  background-color: #efefef;
+  background-color: #f0f0f0;
+  padding: 1rem;
+  transition: left 0.5s ease, width 0.5s ease;
 }
 
-.container {
-  width: 100%;
-  box-shadow: 0 5px 4px -2px rgba(0, 0, 0, 0.4);
-  padding: 0.5rem 0rem 0.5rem 1rem;
-  color: #8a252c;
-  background-color: #fff;
+.main-content .container {
+  padding: 1rem;
 }
 
-/* Start adding new CSS here */
+/* Calendar Styles */
 #calendar {
-  max-width: 60rem;
-  margin: 0 auto;
-  height: 500px;
-  margin-top: 2rem;
-  color: #8a252c;
-  transition: width 0.5s ease;
+  max-width: 800px; /* Set maximum width */
+  margin: 0 auto; /* Center the calendar */
+  background-color: white; /* Background color for better visibility */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+  padding: 1rem; /* Padding inside the calendar */
 }
 
-.fc-daygrid-day {
-  background-color: #fff;
-}
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 60px;
+  }
 
-.fc-day-today {
-  background-color: #fed534 !important;
-  border: 2px solid #8a252c;
-}
+  .sidebar.active {
+    width: 200px;
+  }
 
-.fc-daygrid-day-frame {
-  border: 1px solid #8a252c;
-}
+  .main-content {
+    left: 60px;
+    width: calc(100% - 60px);
+  }
 
-.fc-col-header-cell {
-  background-color: #8a252c;
-  color: #fed534;
-  font-weight: bold;
-  border: 1px solid #8a252c;
+  #calendar {
+    width: 100%; /* Make calendar responsive */
+    padding: 0.5rem; /* Adjust padding for smaller screens */
+  }
 }
