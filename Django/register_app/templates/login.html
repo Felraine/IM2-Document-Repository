@@ -1,31 +1,40 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="{% static 'register_app/loginStyles.css' %}" />
     <title>Student Organization Management System</title>
-
     <link 
-    rel="icon"
-    type="image/x-icon"
-    href="{% static 'images/CIT_logo.png' %}"
+        rel="icon"
+        type="image/x-icon"
+        href="{% static 'images/CIT_logo.png' %}"
     />
-  
-  </head>
-  <body>
+</head>
+<body>
     <div class="container"> 
         <h2 class="title"> Student Organization Management System</h2>
-    <form method="post" class="from-group">
-      {% csrf_token %}
-      <img src="{% static 'images/CIT_logo.png' %}" alt="Logo" class="logo" />
-      <br />
-      <input type="text" id="email" name="email" placeholder="Institutional Email"/><br />
-      <input type="password" id="password" name="password" placeholder="Password"/> <br />
-      <button type="submit" class="btn btn-success">Login</button> <br />
-      <a href="{% url 'calendar' %}">Create Account</a>
-    </form>
+
+        <form method="post" class="form-group">
+            {% csrf_token %}
+            <img src="{% static 'images/CIT_logo.png' %}" alt="Logo" class="logo" />
+            <br />
+            <input type="text" id="email" name="email" placeholder="Institutional Email" required /><br />
+            <input type="password" id="password" name="password" placeholder="Password" required /> <br />
+            <button type="submit" class="btn btn-success">Login</button> <br />
+            <a href="{% url 'calendar' %}">Create Account</a>
+
+            {% if messages %}
+                <div class="error-message">
+
+                    {% for message in messages %}
+                    <p>{{ message }}</p>
+                    {% endfor %}
+                    
+                </div>
+            {% endif %}
+        </form>
     </div>
-  </body>
+</body>
 </html>

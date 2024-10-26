@@ -50,7 +50,7 @@ input {
 }
 
 input::placeholder {
-  color: #9e9d9d; /* Change this to your desired color */
+  color: #b9b9b9; /* Change this to your desired color */
   opacity: 1; /* Optional: control the opacity of the placeholder text */
 }
 
