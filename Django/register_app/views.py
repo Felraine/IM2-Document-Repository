@@ -6,13 +6,16 @@ def login_view(request):
     if request.method == 'POST':
         email = request.POST.get('email')
         password = request.POST.get('password')
-        
+
         try:
-            member = Members.objects.get(email=email, password=password)
-            request.session['member_id'] = member.id
-            return redirect('calendar')  # successful login
+            member = Members.objects.get(email=email)
+            if password == member.password: 
+                request.session['member_id'] = member.id
+                request.user = member  
+                return redirect('calendar')
+            else:
+                messages.error(request, 'Invalid email or password.')
         except Members.DoesNotExist:
             messages.error(request, 'Invalid email or password.')
 
-    
-    return render(request, "login.html") 
+    return render(request, "login.html")

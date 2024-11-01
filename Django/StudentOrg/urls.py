@@ -8,5 +8,4 @@ urlpatterns = [
     path('register/', include('register_app.urls')),  # Login/logout
     path('', login_view, name='register'),  # Landing page for registration
     path('calendar/', include('calendar_app.urls')),  
-    path('settings/', include('settings_app.urls')),  # This line includes settings_app urls
 ]

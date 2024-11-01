@@ -22,7 +22,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'calendar_app',
-    'settings_app',
     'register_app',
 ]
 
@@ -63,7 +62,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'SOMS_db',
         'USER': os.environ.get('DB_USER', 'root'),
-        'PASSWORD': os.environ.get('DB_PASSWORD', 'asdfghjkl'), #asdfghjkl
+        'PASSWORD': os.environ.get('DB_PASSWORD', 'qwertyuiop'), #asdfghjkl
         'HOST': 'localhost',
         'PORT': '3306',
     }

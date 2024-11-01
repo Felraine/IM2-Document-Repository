@@ -46,8 +46,11 @@
             class="user"
           />
           <div class="name">
-            <p class="username">Jane Doe</p>
-            <p class="role">User Role</p>
+            <p class="username">{{ fname }} {{ lname }}</p>
+            <p class="role">
+              {% if user_role == 0 %} Member {% else %} {% if user_role == 1 %}
+              Admin {% else %} Unknown Role {% endif %} {% endif %}
+            </p>
           </div>
         </div>
         <ul>
@@ -83,17 +86,6 @@
               <span class="nav-item">Members</span>
             </a>
             <span class="tooltip">Members</span>
-          </li>
-          <li>
-            <a href="{% url 'settings' %}">
-              <img
-                src="{% static 'images/settings.png' %}"
-                alt="Settings"
-                class="icon settings-icon"
-              />
-              <span class="nav-item">Settings</span>
-            </a>
-            <span class="tooltip">Settings</span>
           </li>
           <li>
             <a href="{% url 'register' %}">
@@ -135,7 +127,6 @@
       };
 
       const listItems = document.querySelectorAll("li");
-
       listItems.forEach((listItem) => {
         listItem.addEventListener("mouseover", function () {
           const homeIcon = this.querySelector(".home-icon");
