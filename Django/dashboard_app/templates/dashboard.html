@@ -112,8 +112,9 @@
     <div class="overlay" id="overlay"></div>
     <div class="eventFormContainer" id="eventFormContainer">
       <span class="close-btn" onclick="closeForm()">&times;</span>
+
       <h2>Add New Event</h2>
-      <form class="eventForm" id="eventForm" method="post" action="{% url 'dashboard' %}">
+      <form class="eventForm" id="eventForm" method="post" action="{% url 'addEvents' %}">
         {% csrf_token %}
         <br>
         <label for="title">Title:</label>
@@ -130,6 +131,7 @@
         <br><br>
         <button type="submit">Save Event</button>
       </form>
+      
     </div>
   </div>
 
