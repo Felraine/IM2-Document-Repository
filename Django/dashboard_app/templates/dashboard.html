@@ -104,7 +104,61 @@
         <h1>Dashboard</h1>
       </div>
       <div id="dashboard"></div>
+      <div class="events">
+        <h2>Upcoming Events</h2>
+      <button class="addEventBtn" id="addEventBtn">Add Event</button>
     </div>
+
+    <div class="overlay" id="overlay"></div>
+    <div class="eventFormContainer" id="eventFormContainer">
+      <span class="close-btn" onclick="closeForm()">&times;</span>
+
+      <h2>Add New Event</h2>
+      <form class="eventForm" id="eventForm" method="post" action="{% url 'addEvents' %}">
+        {% csrf_token %}
+        <br>
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" required>
+        <br><br>
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" required></textarea>
+        <br><br>
+        <label for="location">Location:</label>
+        <input type="text" id="location" name="location" required>
+        <br><br>
+        <label for="date_time">Date & Time:</label>
+        <input type="datetime-local" id="date_time" name="date_time" required>
+        <br><br>
+        <button type="submit">Save Event</button>
+      </form>
+      
+    </div>
+  </div>
+
+  <script>
+    /*dialog box script for add event*/    
+    const addEventBtn = document.getElementById('addEventBtn');
+    const eventFormContainer = document.getElementById('eventFormContainer');
+    const overlay = document.getElementById('overlay');
+
+
+    addEventBtn.onclick = function() {
+      eventFormContainer.style.display = "block";
+      overlay.style.display = "block";
+    }
+
+  
+    function closeForm() {
+      eventFormContainer.style.display = "none";
+      overlay.style.display = "none";
+    }
+
+  
+    overlay.onclick = function() {
+      closeForm();
+    }
+
+  </script>
 
     <script>
       let btn = document.querySelector("#btn");
