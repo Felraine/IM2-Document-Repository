@@ -112,7 +112,7 @@
             <input
               type="text"
               id="searchMember"
-              placeholder="Search by name or email"
+              placeholder="Search by name/email"
               class="search-input"
             />
             <button id="openModalBtn" class="add-member-btn">Add Member</button>
@@ -144,14 +144,29 @@
         </div>
         <div id="membersList">
           <ul class="list">
-            {% for member in members %}
-            <li>{{ member.fname }} {{ member.lname }} - {{ member.email }}</li>
-            {% endfor %}
+              {% for member in members %}
+              <li>
+                  <img src="{{ member.profile_picture_url }}" alt="{{ member.fname }} {{ member.lname }} - {{ member.email }}" class="profile-pic">
+                  
+                  {% if user_role == 1 %} 
+                      <form method="POST" action="{% url 'members' %}" style="display:inline;"> 
+                          {% csrf_token %}
+                          <input type="hidden" name="member_id" value="{{ member.id }}">
+                          <select class="role-change-dropdown" name="new_role" onchange="this.form.submit()">
+                              <option value="1" {% if member.user_role == 1 %}selected{% endif %}>Admin</option>
+                              <option value="0" {% if member.user_role == 0 %}selected{% endif %}>Member</option>
+                          </select>
+                          <input type="hidden" name="change_role" value="true">  
+                      </form>
+                  {% else %}
+                      <span class="role">{{ member.user_role|yesno:"Admin,Member" }}</span>
+                  {% endif %}
+              </li>
+              {% endfor %}
           </ul>
-        </div>
       </div>
-    </div>
-
+      
+       
     <script>
       let btn = document.querySelector("#btn");
       let sidebar = document.querySelector(".sidebar");

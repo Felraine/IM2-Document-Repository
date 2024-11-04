@@ -326,5 +326,40 @@
 }
 
 .list {
-  margin-left: 35px;
+  list-style: none;
+  padding: 0;
+}
+
+.list li {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.3s;
+}
+
+.list li:hover {
+  background-color: #f0f0f0;
+}
+
+.edit-btn {
+  background-color: #4caf50; /* Green */
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.edit-btn:hover {
+  background-color: #45a049;
+}
+
+.role {
+  color: black;
+}
+
+#searchMember {
+  font-size: 15px;
 }
