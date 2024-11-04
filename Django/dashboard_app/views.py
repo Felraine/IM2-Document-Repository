@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from register_app.models import Members
+from .models import Event
 
 def dashboard_view(request):
     print(f"User is authenticated: {'member_id' in request.session}")
@@ -22,3 +23,20 @@ def dashboard_view(request):
             print("Member does not exist")
 
     return render(request, './dashboard.html', context)
+
+def addEvent(request):
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        description = request.POST.get('description')
+        location = request.POST.get('location')
+        date_time = request.POST.get('date_time')
+
+        Event.objects.create(
+            title=title,
+            description=description,
+            location=location,
+            date_time=date_time
+        )
+    
+    return render(request, 'dashboard.html')
+        
