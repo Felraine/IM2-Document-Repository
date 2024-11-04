@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from register_app.models import Members
 from .models import Event
+from django.urls import reverse
 
 def dashboard_view(request):
     print(f"User is authenticated: {'member_id' in request.session}")
@@ -37,6 +38,7 @@ def addEvent(request):
             location=location,
             date_time=date_time
         )
+        return redirect(reverse('event_list')) 
     
     return render(request, 'dashboard.html')
         
