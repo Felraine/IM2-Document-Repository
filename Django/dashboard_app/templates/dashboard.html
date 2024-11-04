@@ -111,9 +111,9 @@
 
     <div class="overlay" id="overlay"></div>
     <div class="eventFormContainer" id="eventFormContainer">
-      <span class="close-btn" onclick="closeForm()">&times;</span>
+      <span class="closeBtn" onclick="closeForm()">&times;</span>
 
-      <h2>Add New Event</h2>
+      <h2 class="title">Add New Event</h2>
       <form class="eventForm" id="eventForm" method="post" action="{% url 'addEvents' %}">
         {% csrf_token %}
         <br>
@@ -127,9 +127,9 @@
         <input type="text" id="location" name="location" required>
         <br><br>
         <label for="date_time">Date & Time:</label>
-        <input type="datetime-local" id="date_time" name="date_time" required>
+        <input type="datetime-local" id="date_time" name="date_time" required> 
         <br><br>
-        <button type="submit">Save Event</button>
+        <button class="saveEventBtn" type="submit">Save Event</button>
       </form>
       
     </div>
