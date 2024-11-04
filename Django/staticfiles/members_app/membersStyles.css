@@ -211,3 +211,8 @@
 }
 
 /* Start adding new CSS here */
+
+.test {
+  font-size: large;
+  font-weight: bold;
+}
