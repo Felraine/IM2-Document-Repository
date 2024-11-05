@@ -117,7 +117,11 @@
                       <p>{{ event.description }}</p>
                       <p><strong>Location:</strong> {{ event.location }}</p>
                       <p><strong>Date & Time:</strong> {{ event.dateTime }}</p>
-                      <button>delete</button>
+                      
+                      <form method="POST" action="{% url 'deleteEvent' event.id %}">
+                        {% csrf_token %}
+                        <button type="submit">Delete</button>
+                    </form>
                   </div>
               {% empty %}
                   <p>No upcoming events.</p>

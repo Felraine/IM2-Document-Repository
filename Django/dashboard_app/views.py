@@ -44,7 +44,8 @@ def addEvent(request):
     return render(request, 'dashboard.html')
 
 def deleteEvent(request, event_id):
-    event = get_object_or_404(Event, id = event_id)
-    event.delete()
-    return redirect('dashboard')
+    if request.method == 'POST':
+        event = get_object_or_404(Event, id = event_id)
+        event.delete()
+        return redirect('dashboard')
         
