@@ -106,6 +106,17 @@
       <div id="dashboard"></div>
       <div class="events">
         <h2>Upcoming Events</h2>
+
+        {% for event in events %}
+        <div class="eventList">
+            <h3>{{ event.title }}</h3>
+            <p>{{ event.description }}</p>
+            <p><strong>Location:</strong> {{ event.location }}</p>
+            <p><strong>Date & Time:</strong> {{ event.dateTime }}</p>
+        </div>
+    {% empty %}
+        <p>No upcoming events.</p>
+    {% endfor %}
       <button class="addEventBtn" id="addEventBtn">Add Event</button>
     </div>
 

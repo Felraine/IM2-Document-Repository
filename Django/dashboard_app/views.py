@@ -9,6 +9,7 @@ def dashboard_view(request):
         'fname': 'Guest',
         'lname': '',
         'user_role': None,
+        'events': Event.objects.all() #display events
     }
 
     if 'member_id' in request.session:
@@ -38,6 +39,7 @@ def addEvent(request):
             dateTime=date_time
         )
         return redirect(dashboard_view) 
-    #Event.objects.all() #fetch n displayy events 
+    
+
     return render(request, 'dashboard.html')
         

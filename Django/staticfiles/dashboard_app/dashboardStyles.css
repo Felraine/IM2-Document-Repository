@@ -308,10 +308,10 @@ textarea:hover{
 
 .closeBtn{
   color:#8a252c;
-    font-size: 20px; 
+    font-size: 30px; 
     cursor: pointer;
     float: right;
-    margin-right: 20px;
+    margin-right: 15px;
 }
 
 .saveEventBtn{
@@ -325,6 +325,10 @@ textarea:hover{
     border-radius: 5px;
     margin-top: 2px;
 
+}
+
+.eventList{
+  
 }
 
 

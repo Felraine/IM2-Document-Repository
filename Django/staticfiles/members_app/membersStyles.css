@@ -211,12 +211,49 @@
 }
 
 /* Start adding new CSS here */
-.test {
-  font-size: large;
-  font-weight: bold;
+.memberHeader {
+  font-weight: 600;
+  color: grey;
+  font-size: 1rem;
+  margin-left: 10px;
+  margin-top: 10px;
 }
 
-/* Style for the "Add Member" button */
+.members-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.memList {
+  color: #000;
+  font-size: 25px;
+  margin-right: auto;
+  margin-left: 10px;
+}
+
+.members-header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-right: 10px;
+  margin-top: 0px;
+  width: 100%;
+}
+
+.member-count {
+  color: grey;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.search-input {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  width: 200px;
+}
+
 .add-member-btn {
   background-color: #8a252c;
   color: white;
@@ -224,12 +261,17 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin: 20px 0;
+  margin-right: 15px;
 }
 
-/* Modal overlay to gray out the background */
+.member-count,
+.search-input,
+.add-member-btn {
+  margin-left: 15px;
+}
+
 .modal-overlay {
-  display: none; /* Hidden by default */
+  display: none;
   position: fixed;
   top: 0;
   left: 0;
@@ -239,7 +281,6 @@
   z-index: 1000;
 }
 
-/* Modal content box */
 .modal-content {
   background-color: #fff;
   width: 400px;
@@ -249,7 +290,6 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Form labels and inputs styling */
 .modal-content label {
   display: block;
   font-weight: bold;
@@ -264,7 +304,6 @@
   border-radius: 4px;
 }
 
-/* Submit and close buttons */
 .submit-btn {
   background-color: #8a252c;
   color: white;
@@ -284,4 +323,43 @@
   cursor: pointer;
   margin-top: 10px;
   width: 100%;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+}
+
+.list li {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.3s;
+}
+
+.list li:hover {
+  background-color: #f0f0f0;
+}
+
+.edit-btn {
+  background-color: #4caf50; /* Green */
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.edit-btn:hover {
+  background-color: #45a049;
+}
+
+.role {
+  color: black;
+}
+
+#searchMember {
+  font-size: 15px;
 }
