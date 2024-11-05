@@ -262,6 +262,20 @@
   position: absolute; 
   bottom: 15px; 
   left: 10px;
+  cursor: pointer;
+}
+
+.editBtn{
+  color: white;
+  background-color: #8a252c;
+  padding: 4px;
+  border-radius: 10px;
+  width: 100px;
+  border: transparent;
+  position: absolute; 
+  bottom: 15px; 
+  right: 30px;
+  cursor: pointer;
 
 }
 .eventListContainer {   /*EVENT CONTAINER BOX*/
