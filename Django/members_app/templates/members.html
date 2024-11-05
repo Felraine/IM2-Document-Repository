@@ -180,7 +180,6 @@
               </ul>
           </div>
   
-          <!-- Delete Confirmation Modal -->
           <div id="deleteMemberModal" class="modal" style="display: none;">
               <div class="modal-content">
                   <span class="close" onclick="closeDeleteModal()">&times;</span>
@@ -190,7 +189,7 @@
                       {% csrf_token %}
                       <input type="hidden" id="delete-member-id" name="member_id">
                       <input type="hidden" name="delete_member" value="true">
-                      <button type="submit" class="submit-btn">Yes, Delete</button>
+                      <button type="submit" class="submit-btn">Yes, Delete User</button>
                       <button type="button" class="close-btn" onclick="closeDeleteModal()">Cancel</button>
                   </form>
               </div>
