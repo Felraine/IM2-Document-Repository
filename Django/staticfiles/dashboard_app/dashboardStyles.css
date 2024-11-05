@@ -215,9 +215,54 @@
 .title{
   text-align: center;
 }
+
+.eventHeader{ /*EVENT TITLE*/
+  display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+    width: 100%;
+    margin-left: 50px;
+
+}
+
 .events{
-  border: dashed;
-  color: #8a252c;
+  width: 90%;
+  height: 350px;
+  display: flex;
+  padding: 20px;
+  gap: 20px;
+  background-color: #f9f9f9;
+  margin: auto;   /*EVENT BOX HERE*/
+  align-items: center;
+  flex-direction: column;
+  border-radius: 20px;
+  margin-top: 50px;
+ 
+}
+
+.eventList {
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  width: 300px; 
+  height: 150px; 
+  flex-shrink: 0;
+  box-sizing: border-box; 
+  
+}
+.eventListContainer {   /*EVENT CONTAINER BOX*/
+  border: solid #fed534;
+  width: 90%;
+  height: 230px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding: 20px;
+  display: flex;
+  gap: 20px;
+  overflow-x: auto; 
+  overflow-y: hidden; /*anti vertical scroll*/
+  max-width: 1200px;
 }
 
 #overlay {
@@ -303,7 +348,9 @@ textarea:hover{
   height: 25px;
   cursor: pointer;
   text-align: center;
-
+  margin-top: 20px;
+  align-self: flex-start;
+  margin-right: 20px;
 }
 
 .closeBtn{
@@ -327,8 +374,38 @@ textarea:hover{
 
 }
 
-.eventList{
-  
+
+.eventList h3 {
+  color: #8a252c;
+  font-size: 1.3rem;
+  margin-bottom: 10px;
 }
 
+.eventList p {
+  font-size: 0.8rem;
+  color: #333;
+  margin: 5px 0;
+}
+
+/*scroll decors*/
+
+.eventListContainer::-webkit-scrollbar {
+  height: 8px; 
+  width: auto;  
+}
+
+.eventListContainer::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+  border-radius: 20px; 
+}
+
+.eventListContainer::-webkit-scrollbar-thumb {
+  background: #fed534; 
+  border-radius: 20px; 
+
+}
+
+.eventListContainer::-webkit-scrollbar-thumb:hover {
+  background: #d1a828; 
+}
 

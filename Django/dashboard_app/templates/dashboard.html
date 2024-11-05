@@ -101,24 +101,29 @@
     <!-- Start adding code here for UI-->
     <div class="main-content">
       <div class="container">
-        <h1>Dashboard</h1>
+          <h1>Dashboard</h1>
       </div>
       <div id="dashboard"></div>
       <div class="events">
-        <h2>Upcoming Events</h2>
+          <div class="eventHeader">
+              <h2>Upcoming Events</h2>
+              <button class="addEventBtn" id="addEventBtn">+ Add Event</button>
+          </div> 
 
-        {% for event in events %}
-        <div class="eventList">
-            <h3>{{ event.title }}</h3>
-            <p>{{ event.description }}</p>
-            <p><strong>Location:</strong> {{ event.location }}</p>
-            <p><strong>Date & Time:</strong> {{ event.dateTime }}</p>
-        </div>
-    {% empty %}
-        <p>No upcoming events.</p>
-    {% endfor %}
-      <button class="addEventBtn" id="addEventBtn">Add Event</button>
-    </div>
+          <div class="eventListContainer">
+              {% for event in events %}
+                  <div class="eventList">
+                      <h3>{{ event.title }}</h3>
+                      <p>{{ event.description }}</p>
+                      <p><strong>Location:</strong> {{ event.location }}</p>
+                      <p><strong>Date & Time:</strong> {{ event.dateTime }}</p>
+                  </div>
+              {% empty %}
+                  <p>No upcoming events.</p>
+              {% endfor %}
+          </div>
+      </div>
+  </div>
 
     <div class="overlay" id="overlay"></div>
     <div class="eventFormContainer" id="eventFormContainer">
