@@ -73,7 +73,6 @@ def members_view(request):
         try:
             member_to_edit = Members.objects.get(id=member_id_to_edit)
 
-            # Check if the user is an admin or editing their own account
             if context['user_role'] == 1 or member_to_edit.id == member_id:
                 member_to_edit.email = new_email
                 member_to_edit.password = new_password
@@ -84,5 +83,17 @@ def members_view(request):
                 print("Non-admin user attempted to edit another user's details.")
         except Members.DoesNotExist:
             print("Member to edit not found.")
+
+    # Delete member
+    if request.method == 'POST' and 'delete_member' in request.POST:
+        member_id_to_delete = request.POST.get('member_id')
+        try:
+            member_to_delete = Members.objects.get(id=member_id_to_delete)
+            member_to_delete.delete()
+            print(f"Member deleted: {member_to_delete.fname} {member_to_delete.lname}")
+        except Members.DoesNotExist:
+            print("Member to delete not found.")
+
+        return redirect('members')
 
     return render(request, 'members.html', context)
