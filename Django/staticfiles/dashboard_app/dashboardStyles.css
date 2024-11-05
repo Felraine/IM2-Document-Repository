@@ -246,10 +246,37 @@
   margin-bottom: 10px;
   border-radius: 4px;
   width: 300px; 
-  height: 150px; 
+  height: 180px; 
   flex-shrink: 0;
   box-sizing: border-box; 
-  
+  position: relative  
+}
+
+.deleteBtn{
+  color: white;
+  background-color: #8a252c;
+  padding: 4px;
+  border-radius: 10px;
+  width: 100px;
+  border: transparent;
+  position: absolute; 
+  bottom: 15px; 
+  left: 10px;
+  cursor: pointer;
+}
+
+.editBtn{
+  color: white;
+  background-color: #8a252c;
+  padding: 4px;
+  border-radius: 10px;
+  width: 100px;
+  border: transparent;
+  position: absolute; 
+  bottom: 15px; 
+  right: 30px;
+  cursor: pointer;
+
 }
 .eventListContainer {   /*EVENT CONTAINER BOX*/
   border: solid #fed534;
@@ -373,7 +400,6 @@ textarea:hover{
     margin-top: 2px;
 
 }
-
 
 .eventList h3 {
   color: #8a252c;
