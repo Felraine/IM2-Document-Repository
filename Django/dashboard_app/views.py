@@ -2,6 +2,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from register_app.models import Members
 from .models import Event
 
+#DISPLAY
 def dashboard_view(request):
     print(f"User is authenticated: {'member_id' in request.session}")
 
@@ -25,6 +26,7 @@ def dashboard_view(request):
 
     return render(request, './dashboard.html', context)
 
+#CREATE
 def addEvent(request):
     if request.method == 'POST':
         title = request.POST.get('title')
@@ -43,9 +45,30 @@ def addEvent(request):
 
     return render(request, 'dashboard.html')
 
+#DELETE
 def deleteEvent(request, event_id):
     if request.method == 'POST':
         event = get_object_or_404(Event, id = event_id)
         event.delete()
         return redirect('dashboard')
+    
+#UPDATE
+def updateEvent(request):
+    if request.method == 'POST':
+        event_id = request.POST.get('event_id')
+        title = request.POST.get('title')
+        description = request.POST.get('description')
+        location = request.POST.get('location')
+        date_time = request.POST.get('date_time')
+
+        event = get_object_or_404(Event, id=event_id)
+        event.title = title
+        event.description = description
+        event.location = location
+        event.dateTime = date_time
+        event.save()
+
+        return redirect('dashboard')
+    
+    return render(request, 'dashboard.html')
         

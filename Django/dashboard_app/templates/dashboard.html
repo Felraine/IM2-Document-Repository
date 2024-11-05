@@ -121,6 +121,7 @@
                       <form method="POST" action="{% url 'deleteEvent' event.id %}" onsubmit="return confirmDel();">    <!-- delete event here-->
                         {% csrf_token %}
                         <button type="submit" class="deleteBtn">Delete</button>
+                        <button type="submit" class="editBtn">Edit</button>
                     </form>
                   </div>
               {% empty %}
