@@ -146,18 +146,31 @@
           <ul class="list">
               {% for member in members %}
               <li>
-                  <img src="{{ member.profile_picture_url }}" alt="{{ member.fname }} {{ member.lname }} - {{ member.email }}" class="profile-pic">
-                  
-                  {% if user_role == 1 %} 
-                      <form method="POST" action="{% url 'members' %}" style="display:inline;"> 
+                  <div class="profile-info">
+                      <img src="{{ member.profile_picture_url }}" alt="{{ member.fname }} {{ member.lname }} - {{ member.email }}" class="profile-pic">
+                      <span class="member-name">{{ member.fname }} {{ member.lname }} <span class="email">{{ member.email }}</span></span>
+                  </div>
+              
+                  {% if user_role == 1 or member.id == member_id %}
+                  <div class="actions">
+                      <form method="POST" action="{% url 'members' %}" class="role-form">
                           {% csrf_token %}
                           <input type="hidden" name="member_id" value="{{ member.id }}">
                           <select class="role-change-dropdown" name="new_role" onchange="this.form.submit()">
                               <option value="1" {% if member.user_role == 1 %}selected{% endif %}>Admin</option>
                               <option value="0" {% if member.user_role == 0 %}selected{% endif %}>Member</option>
                           </select>
-                          <input type="hidden" name="change_role" value="true">  
+                          <input type="hidden" name="change_role" value="true">
                       </form>
+      
+                      <button type="button" class="edit-account-btn" onclick="openEditModal('{{ member.id }}', '{{ member.email }}')">
+                          <img src="{% static 'images/editAccount.png' %}" alt="Edit Account" class="edit-icon">
+                      </button>
+      
+                      <button type="button" class="delete-account-btn">
+                          <img src="{% static 'images/deleteAccount.png' %}" alt="Delete Account" class="delete-icon">
+                      </button>
+                  </div>
                   {% else %}
                       <span class="role">{{ member.user_role|yesno:"Admin,Member" }}</span>
                   {% endif %}
@@ -166,6 +179,23 @@
           </ul>
       </div>
       
+      <!-- Edit Member Modal -->
+      <div id="editMemberModal" class="modal" style="display: none;">
+          <div class="modal-content">
+              <span class="close" onclick="closeEditModal()">&times;</span>
+              <h2>Edit Member</h2>
+              <form id="editMemberForm" method="POST" action="{% url 'members' %}">
+                  {% csrf_token %}
+                  <input type="hidden" id="edit-member-id" name="member_id">
+                  <label for="edit-email">Email:</label>
+                  <input type="email" id="edit-email" name="email" required />
+                  <label for="edit-password">Password:</label>
+                  <input type="password" id="edit-password" name="password" required />
+                  <button type="submit" name="edit_member" class="submit-btn">Save Changes</button>
+                  <button type="button" class="close-btn" onclick="closeEditModal()">Cancel</button>
+              </form>
+          </div>
+      </div> 
        
     <script>
       let btn = document.querySelector("#btn");
@@ -181,6 +211,23 @@
       document.getElementById("closeModalBtn").onclick = function () {
         document.getElementById("modalOverlay").style.display = "none";
       };
+
+      function openEditModal(memberId, memberEmail) {
+    document.getElementById('edit-member-id').value = memberId;
+    document.getElementById('edit-email').value = memberEmail;
+    document.getElementById('editMemberModal').style.display = "block";
+}
+
+function closeEditModal() {
+    document.getElementById('editMemberModal').style.display = "none";
+}
+
+window.onclick = function(event) {
+    var modal = document.getElementById('editMemberModal');
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
 
       const listItems = document.querySelectorAll("li");
       listItems.forEach((listItem) => {
@@ -232,6 +279,30 @@
           }
         });
       });
+
+      document.querySelectorAll(".edit-account-btn, .delete-account-btn").forEach((button) => {
+    button.addEventListener("mouseover", function () {
+        const icon = this.querySelector("img"); 
+        if (icon) {
+            if (this.classList.contains("edit-account-btn")) {
+                icon.src = "{% static 'images/editAccount2.png' %}";
+            } else if (this.classList.contains("delete-account-btn")) {
+                icon.src = "{% static 'images/deleteAccount2.png' %}";
+            }
+        }
+    });
+
+    button.addEventListener("mouseout", function () {
+        const icon = this.querySelector("img");
+        if (icon) {
+            if (this.classList.contains("edit-account-btn")) {
+                icon.src = "{% static 'images/editAccount.png' %}";
+            } else if (this.classList.contains("delete-account-btn")) {
+                icon.src = "{% static 'images/deleteAccount.png' %}";
+              }
+          }
+      });
+  });
     </script>
   </body>
 </html>

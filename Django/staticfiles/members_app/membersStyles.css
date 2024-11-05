@@ -363,3 +363,17 @@
 #searchMember {
   font-size: 15px;
 }
+
+.edit-account-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: 8px; /* Adds space between the dropdown and the button */
+  padding: 0;
+}
+
+.edit-icon {
+  width: 20px; /* Adjust the icon size as needed */
+  height: 20px;
+  vertical-align: middle;
+}

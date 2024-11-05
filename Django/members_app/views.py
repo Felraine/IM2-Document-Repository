@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-#used model from register_app
 from register_app.models import Members
 
 def members_view(request):
@@ -15,7 +14,7 @@ def members_view(request):
         'user_role_display': "Member"
     }
 
-    #Read the info from table
+    # Read the info from the table
     if 'member_id' in request.session:
         member_id = request.session['member_id']
         try:
@@ -64,5 +63,26 @@ def members_view(request):
         )
         new_member.save()
         return redirect('members')
+
+    # Edit member details
+    if request.method == 'POST' and 'edit_member' in request.POST:
+        member_id_to_edit = request.POST.get('member_id')
+        new_email = request.POST.get('email')
+        new_password = request.POST.get('password')
+
+        try:
+            member_to_edit = Members.objects.get(id=member_id_to_edit)
+
+            # Check if the user is an admin or editing their own account
+            if context['user_role'] == 1 or member_to_edit.id == member_id:
+                member_to_edit.email = new_email
+                member_to_edit.password = new_password
+                member_to_edit.save()
+                print(f"Updated {member_to_edit.fname}'s details.")
+                return redirect('members')
+            else:
+                print("Non-admin user attempted to edit another user's details.")
+        except Members.DoesNotExist:
+            print("Member to edit not found.")
 
     return render(request, 'members.html', context)
