@@ -222,6 +222,7 @@
     align-items: center; 
     width: 100%;
     margin-left: 50px;
+    margin-top: 8px;
 
 }
 .upcomingEventsTitle{
@@ -231,7 +232,7 @@
 
 .events{ /*EVENT BOX HERE*/
   width: 60%;
-  height: 500px;
+  height: 550px;
   display: flex;
   gap: 10px;
   background-color: #f9f9f9;
@@ -259,7 +260,7 @@
 }
 
 .eventList h3 {
-  color: #8a252c;
+  color: #000000;
   font-size: 1rem;
   margin-bottom: 10px;
 }
@@ -310,7 +311,7 @@
   border: solid #fed534;
   background-color: #fed534;
   width: 90%;
-  height: 300px;
+  height: 190px;
   border-radius: 10px;
   box-sizing: border-box;
   padding: 20px;
