@@ -104,21 +104,23 @@
     <h1>Dashboard</h1>
   </div>
   <div id="dashboard"></div>
+
   <div class="events">
     <div class="eventHeader">
-      <h2>Upcoming Events</h2>
+      <h2 class="upcomingEventsTitle">Upcoming Events</h2>
       <button class="addEventBtn" id="addEventBtn">+ Add Event</button>
     </div>
     <div class="eventListContainer">
-
-      {% for event in events %}      <!--event list-->
+      <!--event list-->
+      {% for event in events %}      
       <div class="eventList">
         <h3>{{ event.title }}</h3>
-        <p>{{ event.description }}</p>
+        <p>{{ event.description }}</p> 
         <p><strong>Location:</strong> {{ event.location }}</p>
-        <p><strong>Date & Time:</strong> {{ event.dateTime }}</p>
+        <p style="color: red;">{{ event.dateTime }}</p>
 
-        <form method="POST" action="{% url 'deleteEvent' event.id %}" onsubmit="return confirmDel();"> <!--delete event-->
+        <!--delete event-->
+        <form method="POST" action="{% url 'deleteEvent' event.id %}" onsubmit="return confirmDel();"> 
           {% csrf_token %}
           <button type="submit" class="deleteBtn">Delete</button>
         </form>
@@ -132,12 +134,51 @@
         '{{ event.dateTime }}')"
         >Edit</button>
       </div>
+      
       {% empty %}
       <p>No upcoming events.</p>
       {% endfor %}
     </div>
+    
+    <!--Upcoming Meetings Section-->
+    <div class="eventHeader">
+      <h2 class="upcomingEventsTitle">Upcoming Meetings</h2>
+      <button class="addEventBtn" id="addEventBtn">+ Add Meeting</button>
+    </div>
+
+    <div class="eventListContainer">
+      <!--event list-->
+      {% for event in events %}      
+      <div class="eventList">
+        <h3>{{ event.title }}</h3>
+        <p>{{ event.description }}</p> 
+        <p><strong>Location:</strong> {{ event.location }}</p>
+        <p style="color: red;">{{ event.dateTime }}</p>
+
+        <!--delete event-->
+        <form method="POST" action="{% url 'deleteEvent' event.id %}" onsubmit="return confirmDel();"> 
+          {% csrf_token %}
+          <button type="submit" class="deleteBtn">Delete</button>
+        </form>
+
+        <!--edit event-->
+        <button class="editBtn" onclick="openEditForm(
+        '{{ event.id }}',   
+        '{{ event.title }}',
+        '{{ event.description }}',
+        '{{ event.location }}', 
+        '{{ event.dateTime }}')"
+        >Edit</button>
+      </div>
+      
+      {% empty %}
+      <p>No upcoming events.</p>
+      {% endfor %}
+    </div>
+
+
   </div>
-</div>
+</div> <!--div for class events-->
 
 <div class="overlay" id="overlay"></div>
 <div class="eventFormContainer" id="eventFormContainer">
