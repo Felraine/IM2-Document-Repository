@@ -233,7 +233,7 @@ body {
   font-size: 20px;
 }
 
-.events{ /*EVENT BOX HERE*/
+.events{ /*MAIN EVENT BOX HERE*/
   width: 60%;
   height: 550px;
   flex: 1;
@@ -261,7 +261,7 @@ body {
   box-sizing: border-box; 
   position: relative ;
   margin-right: 10px;
-  margin-left: 20px;
+  margin-left: 11px;
 }
 
 .eventList h3 {
