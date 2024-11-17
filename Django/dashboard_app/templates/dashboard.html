@@ -107,6 +107,7 @@
   <div class="container">
     <h1>Dashboard</h1>
   </div>
+  
   <div id="dashboard">
 
   <div class="events">
@@ -181,21 +182,23 @@
     </div>
 
   </div>
-  <div class="calendarContainer">
-    <h2 class="calendarTitle">Calendar</h2>
-    <div id="calendar"></div>
-  </div>
-  
 
-  <div class="tasksContainer">
-    <h2 class="tasksTitle">Tasks</h2>
-    <ul class="tasksList">
-      {% for task in tasks %}
-        <li class="taskItem">{{ task.title }}</li>
-      {% empty %}
-        <li class="taskItem">No tasks available.</li>
-      {% endfor %}
-    </ul>
+  <div class="right-side">
+    <div class="calendarContainer">
+      <h2 class="calendarTitle">Calendar</h2>
+      <div id="calendar"></div>
+    </div>
+
+    <div class="tasksContainer">
+      <h2 class="tasksTitle">Tasks</h2>
+      <ul class="tasksList">
+        {% for task in tasks %}
+          <li class="taskItem">{{ task.title }}</li>
+        {% empty %}
+          <li class="taskItem">No tasks available.</li>
+        {% endfor %}
+      </ul>
+    </div>
   </div>
 </div>
 </div> <!--div for class events-->

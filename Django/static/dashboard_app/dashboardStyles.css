@@ -5,6 +5,10 @@
   font-family:Arial, Helvetica, sans-serif;
 }
 
+body {
+  overflow: hidden; 
+}
+
 .orgName {
   color: white;
   margin-left: 1rem;
@@ -211,18 +215,17 @@
 }
 
 /* Start adding new CSS here */
-
 .title{
   text-align: center;
 }
 
 .eventHeader{ /*EVENT TITLE*/
   display: flex;
-    justify-content: space-between; 
-    align-items: center; 
-    width: 100%;
-    margin-left: 50px;
-    margin-top: 8px;
+  justify-content: space-between; 
+  align-items: center; 
+  width: 100%;
+  margin-left: 50px;
+  margin-top: 8px;
 
 }
 .upcomingEventsTitle{
@@ -233,15 +236,16 @@
 .events{ /*EVENT BOX HERE*/
   width: 60%;
   height: 550px;
+  flex: 1;
   display: flex;
-  gap: 10px;
   background-color: #f9f9f9;
   margin-left: 20px; 
   align-items: center;
   flex-direction: column;
   border-radius: 20px;
-  margin-top: 15px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding-right: 10px;
+  box-sizing: border-box;
 }
 
 
@@ -408,7 +412,8 @@ textarea:hover{
   text-align: center;
   margin-top: 20px;
   align-self: flex-start;
-  margin-right: 80px;
+  margin-right: 70px;
+  margin-bottom: 20px;
 }
 
 .closeBtn{
@@ -432,12 +437,30 @@ textarea:hover{
 
 }
 
-.calendarContainer {
-  position: absolute;
-  top: 68px;
-  right: 20px;
+#dashboard {
+  display: flex; 
+  justify-content: flex-start; 
+  gap: 20px; 
+  width: 100%;
+  padding: 20px;
+}
+
+.right-side {
+  display: flex;
+  flex-direction: column;
+  width: 40%; 
+}
+
+
+.calendarContainer, .tasksContainer {
   width: 400px;
-  height: 100%;
+  background: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.calendarContainer {
+  position: relative;
   background: #f9f9f9;
   padding: 15px;
   border-radius: 10px;
@@ -510,15 +533,14 @@ textarea:hover{
 }
 
 .tasksContainer {
-  position: absolute;
-  bottom: 16px;
-  right: 20px; 
+  position: relative;
   width: 400px;
-  height: 235px;
+  height: 230px;
+  padding: 20px;
   background: #f9f9f9;
-  padding: 15px;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+  margin-top: 18px;
 }
 
 .tasksTitle {
