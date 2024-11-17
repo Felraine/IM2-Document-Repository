@@ -244,6 +244,8 @@ document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
     var calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'dayGridMonth',
+        fixedWeekCount: false, 
+        showNonCurrentDates: true, 
         events: [
             {% for event in events %}
                 {
@@ -257,10 +259,26 @@ document.addEventListener('DOMContentLoaded', function() {
         ],
         windowResize: function(view) {
             calendar.render();
+        },
+        datesRender: function(info) {
+            // Select the calendar's month view element
+            var gridEl = info.view.el.querySelector('.fc-dayGridMonth-view');
+            
+            // Get all the rows in the month view
+            var rows = gridEl.querySelectorAll('.fc-dayGridWeek');
+            
+            // Ensure only 5 rows are visible
+            if (rows.length > 5) {
+                // Hide extra rows beyond the 5th one
+                for (var i = 5; i < rows.length; i++) {
+                    rows[i].style.display = 'none';
+                }
+            }
         }
     });
     calendar.render();
 });
+
 
 
     let edit = false; // if edit btn pressed or nah
