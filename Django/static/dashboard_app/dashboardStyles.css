@@ -241,6 +241,7 @@
   flex-direction: column;
   border-radius: 20px;
   margin-top: 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 
@@ -453,6 +454,46 @@ textarea:hover{
 .eventListContainer::-webkit-scrollbar-thumb:hover {
   background: #d1a828; 
 }
+
+/*MODAL POP UPS*/
+.modal {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1001;
+  text-align: center;
+}
+
+.modalContent {
+  padding: 10px;
+}
+
+.confirmBtn, .cancelBtn {
+  padding: 5px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.confirmBtn {
+  background: #ff4d4d;
+  color: white;
+  margin-right: 10px;
+}
+
+.cancelBtn {
+  background: #007bff;
+  color: white;
+}
+
+
 
 /*UPCOMING MEETING SECTION*/
 
