@@ -236,11 +236,11 @@
   display: flex;
   gap: 10px;
   background-color: #f9f9f9;
-  margin: auto;   
+  margin-left: 20px; 
   align-items: center;
   flex-direction: column;
   border-radius: 20px;
-  margin-top: 30px;
+  margin-top: 15px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
@@ -431,6 +431,125 @@ textarea:hover{
     margin-top: 2px;
 
 }
+
+.calendarContainer {
+  position: absolute;
+  top: 68px;
+  right: 20px;
+  width: 400px;
+  height: 100%;
+  background: #f9f9f9;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  min-height: 300px;
+  max-height: 300px;
+}
+
+.calendarTitle {
+  font-size: 20px;
+  text-align: left;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  color: #333;
+}
+
+#calendar {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  display: grid;
+  font-size: 9px;
+  color: #555;
+  min-height: 235px;
+  max-height: 235px;
+  padding: 5px;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+.fc-daygrid-day {
+  background-color: #fff;
+}
+
+.fc-day-today {
+  background-color: #fed534 !important;
+  border: 2px solid #8a252c;
+}
+
+.fc-daygrid-day-frame {
+  border: 1px solid #8a252c;
+}
+
+.fc-col-header-cell {
+  background-color: #8a252c;
+  color: #fed534;
+  font-weight: bold;
+  border: 1px solid #8a252c;
+}
+
+#calendar .day {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #ddd;
+  cursor: pointer;
+  font-size: 16px;
+  height: 60px; 
+  box-sizing: border-box;
+  padding: 5px;
+  text-align: center; 
+}
+
+#calendar .day:hover {
+  background-color: #f0f0f0;
+}
+
+#calendar .day.empty {
+  background: #f9f9f9; 
+}
+
+.tasksContainer {
+  position: absolute;
+  bottom: 16px;
+  right: 20px; 
+  width: 400px;
+  height: 235px;
+  background: #f9f9f9;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.tasksTitle {
+  font-size: 20px;
+  text-align: left;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.tasksList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.taskItem {
+  font-size: 14px;
+  color: #555;
+  padding: 8px;
+  background: #fff;
+  margin-bottom: 5px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  transition: background 0.3s ease;
+}
+
+.taskItem:hover {
+  background: #f0f0f0;
+}
+
 
 
 /*scroll decors*/

@@ -12,7 +12,7 @@ def login_view(request):
             if password == member.password: 
                 request.session['member_id'] = member.id
                 request.user = member  
-                return redirect('calendar')
+                return redirect('dashboard')
             else:
                 messages.error(request, 'Invalid email or password.')
         except Members.DoesNotExist:
