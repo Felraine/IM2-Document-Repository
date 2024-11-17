@@ -180,7 +180,7 @@
 </div> <!--div for class events-->
 
 <!--FORM CONTAINER-->
-
+<div id="toast" class="toast"></div>
 <div class="overlay" id="overlay"></div>
 <div class="eventFormContainer" id="eventFormContainer">
   <span class="closeBtn" onclick="closeForm()">&times;</span>
@@ -231,7 +231,7 @@
 
     document.getElementById('confirmDeleteBtn').onclick = function() {
     if (deleteForm) {
-        deleteForm.submit(); // submit the form
+        deleteForm.submit(); 
     }
     hideModal(); 
 };
@@ -241,13 +241,6 @@
     modal.style.display = 'none';
     document.getElementById('overlay').style.display = 'none';
     }
-
-    document.getElementById('confirmDeleteBtn').onclick = function () {
-    if (deleteForm) {
-        deleteForm.submit(); 
-    }
-    hideModal();
-    };
 
   document.getElementById('cancelDeleteBtn').onclick = hideModal;
   document.getElementById('overlay').onclick = hideModal;
@@ -269,16 +262,26 @@
       edit = true;
 
       document.getElementById('eventFormContainer').style.display = "block";
-     // document.getElementById('overlay').style.display = "block";
+     
   }
+
+  function showToast(message, isSuccess = true) {
+    const toast = document.getElementById("toast");
+    toast.textContent = message; 
+    toast.className = `toast show ${isSuccess ? '' : 'error'}`; 
+    setTimeout(() => {
+        toast.className = "toast"; 
+    }, 3000);
+}
 
   const saveEventBtn = document.getElementById('saveEventBtn');
   saveEventBtn.onclick = function(){
-    if (edit) {
-          alert("Event Details changed successfully!");
+    if (edit && document.getElementById('date_time').value) {
+          showToast("Event details changed successfully!");
       } else {
-          alert("Event added successfully!");
+          showToast("Please fill out the entire form.",false);
       }
+
   }
 
   // Open add event form
