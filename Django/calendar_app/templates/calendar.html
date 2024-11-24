@@ -40,11 +40,19 @@
         </div>
         <i class="bx bx-menu" id="btn"></i>
         <div class="user">
+          {% if member %} {% if member.profile_picture %}
           <img
-            src="{% static 'images/profile.jpg' %}"
-            alt="user"
+            src="{{ member.profile_picture.url }}"
+            alt="User Profile Picture"
             class="user"
           />
+          {% else %}
+          <img
+            src="{% static 'images/default_profile_picture.jpg' %}"
+            alt="Default Profile Picture"
+            class="user"
+          />
+          {% endif %} {% endif %}
           <div class="name">
             <p class="username">{{ fname }} {{ lname }}</p>
             <p class="role">

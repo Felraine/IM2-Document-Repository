@@ -40,19 +40,26 @@
         </div>
         <i class="bx bx-menu" id="btn"></i>
         <div class="user">
-          <img
-            src="{% static 'images/profile.jpg' %}"
-            alt="user"
-            class="user"
-          />
+          {% if member %}
+              {% if member.profile_picture %}
+                  <img src="{{ member.profile_picture.url }}" alt="User Profile Picture" class="user">
+              {% else %}
+                  <img src="{% static 'images/default_profile_picture.jpg' %}" alt="Default Profile Picture" class="user">
+              {% endif %}
+          {% endif %}
           <div class="name">
-            <p class="username">{{ fname }} {{ lname }}</p>
-            <p class="role">
-              {% if user_role == 0 %} Member {% else %} {% if user_role == 1 %}
-              Admin {% else %} Unknown Role {% endif %} {% endif %}
-            </p>
+              <p class="username">{{ fname }} {{ lname }}</p>
+              <p class="role">
+                  {% if user_role == 0 %} Member {% else %}
+                      {% if user_role == 1 %}
+                          Admin
+                      {% else %}
+                          Unknown Role
+                      {% endif %}
+                  {% endif %}
+              </p>
           </div>
-        </div>
+        </div>   
         <ul>
           <li>
             <a href="{% url 'dashboard' %}">

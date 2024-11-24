@@ -18,6 +18,7 @@ def calendar_view(request):
             context['fname'] = member.fname
             context['lname'] = member.lname
             context['user_role'] = member.user_role
+            context['member'] = member
         except Members.DoesNotExist:
             print("Member does not exist")
 
