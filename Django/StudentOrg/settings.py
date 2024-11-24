@@ -64,7 +64,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'SOMS_db',
         'USER': os.environ.get('DB_USER', 'root'),
-        'PASSWORD': os.environ.get('DB_PASSWORD', 'asdfghjkl'), #asdfghjkl , qwertyuiop
+        'PASSWORD': os.environ.get('DB_PASSWORD', 'qwertyuiop'), #asdfghjkl , qwertyuiop
         'HOST': 'localhost',
         'PORT': '3306',
     }
@@ -88,7 +88,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 LANGUAGE_CODE = 'en-us'
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Manila'
 USE_I18N = True
 USE_TZ = True
 

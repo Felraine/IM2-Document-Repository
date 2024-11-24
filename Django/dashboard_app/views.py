@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from register_app.models import Members
+from django.http import JsonResponse
 from .models import Event
 
 #DISPLAY
@@ -72,3 +73,13 @@ def updateEvent(request):
     
     return render(request, 'dashboard.html')
         
+def get_events(request):
+    events = Event.objects.all()
+    event_data = []
+    for event in events:
+        event_data.append({
+            'title': event.title,
+            'start': event.dateTime.isoformat(),  
+            'description': event.description,
+        })
+    return JsonResponse(event_data, safe=False)

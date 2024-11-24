@@ -117,8 +117,20 @@
 
       let calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: "dayGridMonth",
+        timeZone: "Asia/Manila",
         fixedWeekCount: false,
-        events: "/calendar/events/",
+        events: "/dashboard/get_events/",
+        eventDisplay: "block",
+        eventTimeFormat: {
+          hour: "numeric",
+          minute: "2-digit",
+          meridiem: "short",
+        },
+        eventDidMount: function (info) {
+          info.el.style.backgroundColor = "#FED534";
+          info.el.style.borderColor = "#FED534";
+          info.el.style.fontSize = "12px";
+        },
       });
 
       calendar.render();
