@@ -5,6 +5,10 @@
   font-family:Arial, Helvetica, sans-serif;
 }
 
+body {
+  overflow: hidden; 
+}
+
 .orgName {
   color: white;
   margin-left: 1rem;
@@ -211,18 +215,17 @@
 }
 
 /* Start adding new CSS here */
-
 .title{
   text-align: center;
 }
 
 .eventHeader{ /*EVENT TITLE*/
   display: flex;
-    justify-content: space-between; 
-    align-items: center; 
-    width: 100%;
-    margin-left: 50px;
-    margin-top: 8px;
+  justify-content: space-between; 
+  align-items: center; 
+  width: 100%;
+  margin-left: 50px;
+  margin-top: 8px;
 
 }
 .upcomingEventsTitle{
@@ -230,18 +233,19 @@
   font-size: 20px;
 }
 
-.events{ /*EVENT BOX HERE*/
+.events{ /*MAIN EVENT BOX HERE*/
   width: 60%;
   height: 550px;
+  flex: 1;
   display: flex;
-  gap: 10px;
   background-color: #f9f9f9;
-  margin: auto;   
+  margin-left: 20px; 
   align-items: center;
   flex-direction: column;
   border-radius: 20px;
-  margin-top: 30px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding-right: 10px;
+  box-sizing: border-box;
 }
 
 
@@ -257,7 +261,7 @@
   box-sizing: border-box; 
   position: relative ;
   margin-right: 10px;
-  margin-left: 20px;
+  margin-left: 11px;
 }
 
 .eventList h3 {
@@ -397,7 +401,7 @@ textarea:hover{
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.addEventBtn{
+.addEventBtn,.addMeeting{
   border-radius: 5px;
   border-color: #8a252c;
   color: #8a252c;
@@ -408,7 +412,8 @@ textarea:hover{
   text-align: center;
   margin-top: 20px;
   align-self: flex-start;
-  margin-right: 80px;
+  margin-right: 70px;
+  margin-bottom: 20px;
 }
 
 .closeBtn{
@@ -431,6 +436,142 @@ textarea:hover{
     margin-top: 2px;
 
 }
+
+#dashboard {
+  display: flex; 
+  justify-content: flex-start; 
+  gap: 20px; 
+  width: 100%;
+  padding: 20px;
+}
+
+.right-side {
+  display: flex;
+  flex-direction: column;
+  width: 40%; 
+}
+
+
+.calendarContainer, .tasksContainer {
+  width: 400px;
+  background: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.calendarContainer {
+  position: relative;
+  background: #f9f9f9;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  min-height: 300px;
+  max-height: 300px;
+}
+
+.calendarTitle {
+  font-size: 20px;
+  text-align: left;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  color: #333;
+}
+
+#calendar {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  display: grid;
+  font-size: 9px;
+  color: #555;
+  min-height: 235px;
+  max-height: 235px;
+  padding: 5px;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+.fc-daygrid-day {
+  background-color: #fff;
+}
+
+.fc-day-today {
+  background-color: #fed534 !important;
+  border: 2px solid #8a252c;
+}
+
+.fc-daygrid-day-frame {
+  border: 1px solid #8a252c;
+}
+
+.fc-col-header-cell {
+  background-color: #8a252c;
+  color: #fed534;
+  font-weight: bold;
+  border: 1px solid #8a252c;
+}
+
+#calendar .day {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #ddd;
+  cursor: pointer;
+  font-size: 16px;
+  height: 60px; 
+  box-sizing: border-box;
+  padding: 5px;
+  text-align: center; 
+}
+
+#calendar .day:hover {
+  background-color: #f0f0f0;
+}
+
+#calendar .day.empty {
+  background: #f9f9f9; 
+}
+
+.tasksContainer {
+  position: relative;
+  width: 400px;
+  height: 230px;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+  margin-top: 18px;
+}
+
+.tasksTitle {
+  font-size: 20px;
+  text-align: left;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.tasksList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.taskItem {
+  font-size: 14px;
+  color: #555;
+  padding: 8px;
+  background: #fff;
+  margin-bottom: 5px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  transition: background 0.3s ease;
+}
+
+.taskItem:hover {
+  background: #f0f0f0;
+}
+
 
 
 /*scroll decors*/
@@ -538,4 +679,41 @@ textarea:hover{
   flex-direction: column;
   border-radius: 20px;
   margin-top: 30px;
+}
+
+.meetingListContainer {   /*MEETING CONTAINER BOX*/
+  border: solid #8a252c;
+  background-color: #8a252c;
+  width: 90%;
+  height: 190px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding: 20px;
+  display: flex;
+  gap: 20px;
+  overflow-x: auto; 
+  overflow-y: hidden; /*anti vertical scroll*/
+  max-width: 1200px;
+}
+
+/*Meeting scroll design*/
+
+.meetingListContainer::-webkit-scrollbar {
+  height: 8px; 
+  width: auto;  
+}
+
+.meetingListContainer::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+  border-radius: 10px; 
+}
+
+.meetingListContainer::-webkit-scrollbar-thumb {
+  background: #8a252c; 
+  border-radius: 10px; 
+
+}
+
+.meetingListContainer::-webkit-scrollbar-thumb:hover {
+  background: #721f25; 
 }

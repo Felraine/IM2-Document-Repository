@@ -113,7 +113,9 @@
   <div class="events">
     <div class="eventHeader">
       <h2 class="upcomingEventsTitle">Upcoming Events</h2>
+      {% if user_role == 1 %}
       <button class="addEventBtn" id="addEventBtn">+ Add Event</button>
+      {% endif %}
     </div>
     <div class="eventListContainer">
       <!--event list-->
@@ -125,6 +127,7 @@
         <p style="color: red;">{{ event.dateTime }}</p>
 
         <!--delete event-->
+        {% if user_role == 1 %}
         <form method="POST" action="{% url 'deleteEvent' event.id %}" onsubmit="return confirmDel(this);"> 
           {% csrf_token %}
           <button type="submit" class="deleteBtn">Delete</button>
@@ -138,6 +141,7 @@
         '{{ event.location }}', 
         '{{ event.dateTime }}')"
         >Edit</button>
+        {% endif %}
       </div>
       
       {% empty %}
@@ -148,10 +152,12 @@
     <!--Upcoming Meetings Section-->
     <div class="eventHeader">
       <h2 class="upcomingEventsTitle">Upcoming Meetings</h2>
-      <button class="addEventBtn" id="addEventBtn">+ Add Meeting</button> <!--add meeting button-->
+      {% if user_role == 1 %}
+      <button class="addMeeting" id="addMeetBtn">+ Add Meeting</button> <!--add meeting button-->
+      {% endif %}
     </div>
 
-    <div class="eventListContainer">
+    <div class="meetingListContainer">
       <!--event list-->
       {% for event in events %}      
       <div class="eventList">
@@ -160,6 +166,7 @@
         <p><strong>Location:</strong> {{ event.location }}</p>
         <p style="color: red;">{{ event.dateTime }}</p>
 
+        {% if user_role == 1 %}
         <!--delete event-->
         <form method="POST" action="{% url 'deleteEvent' event.id %}" onsubmit="return confirmDel(this);"> 
           {% csrf_token %}
@@ -174,6 +181,7 @@
         '{{ event.location }}', 
         '{{ event.dateTime }}')"
         >Edit</button>
+        {% endif %}
       </div>
       
       {% empty %}

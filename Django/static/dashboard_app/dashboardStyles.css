@@ -231,6 +231,7 @@ body {
 .upcomingEventsTitle{
   margin-left: 30px;
   font-size: 20px;
+  padding: 10px;
 }
 
 .events{ /*MAIN EVENT BOX HERE*/
@@ -401,7 +402,7 @@ textarea:hover{
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.addEventBtn{
+.addEventBtn,.addMeeting{
   border-radius: 5px;
   border-color: #8a252c;
   color: #8a252c;
@@ -680,3 +681,43 @@ textarea:hover{
   border-radius: 20px;
   margin-top: 30px;
 }
+<<<<<<< HEAD
+=======
+
+.meetingListContainer {   /*MEETING CONTAINER BOX*/
+  border: solid #8a252c;
+  background-color: #8a252c;
+  width: 90%;
+  height: 190px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding: 20px;
+  display: flex;
+  gap: 20px;
+  overflow-x: auto; 
+  overflow-y: hidden; /*anti vertical scroll*/
+  max-width: 1200px;
+}
+
+/*Meeting scroll design*/
+
+.meetingListContainer::-webkit-scrollbar {
+  height: 8px; 
+  width: auto;  
+}
+
+.meetingListContainer::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+  border-radius: 10px; 
+}
+
+.meetingListContainer::-webkit-scrollbar-thumb {
+  background: #8a252c; 
+  border-radius: 10px; 
+
+}
+
+.meetingListContainer::-webkit-scrollbar-thumb:hover {
+  background: #721f25; 
+}
+>>>>>>> 225eaceb755d623540003d66420d5a50db7c41ff
