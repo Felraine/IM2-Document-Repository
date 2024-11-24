@@ -64,7 +64,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'soms_db',
         'USER': os.environ.get('DB_USER', 'root'),
-        'PASSWORD': os.environ.get('DB_PASSWORD', 'qwertyuiop'), #asdfghjkl , qwertyuiop
+        'PASSWORD': os.environ.get('DB_PASSWORD', 'asdfghjkl'), #asdfghjkl , qwertyuiop
         'HOST': 'localhost',
         'PORT': '3306',
     }
