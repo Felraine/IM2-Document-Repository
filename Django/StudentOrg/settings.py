@@ -62,7 +62,7 @@ WSGI_APPLICATION = 'StudentOrg.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'SOMS_db',
+        'NAME': 'soms_db',
         'USER': os.environ.get('DB_USER', 'root'),
         'PASSWORD': os.environ.get('DB_PASSWORD', 'qwertyuiop'), #asdfghjkl , qwertyuiop
         'HOST': 'localhost',
@@ -109,3 +109,6 @@ STATICFILES_FINDERS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'  # Crispy template
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

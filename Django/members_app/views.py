@@ -1,5 +1,8 @@
 from django.shortcuts import render, redirect
+from django.core.exceptions import ObjectDoesNotExist
+from django.conf import settings
 from register_app.models import Members
+from django.http import HttpResponse
 
 def members_view(request):
     print(f"User is authenticated: {'member_id' in request.session}")
@@ -26,6 +29,7 @@ def members_view(request):
             context['user_role_display'] = "Admin" if member.user_role == 1 else "Member"
             context['members'] = Members.objects.all()
             context['member_count'] = context['members'].count()
+            context['member'] = member
         except Members.DoesNotExist:
             print("Member not found.")
 
@@ -73,6 +77,7 @@ def members_view(request):
         try:
             member_to_edit = Members.objects.get(id=member_id_to_edit)
 
+            # Allow admin to edit any user, or allow users to edit only their own account
             if context['user_role'] == 1 or member_to_edit.id == member_id:
                 member_to_edit.email = new_email
                 member_to_edit.password = new_password
@@ -95,5 +100,22 @@ def members_view(request):
             print("Member to delete not found.")
 
         return redirect('members')
+
+    # Update profile picture
+    if request.method == 'POST' and request.FILES.get('profile_picture'):
+        member_id_to_update = request.POST.get('member_id')
+        try:
+            member_to_update = Members.objects.get(id=member_id_to_update)
+            profile_picture = request.FILES['profile_picture']
+
+            # Save the image to the member's profile_picture field
+            member_to_update.profile_picture = profile_picture
+            member_to_update.save()
+
+            print(f"Updated profile picture for {member_to_update.fname} {member_to_update.lname}")
+            return redirect('members')
+
+        except ObjectDoesNotExist:
+            print("Member not found.")
 
     return render(request, 'members.html', context)
