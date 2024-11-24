@@ -231,6 +231,7 @@ body {
 .upcomingEventsTitle{
   margin-left: 30px;
   font-size: 20px;
+  padding: 10px;
 }
 
 .events{ /*MAIN EVENT BOX HERE*/
@@ -661,7 +662,7 @@ textarea:hover{
 
 .toast.error {
   background-color: #f44336; 
-  anim
+  
 }
 
 

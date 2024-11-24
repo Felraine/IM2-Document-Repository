@@ -662,7 +662,7 @@ textarea:hover{
 
 .toast.error {
   background-color: #f44336; 
-  anim
+  
 }
 
 
@@ -681,8 +681,6 @@ textarea:hover{
   border-radius: 20px;
   margin-top: 30px;
 }
-<<<<<<< HEAD
-=======
 
 .meetingListContainer {   /*MEETING CONTAINER BOX*/
   border: solid #8a252c;
@@ -720,4 +718,3 @@ textarea:hover{
 .meetingListContainer::-webkit-scrollbar-thumb:hover {
   background: #721f25; 
 }
->>>>>>> 225eaceb755d623540003d66420d5a50db7c41ff
