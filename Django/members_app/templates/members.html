@@ -111,20 +111,27 @@
           <h1>Members List</h1>
       </div>
       <div id="members">
-          <div class="members-container">
-              <span class="memberHeader">Manage Members Access</span>
-              <div class="members-header">
-                  <span class="memList">List of Members</span>
-                  <span class="member-count">{{ member_count }} members</span>
+        <div class="members-container">
+          <span class="memberHeader">Manage Members Access</span>
+          <div class="members-header">
+              <span class="memList">List of Members</span>
+              <span class="member-count">{{ member_count }} members</span>
+      
+              <!-- Search Form -->
+              <form method="get" action="{% url 'members' %}">
                   <input
                       type="text"
                       id="searchMember"
+                      name="search"
                       placeholder="Search by name/email"
+                      value="{{ request.GET.search }}"  
                       class="search-input"
                   />
-                  <button id="openModalBtn" class="add-member-btn">Add Member</button>
-              </div>
+              </form>
+      
+              <button id="openModalBtn" class="add-member-btn">Add Member</button>
           </div>
+      </div>
   
           <div id="modalOverlay" class="modal-overlay" onclick="closeModal()">
               <div class="modal-content" onclick="event.stopPropagation()">
@@ -152,12 +159,12 @@
           <div id="membersList">
             <ul class="list">
                 {% for member in members %}
-                <li>
+                <li class="member">
                     <div class="profile-info">
                         {% if member.profile_picture %}
-                        <img src="{{ member.profile_picture.url }}" alt="{{ member.fname }} {{ member.lname }} - {{ member.email }}" class="profile-pic" onclick="openProfilePicModal('{{ member.id }}')">
+                        <img src="{{ member.profile_picture.url }}" alt="{{ member.fname }} {{ member.lname }} - {{ member.email }}" class="profile-pic">
                         {% else %}
-                        <img src="{% static 'images/default_profile_picture.jpg' %}" alt="Default Profile Picture" class="profile-pic" onclick="openProfilePicModal('{{ member.id }}')">
+                        <img src="{% static 'images/default_profile_picture.jpg' %}" alt="Default Profile Picture" class="profile-pic">
                         {% endif %}
                         <span class="member-name">{{ member.fname }} {{ member.lname }} <span class="email">{{ member.email }}</span></span>
                     </div>
@@ -248,6 +255,21 @@
       btn.onclick = function () {
         sidebar.classList.toggle("active");
       };
+
+      document.getElementById('searchMember').addEventListener('input', function() {
+        var searchTerm = this.value.toLowerCase();
+        var members = document.querySelectorAll('.list .member');
+
+        members.forEach(function(member) {
+            var name = member.querySelector('.member-name').textContent.toLowerCase();
+            var email = member.querySelector('.email').textContent.toLowerCase();
+            if (name.includes(searchTerm) || email.includes(searchTerm)) {
+                member.style.display = '';  // Show if the term matches
+            } else {
+                member.style.display = 'none';  // Hide if it doesn't match
+            }
+        });
+    });
 
       document.getElementById("openModalBtn").onclick = function () {
         document.getElementById("modalOverlay").style.display = "block";
