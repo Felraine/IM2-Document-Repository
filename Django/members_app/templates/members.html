@@ -162,7 +162,7 @@
                 <li class="member">
                     <div class="profile-info">
                         {% if member.profile_picture %}
-                        <img src="{{ member.profile_picture.url }}" alt="{{ member.fname }} {{ member.lname }} - {{ member.email }}" class="profile-pic">
+                        <img src="{{ member.profile_picture.url }}" alt="{{ member.fname }} {{ member.lname }} - {{ member.email }}" class="profile-pic" onclick="openProfilePicModal('{{ member.id }}')">
                         {% else %}
                         <img src="{% static 'images/default_profile_picture.jpg' %}" alt="Default Profile Picture" class="profile-pic">
                         {% endif %}
