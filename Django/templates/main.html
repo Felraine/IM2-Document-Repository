@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="author" content="Felraine Cataos" />
+    <meta name="Dashboard" content="Dashboard Screen" />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'main/mainStyles.css' %}"
+    />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'dashboard_app/dashboardStyles.css' %}"
+    />
+    <title>{% block title %}Dashboard{% endblock %}</title>
+
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="{% static 'images/CIT_logo.png' %}"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="sidebar">{% include 'sidebar.html' %}</div>
+    <div class="main-content">
+
+      <!-- Main dashboard content will be rendered here -->
+      <div class="content-area">{% block content %}{% endblock %}</div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>
+    {% block scripts %}{% endblock %}
+  </body>
+</html>
