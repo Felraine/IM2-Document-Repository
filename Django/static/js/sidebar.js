@@ -15,8 +15,8 @@ document.addEventListener("DOMContentLoaded", function () {
       const homeIcon = this.querySelector(".home-icon");
       const calendarIcon = this.querySelector(".calendar-icon");
       const memberIcon = this.querySelector(".member-icon");
-      const settingsIcon = this.querySelector(".settings-icon");
       const logoutIcon = this.querySelector(".logout-icon");
+      const meetingsIcon = this.querySelector(".meetings-icon");
 
       // Change the icon images when hovered
       if (homeIcon) {
@@ -37,11 +37,11 @@ document.addEventListener("DOMContentLoaded", function () {
         }
         memberIcon.src = memberIcon.getAttribute("data-hover-src");
       }
-      if (settingsIcon) {
-        if (!settingsIcon.hasAttribute('data-original-src')) {
-          settingsIcon.setAttribute('data-original-src', settingsIcon.src); // Store original src
+      if (meetingsIcon) {
+        if (!meetingsIcon.hasAttribute('data-original-src')) {
+          meetingsIcon.setAttribute('data-original-src', meetingsIcon.src); // Store original src
         }
-        settingsIcon.src = settingsIcon.getAttribute("data-hover-src");
+        meetingsIcon.src = meetingsIcon.getAttribute("data-hover-src");
       }
       if (logoutIcon) {
         if (!logoutIcon.hasAttribute('data-original-src')) {
@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const homeIcon = this.querySelector(".home-icon");
       const calendarIcon = this.querySelector(".calendar-icon");
       const memberIcon = this.querySelector(".member-icon");
-      const settingsIcon = this.querySelector(".settings-icon");
+      const meetingsIcon = this.querySelector(".meetings-icon");
       const logoutIcon = this.querySelector(".logout-icon");
 
       // Restore original icon images
@@ -68,8 +68,8 @@ document.addEventListener("DOMContentLoaded", function () {
       if (memberIcon && memberIcon.hasAttribute('data-original-src')) {
         memberIcon.src = memberIcon.getAttribute('data-original-src');
       }
-      if (settingsIcon && settingsIcon.hasAttribute('data-original-src')) {
-        settingsIcon.src = settingsIcon.getAttribute('data-original-src');
+      if (meetingsIcon && meetingsIcon.hasAttribute('data-original-src')) {
+        meetingsIcon.src = meetingsIcon.getAttribute('data-original-src');
       }
       if (logoutIcon && logoutIcon.hasAttribute('data-original-src')) {
         logoutIcon.src = logoutIcon.getAttribute('data-original-src');

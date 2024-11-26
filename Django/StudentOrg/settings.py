@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     'register_app',
     'dashboard_app',
     'members_app',
+    'meetings',
 ]
 
 MIDDLEWARE = [

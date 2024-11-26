@@ -11,5 +11,6 @@ urlpatterns = [
     path('', login_view, name='register'),  
     path('calendar/', include('calendar_app.urls')),
     path('dashboard/', include('dashboard_app.urls')),
-    path('members/', include('members_app.urls')),  
+    path('members/', include('members_app.urls')),
+    path('meetings/', include('meetings.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

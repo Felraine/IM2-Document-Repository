@@ -113,7 +113,6 @@
   </div>
 </div>
 </div>
-</div> <!--div for class events-->
 
 <!--FORM CONTAINER-->
 <div id="toast" class="toast"></div>
@@ -157,55 +156,48 @@
 <script>
   document.addEventListener("DOMContentLoaded", function () {
   
-  var calendarEl = document.getElementById('calendar');
-  var calendar = new FullCalendar.Calendar(calendarEl, {
-      initialView: 'dayGridMonth',
-      timeZone: 'Asia/Manila',
-      fixedWeekCount: false,
-      showNonCurrentDates: true,
-      events: '/dashboard/get_events/',
-      eventTimeFormat: { 
-          hour: 'numeric',
-          minute: '2-digit',
-          meridiem: 'short'
-      },
-      eventDidMount: function (info) {
-          // Set background color and border color for events
-          info.el.style.fontSize = "6px";
+    var calendarEl = document.getElementById('calendar');
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
+        timeZone: 'Asia/Manila',
+        fixedWeekCount: false,
+        showNonCurrentDates: true,
+        events: '/dashboard/get_events/', // Ensure the events endpoint includes a 'color' field
+        eventTimeFormat: { 
+            hour: 'numeric',
+            minute: '2-digit',
+            meridiem: 'short'
+        },
+        eventContent: function(arg) {
+            // Create the event time element
+            const timeEl = document.createElement('div');
+            timeEl.classList.add('fc-event-time');
+            timeEl.textContent = arg.timeText; // Display event time only
 
-          // Select the event time and title
-          const titleEl = info.el.querySelector('.fc-event-title');
-          const timeEl = info.el.querySelector('.fc-event-time');
+            // Create the circle element
+            const circleEl = document.createElement('div');
+            circleEl.classList.add('fc-event-circle');
+            circleEl.style.width = '10px';
+            circleEl.style.height = '10px';
+            circleEl.style.borderRadius = '50%';
+            circleEl.style.marginRight = '5px';
+            circleEl.style.backgroundColor = arg.event.extendedProps.color || '#fed534'; // Use event color or default to black
 
-          // Modify title and time display
-          if (titleEl && timeEl) {
-              // Force the time to go on a new line
-              timeEl.style.display = 'block';         // Ensure time is on a new line
-              timeEl.style.marginTop = '5px';         // Add space between time and title
-              titleEl.style.whiteSpace = 'normal';    // Allow title text to wrap
-              titleEl.style.wordWrap = 'break-word';  // Break long words
-          }
-      },
-      windowResize: function(view) {
-          calendar.render();
-      },
-      datesRender: function(info) {
-          // Select the calendar's month view element
-          var gridEl = info.view.el.querySelector('.fc-dayGridMonth-view');
-          
-          // Get all the rows in the month view
-          var rows = gridEl.querySelectorAll('.fc-dayGridWeek');
-          
-          // Ensure only 5 rows are visible
-          if (rows.length > 5) {
-              // Hide extra rows beyond the 5th one
-              for (var i = 5; i < rows.length; i++) {
-                  rows[i].style.display = 'none';
-              }
-          }
-      }
-  });
-  calendar.render();
+            // Wrap them together
+            const wrapperEl = document.createElement('div');
+            wrapperEl.style.display = 'flex';
+            wrapperEl.style.alignItems = 'center';
+            wrapperEl.appendChild(circleEl); // Add the circle
+            wrapperEl.appendChild(timeEl);  // Add the time
+
+            return { domNodes: [wrapperEl] };
+        },
+        windowResize: function(view) {
+            calendar.render();
+        }
+    });
+    calendar.render();
+
 });
 
 

@@ -59,6 +59,18 @@
       <span class="tooltip">Calendar</span>
     </li>
     <li>
+      <a href="{% url 'lobby' %}">
+        <img
+          src="{% static 'images/videocall.png' %}"
+          alt="Meetings"
+          class="icon meetings-icon"
+          data-hover-src="{% static 'images/videocall2.png' %}"
+        />
+        <span class="nav-item">Meetings</span>
+      </a>
+      <span class="tooltip">Meetings</span>
+    </li>
+    <li>
       <a href="{% url 'members' %}">
         <img
           src="{% static 'images/group.png' %}"
