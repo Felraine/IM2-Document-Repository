@@ -6,7 +6,7 @@ class Members(models.Model):
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=100)
     user_role = models.IntegerField()
-    profile_picture = models.ImageField(upload_to='profile_pics/', null=True, blank=True)
+    profile_picture = models.ImageField(upload_to='profile_pics/', null=True, blank=True, default='profile_pics/default_profile_picture.jpg')
 
     class Meta:
         db_table = 'members'

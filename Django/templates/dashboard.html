@@ -164,7 +164,6 @@
       fixedWeekCount: false,
       showNonCurrentDates: true,
       events: '/dashboard/get_events/',
-      eventDisplay: 'block',
       eventTimeFormat: { 
           hour: 'numeric',
           minute: '2-digit',
@@ -172,8 +171,6 @@
       },
       eventDidMount: function (info) {
           // Set background color and border color for events
-          info.el.style.backgroundColor = "#FED534";
-          info.el.style.borderColor = "#FED534";
           info.el.style.fontSize = "6px";
 
           // Select the event time and title
