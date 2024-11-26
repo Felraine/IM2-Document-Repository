@@ -1,215 +1,3 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Courier New", Courier, monospace;
-}
-
-.orgName {
-  color: white;
-  margin-left: 1rem;
-  font-size: 2rem;
-}
-
-.user {
-  width: 50px;
-  height: 50px;
-  border-radius: 100%;
-  border: 1px solid #8a252c;
-  display: flex;
-  align-items: center;
-  margin: 1rem 0;
-}
-
-.name {
-  display: flex;
-  flex-direction: column;
-}
-
-.username {
-  font-weight: 600;
-  white-space: nowrap;
-}
-
-.role {
-  font-size: 0.85rem;
-  color: #ccc;
-  margin-top: 0.2rem;
-}
-
-.logo {
-  height: 5rem;
-  width: 5rem;
-}
-
-.sidebar {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  width: 80px;
-  background-color: #8a252c;
-  padding: 0.4rem 0.8rem;
-  transition: all 0.5s ease;
-}
-
-.sidebar.active ~ .main-content {
-  left: 12.5rem;
-  width: calc(100% - 12.5rem);
-}
-
-.sidebar.active {
-  width: 12.5rem;
-}
-
-.sidebar #btn {
-  position: absolute;
-  color: #fff;
-  top: 0.4rem;
-  left: 50%;
-  font-size: 1.2rem;
-  line-height: 50px;
-  transform: translateX(-50%);
-  cursor: pointer;
-}
-
-.sidebar.active #btn {
-  left: 90%;
-}
-
-.sidebar .top .logo {
-  display: flex;
-  height: 50px;
-  width: 5rem;
-  align-items: center;
-  pointer-events: none;
-  opacity: 0;
-}
-
-.sidebar.active .top .logo {
-  opacity: 1;
-}
-
-.top .logo {
-  font-size: 1rem;
-  margin-right: 5px;
-}
-
-.user {
-  display: flex;
-  align-items: center;
-  margin: 1rem 0;
-}
-
-.user p {
-  color: #fff;
-  opacity: 1;
-  margin-left: 1rem;
-}
-
-.username {
-  font-weight: 600;
-}
-
-.sidebar p {
-  opacity: 0;
-}
-
-.sidebar.active p {
-  opacity: 1;
-}
-
-.sidebar ul li {
-  position: relative;
-  list-style-type: none;
-  height: 50px;
-  width: 90%;
-  margin: 0.8rem auto;
-  line-height: 50px;
-}
-
-.sidebar ul li a {
-  color: #fff;
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-  border-radius: 0.8rem;
-  margin-top: 0.5rem;
-  padding-left: 4px;
-}
-
-.sidebar ul li a:hover {
-  background-color: #fed534;
-}
-
-.sidebar ul li a:hover .nav-item {
-  background-color: #fed534 !important;
-  color: black !important;
-}
-
-.sidebar ul li a img {
-  min-width: 1.5rem;
-  height: 1.5rem;
-  margin-left: 8px;
-}
-
-.home:hover {
-  content: url("images/home2.png");
-}
-
-.sidebar .nav-item {
-  opacity: 0;
-  margin-left: 1rem;
-}
-
-.sidebar.active .nav-item {
-  opacity: 1;
-}
-
-.sidebar ul li .tooltip {
-  position: absolute;
-  left: 125px;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  box-shadow: 0 0.5rem 0.8rem rgba(0, 0, 0, 0.2);
-  border-radius: 0.6rem;
-  padding: 0.4rem 1.2rem;
-  line-height: 1.8rem;
-  z-index: 20;
-  opacity: 0;
-  color: white;
-  pointer-events: none;
-}
-
-.sidebar ul li:hover .tooltip {
-  opacity: 1;
-  background-color: #8a252c;
-  margin-left: 1rem;
-}
-
-.sidebar.active ul li .tooltip {
-  display: none;
-}
-
-.main-content {
-  position: relative;
-  min-height: 100vh;
-  top: 0;
-  left: 80px;
-  transition: all 0.5s ease;
-  width: calc(100% - 80px);
-  padding: 0;
-  background-color: #efefef;
-}
-
-.container {
-  width: 100%;
-  box-shadow: 0 5px 4px -2px rgba(0, 0, 0, 0.4);
-  padding: 0.5rem 0rem 0.5rem 1rem;
-  color: #8a252c;
-  background-color: #fff;
-}
-
 /* Start adding new CSS here */
 .memberHeader {
   font-weight: 600;
@@ -218,12 +6,12 @@
   margin-left: 10px;
   margin-top: 10px;
 }
-
+ 
 .members-container {
   display: flex;
   flex-direction: column;
 }
-
+ 
 #membersList {
   margin-top: 1rem;
 }
@@ -233,7 +21,7 @@
   margin-right: auto;
   margin-left: 10px;
 }
-
+ 
 .members-header {
   display: flex;
   justify-content: flex-end;
@@ -242,13 +30,13 @@
   margin-top: 0px;
   width: 100%;
 }
-
+ 
 .member-count {
   color: grey;
   font-size: 1rem;
   font-weight: 600;
 }
-
+ 
 .search-input {
   padding: 8px;
   border: 1px solid #ddd;
@@ -256,7 +44,7 @@
   font-size: 1rem;
   width: 200px;
 }
-
+ 
 .add-member-btn {
   background-color: #8a252c;
   color: white;
@@ -266,13 +54,13 @@
   cursor: pointer;
   margin-right: 15px;
 }
-
+ 
 .member-count,
 .search-input,
 .add-member-btn {
   margin-left: 15px;
 }
-
+ 
 .modal-overlay {
   display: none;
   position: fixed;
@@ -283,7 +71,7 @@
   background-color: rgba(0, 0, 0, 0.6);
   z-index: 1000;
 }
-
+ 
 .modal-content {
   background-color: #fff;
   width: 400px;
@@ -292,13 +80,13 @@
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
-
+ 
 .modal-content label {
   display: block;
   font-weight: bold;
   margin: 10px 0 5px;
 }
-
+ 
 .modal-content input {
   width: 100%;
   padding: 8px;
@@ -306,7 +94,7 @@
   border: 1px solid #ddd;
   border-radius: 4px;
 }
-
+ 
 .submit-btn {
   background-color: #8a252c;
   color: white;
@@ -316,7 +104,7 @@
   cursor: pointer;
   width: 100%;
 }
-
+ 
 .close-btn {
   background-color: #fed534;
   color: black;
@@ -327,12 +115,12 @@
   margin-top: 10px;
   width: 100%;
 }
-
+ 
 .list {
   list-style: none;
   padding: 0;
 }
-
+ 
 .list li {
   padding: 10px;
   border-top: 1px solid #ddd;
@@ -341,11 +129,11 @@
   align-items: center;
   transition: background-color 0.3s;
 }
-
+ 
 .list li:hover {
   background-color: #f0f0f0;
 }
-
+ 
 .edit-btn {
   background-color: #4caf50; /* Green */
   color: white;
@@ -354,45 +142,46 @@
   border-radius: 5px;
   cursor: pointer;
 }
-
+ 
 .edit-btn:hover {
   background-color: #45a049;
 }
-
+ 
 .role {
   color: black;
 }
-
+ 
 #searchMember {
   font-size: 15px;
 }
-
+ 
 .profile-info {
   display: flex;
   align-items: center;
 }
-
+ 
 .profile-pic {
   width: 40px;
   height: 40px;
   border-radius: 50%;
   margin-right: 10px;
+  cursor: pointer;
 }
-
+ 
 .member-name {
   font-weight: 600;
 }
-
+ 
 .actions {
   display: flex;
   align-items: center;
   gap: 10px;
 }
-
+ 
 .role-form {
   display: inline;
 }
-
+ 
 .role-change-dropdown {
   padding: 5px;
   font-size: 1rem;
@@ -402,43 +191,43 @@
   background-color: rgb(255, 255, 255);
   transition: box-shadow 0.2s ease, border-color 0.2s ease;
 }
-
+ 
 .role-change-dropdown:hover {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
   border-color: rgba(0, 0, 0, 0.3);
 }
-
+ 
 .edit-account-btn {
   background: none;
   border: none;
   cursor: pointer;
   margin-right: 1rem;
 }
-
+ 
 .edit-icon {
   width: 20px;
   height: 20px;
   vertical-align: middle;
 }
-
+ 
 .delete-account-btn {
   background: none;
   border: none;
   cursor: pointer;
   margin-right: 1rem;
 }
-
+ 
 .delete-icon {
   width: 20px;
   height: 20px;
   vertical-align: middle;
 }
-
+ 
 .member-name .email {
   color: grey;
   margin-left: 8px;
 }
-
+ 
 .modal {
   display: none;
   position: fixed;
@@ -451,30 +240,31 @@
   background-color: rgb(0, 0, 0);
   background-color: rgba(0, 0, 0, 0.4);
 }
-
+ 
 .modal-content {
   background-color: #fefefe;
   padding: 20px;
   border: 1px solid #888;
   width: 40%;
 }
-
+ 
 .close {
   color: #aaa;
   float: right;
   font-size: 28px;
   font-weight: bold;
 }
-
+ 
 .close:hover,
 .close:focus {
   color: black;
   text-decoration: none;
   cursor: pointer;
 }
-
+ 
 #deleteMemberName {
   font-size: 1.5rem;
   font-weight: 800;
   margin: 10px 0;
 }
+ 

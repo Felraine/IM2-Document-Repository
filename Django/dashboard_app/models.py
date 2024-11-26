@@ -9,7 +9,22 @@ class Event(models.Model):
 
     class Meta:
         db_table = 'events'
-
+    
     def __str__(self):
         return self.title
+
+class Task(models.Model):
+    dateAssigned = models.DateField()
+    taskTitle  = models.CharField(max_length=50)
+    taskDescription = models.TextField(max_length=255)
+    dueDate = models.DateTimeField()
+    
+    class Meta:
+        db_table = 'tasks'
+    
+    def __str__(self):
+        return self.taskTitle
+
+    
+
 
