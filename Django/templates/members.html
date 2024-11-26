@@ -1,112 +1,14 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="author" content="Felraine Cataos" />
-    <meta name="Calendar" content="Calendar Screen" />
+{% extends 'main.html' %}
 
-    <link
+{% block title %}Members List{% endblock %}
+
+{% load static %}
+{% block content %}
+<link
       rel="stylesheet"
       type="text/css"
-      href="{% static 'members_app/membersStyles.css' %}"
-    />
-
-    <title>Members List</title>
-    <link
-      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
-      rel="stylesheet"
-    />
-    <link
-      rel="icon"
-      type="image/x-icon"
-      href="{% static 'images/CIT_logo.png' %}"
-    />
-  </head>
-  <body>
-    <div class="sidebar">
-      <div class="top">
-        <div class="logo">
-          <img
-            src="{% static 'images/CIT_logo.png' %}"
-            alt="logo"
-            class="logo"
-          />
-          <span class="orgName">CSS</span>
-        </div>
-        <i class="bx bx-menu" id="btn"></i>
-        <div class="user">
-          {% if member %}
-              {% if member.profile_picture %}
-                  <img src="{{ member.profile_picture.url }}" alt="User Profile Picture" class="user">
-              {% else %}
-                  <img src="{% static 'images/default_profile_picture.jpg' %}" alt="Default Profile Picture" class="user">
-              {% endif %}
-          {% endif %}
-          <div class="name">
-              <p class="username">{{ fname }} {{ lname }}</p>
-              <p class="role">
-                  {% if user_role == 0 %} Member {% else %}
-                      {% if user_role == 1 %}
-                          Admin
-                      {% else %}
-                          Unknown Role
-                      {% endif %}
-                  {% endif %}
-              </p>
-          </div>
-        </div>      
-        <ul>
-          <li>
-            <a href="{% url 'dashboard' %}">
-              <img
-                src="{% static 'images/home.png' %}"
-                alt="home"
-                class="icon home-icon"
-              />
-              <span class="nav-item">Dashboard</span>
-            </a>
-            <span class="tooltip">Dashboard</span>
-          </li>
-          <li>
-            <a href="{% url 'calendar' %}">
-              <img
-                src="{% static 'images/calendar.png' %}"
-                alt="calendar"
-                class="icon calendar-icon"
-              />
-              <span class="nav-item">Calendar</span>
-            </a>
-            <span class="tooltip">Calendar</span>
-          </li>
-          <li>
-            <a href="{% url 'members' %}">
-              <img
-                src="{% static 'images/group.png' %}"
-                alt="Members List"
-                class="icon member-icon"
-              />
-              <span class="nav-item">Members</span>
-            </a>
-            <span class="tooltip">Members</span>
-          </li>
-          <li>
-            <a href="{% url 'register' %}">
-              <img
-                src="{% static 'images/logout.png' %}"
-                alt="logout"
-                class="icon logout-icon"
-              />
-              <span class="nav-item">Logout</span>
-            </a>
-            <span class="tooltip">Logout</span>
-          </li>
-        </ul>
-      </div>
-    </div>
-
+      href="{% static 'members_app/membersStyles.css' %}"/>
     <!-- Start adding code here for UI-->
-    <div class="main-content">
       <div class="container">
           <h1>Members List</h1>
       </div>
@@ -246,16 +148,10 @@
               </div>
           </div>
       </div>
-  </div>
-       
+  {% endblock %}
+
+  {% block scripts %}
     <script>
-      let btn = document.querySelector("#btn");
-      let sidebar = document.querySelector(".sidebar");
-
-      btn.onclick = function () {
-        sidebar.classList.toggle("active");
-      };
-
       document.getElementById('searchMember').addEventListener('input', function() {
         var searchTerm = this.value.toLowerCase();
         var members = document.querySelectorAll('.list .member');
@@ -327,57 +223,6 @@
       event.stopPropagation();
   }
 
-    const listItems = document.querySelectorAll("li");
-      listItems.forEach((listItem) => {
-        listItem.addEventListener("mouseover", function () {
-          const homeIcon = this.querySelector(".home-icon");
-          const calendarIcon = this.querySelector(".calendar-icon");
-          const memberIcon = this.querySelector(".member-icon");
-          const settingsIcon = this.querySelector(".settings-icon");
-          const logoutIcon = this.querySelector(".logout-icon");
-
-          if (homeIcon) {
-            homeIcon.src = "{% static 'images/home2.png' %}";
-          }
-          if (calendarIcon) {
-            calendarIcon.src = "{% static 'images/calendar2.png' %}";
-          }
-          if (memberIcon) {
-            memberIcon.src = "{% static 'images/group2.png' %}";
-          }
-          if (settingsIcon) {
-            settingsIcon.src = "{% static 'images/settings2.png' %}";
-          }
-          if (logoutIcon) {
-            logoutIcon.src = "{% static 'images/logout2.png' %}";
-          }
-        });
-
-        listItem.addEventListener("mouseout", function () {
-          const homeIcon = this.querySelector(".home-icon");
-          const calendarIcon = this.querySelector(".calendar-icon");
-          const memberIcon = this.querySelector(".member-icon");
-          const settingsIcon = this.querySelector(".settings-icon");
-          const logoutIcon = this.querySelector(".logout-icon");
-
-          if (homeIcon) {
-            homeIcon.src = "{% static 'images/home.png' %}";
-          }
-          if (calendarIcon) {
-            calendarIcon.src = "{% static 'images/calendar.png' %}";
-          }
-          if (memberIcon) {
-            memberIcon.src = "{% static 'images/group.png' %}";
-          }
-          if (settingsIcon) {
-            settingsIcon.src = "{% static 'images/settings.png' %}";
-          }
-          if (logoutIcon) {
-            logoutIcon.src = "{% static 'images/logout.png' %}";
-          }
-        });
-      });
-
       document.querySelectorAll(".edit-account-btn, .delete-account-btn").forEach((button) => {
     button.addEventListener("mouseover", function () {
         const icon = this.querySelector("img"); 
@@ -402,5 +247,4 @@
       });
   });
     </script>
-  </body>
-</html>
+{% endblock %}
