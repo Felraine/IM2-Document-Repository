@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from register_app.models import Members
 from django.http import JsonResponse
-from .models import Event
+from .models import Event,Task
 
 #DISPLAY
 def dashboard_view(request):
@@ -84,3 +84,18 @@ def get_events(request):
             'description': event.description,
         })
     return JsonResponse(event_data, safe=False)
+
+def getTask(request):
+    tasks = Task.objects.all()
+    task_data = []
+    for task in tasks:
+        task_data.append({
+        'dateAssigned': task.dateAssigned,
+        'taskTitle': task.taskTitle,
+        'taskDescription': task.taskDescription,
+        'dueDate': task.dueDate,
+        })
+    return JsonResponse(task_data, safe =False)
+
+
+     

@@ -215,3 +215,7 @@
     color: #8a252c;
     background-color: #fff;
   }
+
+  .content-area {
+    align-items: center;
+  }

@@ -6,12 +6,12 @@
   margin-left: 10px;
   margin-top: 10px;
 }
-
+ 
 .members-container {
   display: flex;
   flex-direction: column;
 }
-
+ 
 #membersList {
   margin-top: 1rem;
 }
@@ -21,7 +21,7 @@
   margin-right: auto;
   margin-left: 10px;
 }
-
+ 
 .members-header {
   display: flex;
   justify-content: flex-end;
@@ -30,13 +30,13 @@
   margin-top: 0px;
   width: 100%;
 }
-
+ 
 .member-count {
   color: grey;
   font-size: 1rem;
   font-weight: 600;
 }
-
+ 
 .search-input {
   padding: 8px;
   border: 1px solid #ddd;
@@ -44,7 +44,7 @@
   font-size: 1rem;
   width: 200px;
 }
-
+ 
 .add-member-btn {
   background-color: #8a252c;
   color: white;
@@ -54,13 +54,13 @@
   cursor: pointer;
   margin-right: 15px;
 }
-
+ 
 .member-count,
 .search-input,
 .add-member-btn {
   margin-left: 15px;
 }
-
+ 
 .modal-overlay {
   display: none;
   position: fixed;
@@ -71,7 +71,7 @@
   background-color: rgba(0, 0, 0, 0.6);
   z-index: 1000;
 }
-
+ 
 .modal-content {
   background-color: #fff;
   width: 400px;
@@ -80,13 +80,13 @@
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
-
+ 
 .modal-content label {
   display: block;
   font-weight: bold;
   margin: 10px 0 5px;
 }
-
+ 
 .modal-content input {
   width: 100%;
   padding: 8px;
@@ -94,7 +94,7 @@
   border: 1px solid #ddd;
   border-radius: 4px;
 }
-
+ 
 .submit-btn {
   background-color: #8a252c;
   color: white;
@@ -104,7 +104,7 @@
   cursor: pointer;
   width: 100%;
 }
-
+ 
 .close-btn {
   background-color: #fed534;
   color: black;
@@ -115,12 +115,12 @@
   margin-top: 10px;
   width: 100%;
 }
-
+ 
 .list {
   list-style: none;
   padding: 0;
 }
-
+ 
 .list li {
   padding: 10px;
   border-top: 1px solid #ddd;
@@ -129,11 +129,11 @@
   align-items: center;
   transition: background-color 0.3s;
 }
-
+ 
 .list li:hover {
   background-color: #f0f0f0;
 }
-
+ 
 .edit-btn {
   background-color: #4caf50; /* Green */
   color: white;
@@ -142,24 +142,24 @@
   border-radius: 5px;
   cursor: pointer;
 }
-
+ 
 .edit-btn:hover {
   background-color: #45a049;
 }
-
+ 
 .role {
   color: black;
 }
-
+ 
 #searchMember {
   font-size: 15px;
 }
-
+ 
 .profile-info {
   display: flex;
   align-items: center;
 }
-
+ 
 .profile-pic {
   width: 40px;
   height: 40px;
@@ -167,21 +167,21 @@
   margin-right: 10px;
   cursor: pointer;
 }
-
+ 
 .member-name {
   font-weight: 600;
 }
-
+ 
 .actions {
   display: flex;
   align-items: center;
   gap: 10px;
 }
-
+ 
 .role-form {
   display: inline;
 }
-
+ 
 .role-change-dropdown {
   padding: 5px;
   font-size: 1rem;
@@ -191,43 +191,43 @@
   background-color: rgb(255, 255, 255);
   transition: box-shadow 0.2s ease, border-color 0.2s ease;
 }
-
+ 
 .role-change-dropdown:hover {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
   border-color: rgba(0, 0, 0, 0.3);
 }
-
+ 
 .edit-account-btn {
   background: none;
   border: none;
   cursor: pointer;
   margin-right: 1rem;
 }
-
+ 
 .edit-icon {
   width: 20px;
   height: 20px;
   vertical-align: middle;
 }
-
+ 
 .delete-account-btn {
   background: none;
   border: none;
   cursor: pointer;
   margin-right: 1rem;
 }
-
+ 
 .delete-icon {
   width: 20px;
   height: 20px;
   vertical-align: middle;
 }
-
+ 
 .member-name .email {
   color: grey;
   margin-left: 8px;
 }
-
+ 
 .modal {
   display: none;
   position: fixed;
@@ -240,30 +240,31 @@
   background-color: rgb(0, 0, 0);
   background-color: rgba(0, 0, 0, 0.4);
 }
-
+ 
 .modal-content {
   background-color: #fefefe;
   padding: 20px;
   border: 1px solid #888;
   width: 40%;
 }
-
+ 
 .close {
   color: #aaa;
   float: right;
   font-size: 28px;
   font-weight: bold;
 }
-
+ 
 .close:hover,
 .close:focus {
   color: black;
   text-decoration: none;
   cursor: pointer;
 }
-
+ 
 #deleteMemberName {
   font-size: 1.5rem;
   font-weight: 800;
   margin: 10px 0;
 }
+ 

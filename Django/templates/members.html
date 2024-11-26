@@ -1,7 +1,7 @@
 {% extends 'main.html' %}
-
+ 
 {% block title %}Members List{% endblock %}
-
+ 
 {% load static %}
 {% block content %}
 <link
@@ -18,7 +18,7 @@
           <div class="members-header">
               <span class="memList">List of Members</span>
               <span class="member-count">{{ member_count }} members</span>
-      
+     
               <!-- Search Form -->
               <form method="get" action="{% url 'members' %}">
                   <input
@@ -30,11 +30,11 @@
                       class="search-input"
                   />
               </form>
-      
+     
               <button id="openModalBtn" class="add-member-btn">Add Member</button>
           </div>
       </div>
-  
+ 
           <div id="modalOverlay" class="modal-overlay" onclick="closeModal()">
               <div class="modal-content" onclick="event.stopPropagation()">
                   <h2>Add New Member</h2>
@@ -42,22 +42,22 @@
                       {% csrf_token %}
                       <label for="fname">First Name:</label>
                       <input type="text" id="fname" name="fname" required />
-  
+ 
                       <label for="lname">Last Name:</label>
                       <input type="text" id="lname" name="lname" required />
-  
+ 
                       <label for="email">Email:</label>
                       <input type="email" id="email" name="email" required />
-  
+ 
                       <input type="hidden" name="password" value="123456" />
                       <input type="hidden" name="user_role" value="0" />
-  
+ 
                       <button type="submit" name="add_member" class="submit-btn">Add Member</button>
                       <button type="button" id="closeModalBtn" class="close-btn" onclick="closeModal()">Cancel</button>
                   </form>
               </div>
           </div>
-  
+ 
           <div id="membersList">
             <ul class="list">
                 {% for member in members %}
@@ -70,7 +70,7 @@
                         {% endif %}
                         <span class="member-name">{{ member.fname }} {{ member.lname }} <span class="email">{{ member.email }}</span></span>
                     </div>
-        
+       
                     {% if user_role == 1 or member.id == member_id %}
                     <div class="actions">
                         <form method="POST" action="{% url 'members' %}" class="role-form">
@@ -82,11 +82,11 @@
                             </select>
                             <input type="hidden" name="change_role" value="true">
                         </form>
-        
+       
                         <button type="button" class="edit-account-btn" onclick="openEditModal('{{ member.id }}', '{{ member.email }}')">
                             <img src="{% static 'images/editAccount.png' %}" alt="Edit Account" class="edit-icon">
                         </button>
-        
+       
                         <!-- Delete Account Button -->
                         <button type="button" class="delete-account-btn" onclick="openDeleteModal('{{ member.id }}', '{{ member.fname }} {{ member.lname }}')">
                             <img src="{% static 'images/deleteAccount.png' %}" alt="Delete Account" class="delete-icon">
@@ -99,7 +99,7 @@
                 {% endfor %}
             </ul>
         </div>
-        
+       
         <!-- Modal for editing profile picture -->
         <div id="editProfilePicModal" class="modal" style="display: none;">
             <div class="modal-content">
@@ -115,7 +115,7 @@
                 </form>
             </div>
         </div>
-        
+       
           <div id="deleteMemberModal" class="modal" style="display: none;">
               <div class="modal-content">
                   <span class="close" onclick="closeDeleteModal()">&times;</span>
@@ -130,7 +130,7 @@
                   </form>
               </div>
           </div>
-  
+ 
           <div id="editMemberModal" class="modal" style="display: none;">
               <div class="modal-content">
                   <span class="close" onclick="closeEditModal()">&times;</span>
@@ -149,13 +149,13 @@
           </div>
       </div>
   {% endblock %}
-
+ 
   {% block scripts %}
     <script>
       document.getElementById('searchMember').addEventListener('input', function() {
         var searchTerm = this.value.toLowerCase();
         var members = document.querySelectorAll('.list .member');
-
+ 
         members.forEach(function(member) {
             var name = member.querySelector('.member-name').textContent.toLowerCase();
             var email = member.querySelector('.email').textContent.toLowerCase();
@@ -166,66 +166,66 @@
             }
         });
     });
-
+ 
       document.getElementById("openModalBtn").onclick = function () {
         document.getElementById("modalOverlay").style.display = "block";
       };
       document.getElementById("closeModalBtn").onclick = function () {
         document.getElementById("modalOverlay").style.display = "none";
       };
-
+ 
       function openDeleteModal(memberId, memberName) {
         document.getElementById('delete-member-id').value = memberId;
         document.getElementById('deleteMemberName').textContent = memberName;
         document.getElementById('deleteMemberModal').style.display = 'block';
     }
-
+ 
     function closeDeleteModal() {
         document.getElementById('deleteMemberModal').style.display = 'none';
     }
-
+ 
       function openEditModal(memberId, memberEmail) {
         document.getElementById('edit-member-id').value = memberId;
         document.getElementById('edit-email').value = memberEmail;
         document.getElementById('editMemberModal').style.display = "block";
     }
-
+ 
       function closeEditModal() {
           document.getElementById('editMemberModal').style.display = "none";
       }
-
+ 
       window.onclick = function(event) {
           var modal = document.getElementById('editMemberModal');
-          
+         
           if (event.target == modal) {
               modal.style.display = "none";
           }
       }
-
+ 
       document.getElementById("openModalBtn").onclick = function () {
     document.getElementById("modalOverlay").style.display = "block";
   };
-
+ 
   function closeModal() {
       document.getElementById("modalOverlay").style.display = "none";
   }
-
+ 
   function openProfilePicModal(memberId) {
     document.getElementById('profile-pic-member-id').value = memberId;
     document.getElementById('editProfilePicModal').style.display = 'block';
   }
-
+ 
   function closeProfilePicModal() {
     document.getElementById('editProfilePicModal').style.display = 'none';
   }
-
+ 
   document.querySelector('.modal-content').onclick = function(event) {
       event.stopPropagation();
   }
-
+ 
       document.querySelectorAll(".edit-account-btn, .delete-account-btn").forEach((button) => {
     button.addEventListener("mouseover", function () {
-        const icon = this.querySelector("img"); 
+        const icon = this.querySelector("img");
         if (icon) {
             if (this.classList.contains("edit-account-btn")) {
                 icon.src = "{% static 'images/editAccount2.png' %}";
@@ -234,7 +234,7 @@
             }
         }
     });
-
+ 
     button.addEventListener("mouseout", function () {
         const icon = this.querySelector("img");
         if (icon) {
