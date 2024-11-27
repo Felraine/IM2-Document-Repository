@@ -97,5 +97,23 @@ def getTask(request):
         })
     return JsonResponse(task_data, safe =False)
 
+def addTasks(request):
+     if request.method == 'POST':
+        dateAssigned = request.POST.get('dateAssigned')
+        taskTitle = request.POST.get('taskTitle')
+        taskDescription = request.POST.get('taskDescription')
+        dueDate = request.POST.get('dueDate')
+
+        Event.objects.create(
+            dateAssigned=dateAssigned,
+            taskTitle=taskTitle,
+            taskDescription=taskDescription,
+            dueDate=dueDate
+        )
+        return redirect(dashboard_view) 
+     
+     return render(request, 'dashboard.html')
+
+
 
      

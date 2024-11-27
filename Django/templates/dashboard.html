@@ -102,6 +102,7 @@
   </div>
 
   <div class="tasksContainer">
+    <button class="assignTaskBtn">+ Assign Task</button>
     <h2 class="tasksTitle">Tasks</h2>
     <ul class="tasksList">
       {% for task in tasks %}
@@ -162,7 +163,7 @@
         timeZone: 'Asia/Manila',
         fixedWeekCount: false,
         showNonCurrentDates: true,
-        events: '/dashboard/get_events/', // Ensure the events endpoint includes a 'color' field
+        events: '/dashboard/get_events/', 
         eventTimeFormat: { 
             hour: 'numeric',
             minute: '2-digit',
