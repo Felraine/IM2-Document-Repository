@@ -7,12 +7,32 @@
 <link
       rel="stylesheet"
       type="text/css"
-      href="{% static 'meetings/meetingsStyles.css' %}"/>
+      href="{% static 'meetings/lobbyStyles.css' %}"/>
 <div class="container">
   <h1>Meetings</h1>
 </div>
 
-<div id="lobby">
-    <h2>Join Room</h2>
+<div id="form-container">
+
+    <div>
+      <h2>Join Room</h2>
+    </div>
+
+    <form id="form">
+      <div class="form-field">
+        <input type="submit" value="Join Meeting" />
+      </div>
+    </form>
 </div>
+
+<script type="text/javascript">
+  let form = document.getElementById('form')
+
+  let handleSubmit = async (e) => {
+    e.preventDefault()
+    window.open('/meetings/room/', '_self')
+  }
+
+  form.addEventListener('submit', handleSubmit)
+</script>
 {% endblock %}

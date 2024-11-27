@@ -1,1 +1,25 @@
-<h2>Lobby</h2>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Call</title>
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'meetings/roomStyles.css' %}"/>
+</head>
+<body>
+    <main>
+        <section id="room-name-wrapper">
+            <p>Room Name: <span id="room-name"></span></p>
+        </section>
+
+        <section id="video-streams"></section>
+    </main>
+    <script type="text/javascript" src="{% static 'assets/AgoraRTC_N-4.22.2.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/streams.js' %}"></script>
+</body>
+</html>
