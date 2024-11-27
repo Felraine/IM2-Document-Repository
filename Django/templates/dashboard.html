@@ -102,8 +102,10 @@
   </div>
   <!--TASK SECTION-->
   <div class="tasksContainer">
-  <button class="assignTaskBtn">+ Assign Task</button>
-  <h2 class="tasksTitle">Tasks</h2>
+    <div class="tasksHeader">
+      <h2 class="tasksTitle">Tasks</h2>
+      <button class="assignTaskBtn">+ Assign Task</button>
+    </div>
   <div class="tasksList">
     {% for task in tasks %}
     <div class="taskBox">

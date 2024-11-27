@@ -187,7 +187,7 @@ textarea:hover{
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.addEventBtn,.addMeeting,.assignTaskBtn{
+.addEventBtn,.addMeeting{
   border-radius: 5px;
   border-color: #8a252c;
   color: #8a252c;
@@ -317,48 +317,6 @@ textarea:hover{
 #calendar .day.empty {
   background: #f9f9f9; 
 }
-
-.tasksContainer {
-  position: relative;
-  width: 400px;
-  height: 230px;
-  padding: 20px;
-  background: #f9f9f9;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
-  margin-top: 18px;
-}
-
-.tasksTitle {
-  font-size: 20px;
-  text-align: left;
-  margin-left: 10px;
-  margin-bottom: 10px;
-  color: #333;
-}
-
-.tasksList {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.taskItem {
-  font-size: 14px;
-  color: #555;
-  padding: 8px;
-  background: #fff;
-  margin-bottom: 5px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  transition: background 0.3s ease;
-}
-
-.taskItem:hover {
-  background: #f0f0f0;
-}
-
-
 
 /*scroll decors*/
 
@@ -505,6 +463,29 @@ textarea:hover{
 }
 
 /*TASK SECTION*/
+
+.tasksHeader {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center; 
+  margin-bottom: 5px;
+  margin-top: -10px;
+}
+
+.assignTaskBtn{
+  border-radius: 5px;
+  border-color: #8a252c;
+  color: #8a252c;
+  background-color: transparent;
+  width: 100px;
+  height: 25px;
+  cursor: pointer;
+  text-align: center;
+  margin-top: 20px;
+  align-self: flex-start;
+  margin-right: 15px;
+  margin-bottom: 20px;
+}
 .tasksList {
   display: flex;
   flex-wrap: wrap;
@@ -532,3 +513,24 @@ textarea:hover{
   font-size: 14px; 
   color: #555;
 }
+
+.tasksContainer {
+  position: relative;
+  width: 400px;
+  height: 230px;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+  margin-top: 18px;
+}
+
+.tasksTitle {
+  font-size: 20px;
+  text-align: left;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+
