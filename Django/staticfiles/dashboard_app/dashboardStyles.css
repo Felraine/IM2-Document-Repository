@@ -187,7 +187,7 @@ textarea:hover{
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.addEventBtn,.addMeeting{
+.addEventBtn,.addMeeting,.assignTaskBtn{
   border-radius: 5px;
   border-color: #8a252c;
   color: #8a252c;
@@ -502,4 +502,37 @@ textarea:hover{
 
 .meetingListContainer::-webkit-scrollbar-thumb:hover {
   background: #721f25; 
+}
+
+/*TASK SECTION*/
+.tasksList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; 
+}
+
+.taskBox {
+  border: 1px solid #ddd; 
+  background: #fff; 
+  border-radius: 8px; 
+  padding: 10px; 
+  width: calc(50% - 10px); 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+  box-sizing: border-box; 
+}
+
+.taskBox:hover {
+  background: #f0f0f0; 
+}
+
+.taskTitle {
+  font-size: 16px; 
+  font-weight: bold; 
+  margin-bottom: 5px; 
+  color: #333;
+}
+
+.taskDescription {
+  font-size: 14px; 
+  color: #555;
 }

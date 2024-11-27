@@ -11,7 +11,8 @@ def dashboard_view(request):
         'fname': 'Guest',
         'lname': '',
         'user_role': None,
-        'events': Event.objects.all() #display events
+        'events': Event.objects.all(), #display events
+        'tasks': Task.objects.all(), #display tasks
     }
 
     if 'member_id' in request.session:
@@ -104,7 +105,7 @@ def addTasks(request):
         taskDescription = request.POST.get('taskDescription')
         dueDate = request.POST.get('dueDate')
 
-        Event.objects.create(
+        Task.objects.create(
             dateAssigned=dateAssigned,
             taskTitle=taskTitle,
             taskDescription=taskDescription,

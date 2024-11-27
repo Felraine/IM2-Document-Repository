@@ -100,19 +100,18 @@
     <h2 class="calendarTitle">Calendar</h2>
     <div id="calendar"></div>
   </div>
-
+  <!--TASK SECTION-->
   <div class="tasksContainer">
-    <button class="assignTaskBtn">+ Assign Task</button>
-    <h2 class="tasksTitle">Tasks</h2>
-    <ul class="tasksList">
-      {% for task in tasks %}
-        <li class="taskItem">{{ task.title }}</li>
-      {% empty %}
-        <li class="taskItem">No tasks available.</li>
-      {% endfor %}
-    </ul>
+  <button class="assignTaskBtn">+ Assign Task</button>
+  <h2 class="tasksTitle">Tasks</h2>
+  <div class="tasksList">
+    {% for task in tasks %}
+    <div class="taskBox">
+      <h3 class="taskTitle">{{ task.taskTitle }}</h3>
+      <p class="taskDescription">{{task.taskDescription}}.</p>
+    </div>
+    {% endfor %}
   </div>
-</div>
 </div>
 
 <!--FORM CONTAINER-->
