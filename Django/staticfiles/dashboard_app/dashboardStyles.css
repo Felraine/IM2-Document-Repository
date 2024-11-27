@@ -521,10 +521,6 @@ textarea:hover{
   box-sizing: border-box; 
 }
 
-.taskBox:hover {
-  background: #f0f0f0; 
-}
-
 .taskTitle {
   font-size: 16px; 
   font-weight: bold; 
