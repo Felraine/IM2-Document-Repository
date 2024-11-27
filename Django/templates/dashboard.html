@@ -154,6 +154,42 @@
       </div>
   </div>
 </div>
+
+<!-- Task Assignment Modal -->
+<div class="modal" id="assignTaskModal" style="display: none;">
+  <div class="modalContent">
+    <span class="closeBtn" onclick="closeTaskModal()">&times;</span>
+    <h2>Assign Task</h2>
+    <form id="assignTaskForm" method="POST" action="{% url 'addTasks' %}">
+      {% csrf_token %}
+      <label for="taskTitle">Task Title:</label>
+      <input type="text" id="taskTitle" name="taskTitle" placeholder="title"required >
+      <br><br>
+
+      <label for="taskDescription">Task Description:</label>
+      <textarea id="taskDescription" name="taskDescription" placeholder="short description here..."></textarea>
+      <br><br>
+
+      <label for="dueDate">Due Date:</label>
+      <input type="date" id="dueDate" name="dueDate" required>
+      <br><br>
+
+      <label for="assignedTo">Assign To:</label>
+      <select id="assignedTo" name="assignedTo" required>
+        <option value="">Select Member</option>
+        {% for member in members %}
+        <option value="{{ member.id }}">{{ member.name }}</option>
+        {% endfor %}
+      </select>
+      <br><br>
+
+      <button type="submit" class="saveTaskBtn">Assign Task</button>
+    </form>
+  </div>
+</div>
+
+
+
   {% endblock %}
 
 {% block scripts %}
@@ -297,5 +333,23 @@ function closeForm() {
 document.getElementById('overlay').onclick = function() {
     closeForm();
 }
+
+// Open Assign Task Modal
+const assignTaskBtn = document.querySelector('.assignTaskBtn');
+const assignTaskModal = document.getElementById('assignTaskModal');
+const overlay = document.getElementById('overlay');
+
+assignTaskBtn.addEventListener('click', () => {
+  assignTaskModal.style.display = 'block';
+  overlay.style.display = 'block';
+});
+
+// Close Assign Task Modal
+function closeTaskModal() {
+  assignTaskModal.style.display = 'none';
+  overlay.style.display = 'none';
+}
+
+overlay.addEventListener('click', closeTaskModal);
 </script>
 {% endblock %}

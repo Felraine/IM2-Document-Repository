@@ -13,6 +13,7 @@ def dashboard_view(request):
         'user_role': None,
         'events': Event.objects.all(), #display events
         'tasks': Task.objects.all(), #display tasks
+        'members': Members.objects.all()
     }
 
     if 'member_id' in request.session:
