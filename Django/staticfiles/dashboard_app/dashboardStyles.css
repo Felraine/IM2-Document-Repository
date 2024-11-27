@@ -500,7 +500,7 @@ textarea:hover{
   border-radius: 8px; 
   padding: 10px; 
   width: calc(50% - 10px); 
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+  box-shadow: 0 2px 4px rgba(0, 0, 0.2, 0.2); 
   box-sizing: border-box; 
   flex:100%;
   max-width: 100%;
@@ -511,11 +511,19 @@ textarea:hover{
   font-weight: bold; 
   margin-bottom: 5px; 
   color: #000000;
+  margin: 10px;
 }
 
 .taskDescription {
-  font-size: 14px; 
+  font-size: 12px; 
   color: #000000;
+  margin: 10px;
+}
+
+.taskDueDate{
+  font-size: 10px;
+  color: #8A252C;
+  margin: 10px;
 }
 
 .tasksContainer {
