@@ -18,10 +18,11 @@ class Task(models.Model):
     taskTitle  = models.CharField(max_length=50)
     taskDescription = models.TextField(max_length=255)
     dueDate = models.DateTimeField()
+    assignTo = models.ForeignKey('register_app.Members', on_delete=models.CASCADE, null=True)
     
     class Meta:
         db_table = 'tasks'
-    
+        
     def __str__(self):
         return self.taskTitle
 

@@ -13,6 +13,7 @@ def dashboard_view(request):
         'user_role': None,
         'events': Event.objects.all(), #display events
         'tasks': Task.objects.all(), #display tasks
+        'members': Members.objects.all()
     }
 
     if 'member_id' in request.session:
@@ -104,12 +105,16 @@ def addTasks(request):
         taskTitle = request.POST.get('taskTitle')
         taskDescription = request.POST.get('taskDescription')
         dueDate = request.POST.get('dueDate')
+        member_id = request.POST.get('assignTo')  # Get selected member ID 
+
+        member = get_object_or_404(Members, id=member_id)
 
         Task.objects.create(
             dateAssigned=dateAssigned,
             taskTitle=taskTitle,
             taskDescription=taskDescription,
-            dueDate=dueDate
+            dueDate=dueDate,
+            assignTo =member
         )
         return redirect(dashboard_view) 
      
