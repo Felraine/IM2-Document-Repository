@@ -483,15 +483,32 @@ textarea:hover{
   text-align: center;
   margin-top: 20px;
   align-self: flex-start;
-  margin-right: 15px;
+  margin-right: 12px;
   margin-bottom: 20px;
 }
+
 .tasksList {
   display: flex;
   flex-wrap: wrap;
   gap: 10px; 
   box-sizing: border-box;
   width: 100%;
+  max-height: 150px; 
+  overflow-y: auto;
+  margin-top: -10px;
+}
+
+.tasksList::-webkit-scrollbar {
+  width: 8px; 
+}
+
+.tasksList::-webkit-scrollbar-thumb {
+  background-color: #ccc; 
+  border-radius: 4px;
+}
+
+.tasksList::-webkit-scrollbar-thumb:hover {
+  background: #d1a828;
 }
 
 .assignTaskForm{
