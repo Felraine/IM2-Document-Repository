@@ -1,22 +1,31 @@
 const APP_ID = 'fd6776f642cf4c4783a18c670407df19'
-const CHANNEL = 'main'
-const TOKEN = '007eJxTYFC6e3V56HK1Zu7AXuf0dptNJ1Ycfign32EQUbwl9qv9Zi0FhrQUM3NzszQzE6PkNJNkE3ML40RDi2QzcwMTA/OUNEPL1ONu6Q2BjAyVjHNYGBkgEMRnYchNzMxjYAAADboeGA=='
-let UID;
+const CHANNEL = sessionStorage.getItem('room')
+const TOKEN = sessionStorage.getItem('token')
+let UID = Number(sessionStorage.getItem('UID'))
+let name = sessionStorage.getItem('name')
 const client = AgoraRTC.createClient({mode:'rtc', codec:'vp8'})
 
 let localTracks = []
 let remoteUsers = {}
 
 let joinAndDisplayLocalStream = async () => {
+    document.getElementById('room-name').innerText = CHANNEL
+    
     client.on('user-published', handleUserJoined)
     client.on('user-left', handleUserLeft)
 
-    UID = await client.join(APP_ID, CHANNEL, TOKEN, null)
+    try{
+        await client.join(APP_ID, CHANNEL, TOKEN, UID)
+    }catch(error){
+        console.error(error)
+        window.open('/meetings/lobby/', '_self')
+    }
+    
 
     localTracks = await AgoraRTC.createMicrophoneAndCameraTracks()
 
     let player = `<div class="video-container" id="user-container-${UID}">
-                    <div class="username-wrapper"><span class="user-name">My name</span></div>
+                    <div class="username-wrapper"><span class="user-name">${name}</span></div>
                     <div class="video-player" id="user-${UID}"></div>
                 </div>`
     document.getElementById('video-streams').insertAdjacentHTML('beforeend', player)
@@ -37,7 +46,7 @@ let handleUserJoined = async (user, mediaType) => {
         }
 
         player = `<div class="video-container" id="user-container-${user.uid}">
-                    <div class="username-wrapper"><span class="user-name">My name</span></div>
+                    <div class="username-wrapper"><span class="user-name">user</span></div>
                     <div class="video-player" id="user-${user.uid}"></div>
                 </div>`
         document.getElementById('video-streams').insertAdjacentHTML('beforeend', player)
