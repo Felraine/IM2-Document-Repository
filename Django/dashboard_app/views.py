@@ -1,3 +1,4 @@
+from django.utils import timezone
 from django.shortcuts import get_object_or_404, redirect, render
 from register_app.models import Members
 from django.http import JsonResponse
@@ -101,11 +102,16 @@ def getTask(request):
 
 def addTasks(request):
      if request.method == 'POST':
-        dateAssigned = request.POST.get('dateAssigned')
+        member_id = request.POST.get('member_id')
+        dateAssigned = timezone.now().date()
         taskTitle = request.POST.get('taskTitle')
         taskDescription = request.POST.get('taskDescription')
         dueDate = request.POST.get('dueDate')
-        member_id = request.POST.get('assignTo')  # Get selected member ID 
+        member_id = request.POST.get('member_id')  # Get selected member ID 
+
+        if not member_id:
+            return render(request, 'dashboard/add_task.html', {'error': "Please select a member."})
+
 
         member = get_object_or_404(Members, id=member_id)
 
@@ -118,7 +124,8 @@ def addTasks(request):
         )
         return redirect(dashboard_view) 
      
-     return render(request, 'dashboard.html')
+     members = Members.objects.all() 
+     return render(request, 'dashboard.html',{'members': members})
 
 
 

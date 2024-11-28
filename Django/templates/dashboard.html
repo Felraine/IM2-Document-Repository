@@ -167,8 +167,8 @@
       <label for="dueDate">Due Date:</label>
       <input type="datetime-local" id="dueDate" name="dueDate" required>
       <br><br>
-      <label  for="assignedTo">Assign To:</label>
-      <select id="assignedTo" name="assignedTo" class="selectMember" required>
+      <label  for="member_id">Assign To:</label>
+      <select id="assignedTo" name="member_id" class="selectMember" required>
         <option>Select Member</option>
         {% for member in members %}
         <option class="optionMembers" value="{{ member.id }}">{{ member.fname }} {{ member.lname }}</option>
