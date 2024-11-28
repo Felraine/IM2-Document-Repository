@@ -104,7 +104,9 @@
   <div class="tasksContainer">
     <div class="tasksHeader">
       <h2 class="tasksTitle">Tasks</h2>
+      {% if user_role == 1 %}
       <button class="assignTaskBtn">+ Assign Task</button>
+      {% endif %} 
     </div>
   <div class="tasksList">
     {% for task in tasks %}
