@@ -22,7 +22,3 @@ Links:
 3. Attendance Tracking
 4. Assign Events
 5. Announcements/Reminders
-
-#### Install This
-
-py -m pip install Pillow
