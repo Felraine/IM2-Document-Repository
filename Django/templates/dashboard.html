@@ -160,7 +160,7 @@
   <div class="modalContent">
     <span class="closeBtn" onclick="closeTaskModal()">&times;</span>
     <h2>Assign Task</h2>
-    <form id="assignTaskForm" method="POST" action="{% url 'addTasks' %}">
+    <form id="assignTaskForm" class="assignTaskForm" method="POST" action="{% url 'addTasks' %}">
       {% csrf_token %}
       <label for="taskTitle">Task Title:</label>
       <input type="text" id="taskTitle" name="taskTitle" placeholder="title"required >
@@ -178,7 +178,7 @@
       <select id="assignedTo" name="assignedTo" required>
         <option value="">Select Member</option>
         {% for member in members %}
-        <option value="{{ member.id }}">{{ member.name }}</option>
+        <option class="optionMembers" value="{{ member.id }}">{{ member.name }}</option>
         {% endfor %}
       </select>
       <br><br>

@@ -1,4 +1,5 @@
 from django.db import models
+from register_app.models import Members
 
 #Adding Events
 class Event(models.Model):
@@ -18,10 +19,11 @@ class Task(models.Model):
     taskTitle  = models.CharField(max_length=50)
     taskDescription = models.TextField(max_length=255)
     dueDate = models.DateTimeField()
+    assignTo = models.ForeignKey(Members, on_delete=models.CASCADE, related_name='task', null=True)
     
     class Meta:
         db_table = 'tasks'
-    
+        
     def __str__(self):
         return self.taskTitle
 

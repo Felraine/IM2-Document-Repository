@@ -210,7 +210,7 @@ textarea:hover{
     margin-right: 15px;
 }
 
-.saveEventBtn{
+.saveEventBtn,.saveTaskBtn{
     color:#ffffff;
     background-color: #8a252c;
     font-size: 14px; 
@@ -494,6 +494,13 @@ textarea:hover{
   width: 100%;
 }
 
+.assignTaskForm{
+  margin: 0 auto;     
+  width: 100%;          
+  padding: 20px;       
+  text-align: left;
+}
+
 .taskBox {
   border: 1px solid #ddd; 
   background-color: #FECB01;
@@ -554,6 +561,11 @@ textarea:hover{
   margin-left: 10px;
   margin-bottom: 10px;
   color: #333;
+}
+
+.optionMembers{
+  color: black;
+  background-color: white;
 }
 
 
