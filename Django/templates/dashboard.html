@@ -1,7 +1,5 @@
 {% extends 'main.html' %}
-
 {% block title %}Dashboard{% endblock %}
-
 {% load static %}
 {% block content %}
 <link
@@ -11,9 +9,7 @@
 <div class="container">
   <h1>Dashboard</h1>
 </div>
-
 <div id="dashboard">
-
 <div class="events">
   <div class="eventHeader">
     <h2 class="upcomingEventsTitle">Upcoming Events</h2>
@@ -69,7 +65,6 @@
       <p>{{ event.description }}</p> 
       <p><strong>Location:</strong> {{ event.location }}</p>
       <p style="color: red;">{{ event.dateTime }}</p>
-
       {% if user_role == 1 %}
       <!--delete event-->
       <form method="POST" action="{% url 'deleteEvent' event.id %}" onsubmit="return confirmDel(this);"> 
@@ -92,7 +87,6 @@
     <p>No upcoming events.</p>
     {% endfor %}
   </div>
-
 </div>
 
 <div class="right-side">
@@ -120,7 +114,7 @@
   </div>
 </div>
 
-<!--FORM CONTAINER-->
+<!--FORM CONTAINER TO ADD AND EDIT EVENTS-->
 <div id="toast" class="toast"></div>
 <div class="overlay" id="overlay"></div>
 <div class="eventFormContainer" id="eventFormContainer">
@@ -171,17 +165,16 @@
       <textarea id="taskDescription" name="taskDescription" placeholder="short description here..."></textarea>
       <br><br>
       <label for="dueDate">Due Date:</label>
-      <input type="date" id="dueDate" name="dueDate" required>
+      <input type="datetime-local" id="dueDate" name="dueDate" required>
       <br><br>
-      <label for="assignedTo">Assign To:</label>
-      <select id="assignedTo" name="assignedTo" required>
-        <option value="">Select Member</option>
+      <label  for="assignedTo">Assign To:</label>
+      <select id="assignedTo" name="assignedTo" class="selectMember" required>
+        <option>Select Member</option>
         {% for member in members %}
-        <option class="optionMembers" value="{{ member.id }}">{{ member.name }}</option>
+        <option class="optionMembers" value="{{ member.id }}">{{ member.fname }} {{ member.lname }}</option>
         {% endfor %}
       </select>
       <br><br>
-
       <button type="submit" class="saveTaskBtn">Assign Task</button>
     </form>
   </div>
@@ -219,7 +212,6 @@
             circleEl.style.marginRight = '5px';
             circleEl.style.backgroundColor = arg.event.extendedProps.color || '#fed534'; // Use event color or default to black
 
-            // Wrap them together
             const wrapperEl = document.createElement('div');
             wrapperEl.style.display = 'flex';
             wrapperEl.style.alignItems = 'center';
@@ -235,9 +227,6 @@
     calendar.render();
 
 });
-
-
-
 
   let edit = false; // if edit btn pressed or nah
   let deleteForm = null; //modal form
@@ -295,7 +284,6 @@ function showToast(message, isSuccess = true) {
       toast.className = "toast"; 
   }, 3000);
 }
-
 const saveEventBtn = document.getElementById('saveEventBtn');
 saveEventBtn.onclick = function(){
   if (edit && document.getElementById('date_time').value) {
@@ -305,7 +293,6 @@ saveEventBtn.onclick = function(){
     }
 
 }
-
 // Open add event form
 const addEventBtn = document.getElementById('addEventBtn');
 addEventBtn.onclick = function() {
