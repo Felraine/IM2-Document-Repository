@@ -6,6 +6,8 @@ command installs:
 pip install pipenv
 pip install pymysql
 pipenv install pymysql
+py -m pip install Pillow
+pip install agora-token-builder
 
 migration commands:
 python manage.py makemigrations
