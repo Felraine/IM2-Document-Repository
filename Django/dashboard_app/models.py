@@ -26,6 +26,18 @@ class Task(models.Model):
     def __str__(self):
         return self.taskTitle
 
+class Meeting(models.Model):
+    title = models.CharField(max_length=50)
+    description = models.TextField(max_length=255)
+    location = models.CharField(max_length=100)
+    dateTime = models.DateTimeField()
+
+    class Meta:
+        db_table = 'meeting'
+    
+    def __str__(self):
+        return self.title
+
     
 
 

@@ -2,7 +2,7 @@ from django.utils import timezone
 from django.shortcuts import get_object_or_404, redirect, render
 from register_app.models import Members
 from django.http import JsonResponse
-from .models import Event,Task
+from .models import Event,Task, Meeting
 
 #DISPLAY
 def dashboard_view(request):
@@ -14,6 +14,7 @@ def dashboard_view(request):
         'user_role': None,
         'events': Event.objects.all(), #display events
         'tasks': Task.objects.all(), #display tasks
+        'meetings': Meeting.objects.all(),
         'members': Members.objects.all()
     }
 
@@ -126,6 +127,63 @@ def addTasks(request):
      
      members = Members.objects.all() 
      return render(request, 'dashboard.html',{'members': members})
+
+# Create a new meeting
+def addMeeting(request):
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        description = request.POST.get('description')
+        location = request.POST.get('location')
+        date_time = request.POST.get('date_time')
+
+        Meeting.objects.create(
+            title=title,
+            description=description,
+            location=location,
+            dateTime=date_time
+        )
+        return redirect(dashboard_view)  # Redirect back to the dashboard
+    
+    return render(request, 'dashboard.html')
+
+# Delete a meeting
+def deleteMeeting(request, meeting_id):
+    if request.method == 'POST':
+        meeting = get_object_or_404(Meeting, id=meeting_id)
+        meeting.delete()
+        return redirect('dashboard')
+    
+def get_meeting(request):
+    meetings = Meeting.objects.all()  # Corrected: Use the Meeting model
+    meeting_data = []
+    for meeting in meetings:
+        meeting_data.append({
+            'title': meeting.title,
+            'start': meeting.dateTime.isoformat(),  
+            'description': meeting.description,
+        })
+    return JsonResponse(meeting_data, safe=False)  # Moved outside of the loop
+
+# Update an existing meeting
+def updateMeeting(request):
+    if request.method == 'POST':
+        meeting_id = request.POST.get('meeting_id')
+        title = request.POST.get('title')
+        description = request.POST.get('description')
+        location = request.POST.get('location')
+        date_time = request.POST.get('date_time')
+
+        meeting = get_object_or_404(Meeting, id=meeting_id)
+        meeting.title = title
+        meeting.description = description
+        meeting.location = location
+        meeting.dateTime = date_time
+        meeting.save()
+
+        return redirect('dashboard')
+
+    return render(request, 'dashboard.html')
+
 
 
 

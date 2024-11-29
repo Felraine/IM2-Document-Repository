@@ -92,12 +92,30 @@
   right: 8px;
   cursor: pointer;
   margin-bottom: -4px;
-
 }
 
 .editBtn:hover{
   color: white;
 }
+
+.joinBtn{
+  color: white;
+  background-color: #8a252c;
+  padding: 4px;
+  border-radius: 10px;
+  width: 175px;
+  border: transparent;
+  position: absolute; 
+  bottom: 15px; 
+  left: 8px;
+  cursor: pointer;
+  margin-bottom: -4px;
+}
+
+.joinBtn:hover{
+  color: black;
+}
+
 .eventListContainer {   /*EVENT CONTAINER BOX*/
   border: solid #fed534;
   background-color: #fed534;
