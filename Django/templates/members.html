@@ -19,7 +19,7 @@
               <span class="memList">List of Members</span>
               <span class="member-count">{{ member_count }} members</span>
      
-              <form method="get" action="{% url 'members' %}">
+              <form method="get" action="{% url 'members' %}" class="search">
                   <input
                       type="text"
                       id="searchMember"
@@ -29,8 +29,9 @@
                       class="search-input"
                   />
               </form>
-     
+              {% if user_role == 1 %}
               <button id="openModalBtn" class="add-member-btn">Add Member</button>
+              {% endif %}
           </div>
       </div>
  
