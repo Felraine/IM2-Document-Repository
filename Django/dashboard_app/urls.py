@@ -13,6 +13,6 @@ urlpatterns = [
     #meeting routes
     path('addMeeting/', addMeeting, name='addMeeting'),
     path('deleteMeeting/<int:meeting_id>/', deleteMeeting, name='deleteMeeting'),
-    path('updateMeeting/', updateMeeting, name='updateMeeting'),
+    path('updateMeeting/<int:meeting_id>/', updateMeeting, name='updateMeeting'),
     path('get_meeting/', get_meeting, name='get_meeting'),
 ]

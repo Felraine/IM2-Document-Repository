@@ -178,9 +178,9 @@ def get_meeting(request):
     return JsonResponse(meeting_data, safe=False)  # Moved outside of the loop
 
 # Update an existing meeting
-def updateMeeting(request):
+def updateMeeting(request, meeting_id):
     if request.method == 'POST':
-        meeting_id = request.POST.get('meeting_id')
+        # No need to get meeting_id from POST data, it's now in the URL
         title = request.POST.get('title')
         description = request.POST.get('description')
         location = request.POST.get('location')
@@ -195,7 +195,9 @@ def updateMeeting(request):
 
         return redirect('dashboard')
 
-    return render(request, 'dashboard.html')
+    # If it's a GET request, you might want to render a form with existing meeting details
+    meeting = get_object_or_404(Meeting, id=meeting_id)
+    return render(request, 'dashboard.html', {'meeting': meeting})
 
 
 

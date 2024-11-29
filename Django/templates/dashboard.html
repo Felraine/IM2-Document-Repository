@@ -74,7 +74,7 @@
         </form>
 
         <!-- Edit Meeting -->
-        <button class="editBtn" onclick="openEditForm(
+        <button class="editBtn" onclick="openEditMeetingForm(
           '{{ meeting.id }}',   
           '{{ meeting.title }}',
           '{{ meeting.description }}',
@@ -143,31 +143,8 @@
 </form>
   </div>
 </div>
-<!--html modal for meetings-->
-<div id="toast" class="toast"></div>
-<div class="overlay" id="overlay"></div>
-<div class="eventFormContainer" id="eventFormContainer">
-<span class="closeBtn" onclick="closeForm()">&times;</span>
 
-<h2 class="title" id="formTitle">Add New Event</h2>
-<form class="eventForm" id="eventForm" method="post" action="{% url 'addEvents' %}">
-  {% csrf_token %}
-  <input type="hidden" id="edit_event_id" name="event_id">
-  <label for="title">Title:</label>
-  <input type="text" id="title" name="title" required>
-  <br><br>
-  <label for="description">Description:</label>
-  <textarea id="description" name="description" required></textarea>
-  <br><br>
-  <label for="location">Location:</label>
-  <input type="text" id="location" name="location" required>
-  <br><br>
-  <label for="date_time">Date & Time:</label>
-  <input type="datetime-local" id="date_time" name="date_time" required>
-  <br><br>
-  <button class="saveEventBtn" type="submit" id="saveEventBtn">Save Event</button>
-</form>
-  </div>
+
 <!--HTML MODAL POP UP FOR DELETE-->
 <div id="deleteConfirmationModal" class="modal">
   <div class="modalContent">
@@ -312,8 +289,41 @@ document.getElementById('cancelDeleteBtn').onclick = hideModal;
 document.getElementById('overlay').onclick = hideModal;
   
 //UPDATING FORMS SECTION
+function openEditMeetingForm(id, title, description, location, dateTime) {
+    document.getElementById('edit_event_id').value = id;
+    document.getElementById('title').value = title;
+    document.getElementById('description').value = description;
+    document.getElementById('location').value = location;
+    
+    let formattedDateTime = '';
+    try {
+        const dateObj = new Date(dateTime);
+        
+        if (isNaN(dateObj.getTime())) {
+            console.error('Invalid date:', dateTime);
+            formattedDateTime = ''; 
+        } else {
+            const localDate = new Date(dateObj.getTime() - (dateObj.getTimezoneOffset() * 60000));
+            formattedDateTime = localDate.toISOString().slice(0,16);
+        }
+    } catch (error) {
+        console.error('Error parsing date:', error);
+        formattedDateTime = '';
+    }
 
-  // edit event form
+    document.getElementById('date_time').value = formattedDateTime;
+
+    document.getElementById('formTitle').innerText = "Edit Meeting";
+    document.getElementById('saveEventBtn').innerText = "Save Meeting";
+
+    document.getElementById('eventForm').action = `/dashboard/updateMeeting/${id}/`;
+
+    edit = true;
+
+    document.getElementById('eventFormContainer').style.display = "block";
+}
+
+// edit event form
 function openEditForm(id, title, description, location, dateTime) {
     document.getElementById('edit_event_id').value = id;
     document.getElementById('title').value = title;
@@ -324,12 +334,15 @@ function openEditForm(id, title, description, location, dateTime) {
     // Change the form title and action URL
     document.getElementById('formTitle').innerText = "Edit Event";
     document.getElementById('eventForm').action = "{% url 'updateEvent' %}"; 
+    document.getElementById('saveEventBtn').innerText = "Save Event";
 
     edit = true;
 
     document.getElementById('eventFormContainer').style.display = "block";
    
 }
+
+
 
 function showToast(message, isSuccess = true) {
   const toast = document.getElementById("toast");
@@ -392,6 +405,7 @@ addEventBtn.onclick = function() {
     document.getElementById('eventForm').reset(); 
     document.getElementById('eventFormContainer').style.display = "block";
     document.getElementById('overlay').style.display = "block";
+    document.getElementById('saveEventBtn').innerText = "Save Event";
 }
 
 // Close form
@@ -416,6 +430,7 @@ addMeetBtn.onclick = function() {
     // Show the form and the overlay
     document.getElementById('eventFormContainer').style.display = "block";
     document.getElementById('overlay').style.display = "block";
+    document.getElementById('saveEventBtn').innerText = "Save Meeting";
 }
 
 // Close the form when the overlay is clicked
