@@ -19,7 +19,6 @@
               <span class="memList">List of Members</span>
               <span class="member-count">{{ member_count }} members</span>
      
-              <!-- Search Form -->
               <form method="get" action="{% url 'members' %}">
                   <input
                       type="text"
@@ -64,12 +63,28 @@
                 <li class="member">
                     <div class="profile-info">
                         {% if member.profile_picture %}
-                        <img src="{{ member.profile_picture.url }}" alt="{{ member.fname }} {{ member.lname }} - {{ member.email }}" class="profile-pic" onclick="openProfilePicModal('{{ member.id }}')">
+                            <img src="{{ member.profile_picture.url }}" alt="{{ member.fname }} {{ member.lname }} - {{ member.email }}" 
+                                 class="profile-pic" 
+                                 {% if member.id != user_id %}
+                                     style="cursor: not-allowed;" 
+                                     onclick="showToast('You can only edit your own profile picture.')" 
+                                 {% else %}
+                                     onclick="openProfilePicModal('{{ member.id }}')" 
+                                 {% endif %}>
                         {% else %}
-                        <img src="{% static 'images/default_profile_picture.jpg' %}" alt="Default Profile Picture" class="profile-pic">
+                            <img src="{% static 'images/default_profile_picture.jpg' %}" alt="Default Profile Picture" 
+                                 class="profile-pic" 
+                                 {% if member.id != user_id %}
+                                     style="cursor: not-allowed;" 
+                                     onclick="showToast('You can only edit your own profile picture.')" 
+                                 {% else %}
+                                     onclick="openProfilePicModal('{{ member.id }}')" 
+                                 {% endif %}>
                         {% endif %}
-                        <span class="member-name">{{ member.fname }} {{ member.lname }} <span class="email">{{ member.email }}</span></span>
-                    </div>
+                        <span class="member-name">{{ member.fname }} {{ member.lname }} 
+                            <span class="email">{{ member.email }}</span>
+                        </span>
+                    </div>                   
        
                     {% if user_role == 1 or member.id == member_id %}
                     <div class="actions">
@@ -87,7 +102,6 @@
                             <img src="{% static 'images/editAccount.png' %}" alt="Edit Account" class="edit-icon">
                         </button>
        
-                        <!-- Delete Account Button -->
                         <button type="button" class="delete-account-btn" onclick="openDeleteModal('{{ member.id }}', '{{ member.fname }} {{ member.lname }}')">
                             <img src="{% static 'images/deleteAccount.png' %}" alt="Delete Account" class="delete-icon">
                         </button>
@@ -246,5 +260,17 @@
           }
       });
   });
+
+  function showToast(message) {
+        Toastify({
+            text: message, 
+            duration: 3000, 
+            close: true, 
+            gravity: "bottom",
+            position: "right", 
+            backgroundColor: "#8a252c", 
+            stopOnFocus: true
+        }).showToast();
+    }
     </script>
 {% endblock %}

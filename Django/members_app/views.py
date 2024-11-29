@@ -20,6 +20,7 @@ def members_view(request):
     # Read the info from the table
     if 'member_id' in request.session:
         member_id = request.session['member_id']
+        context['user_id'] = member_id
         try:
             member = Members.objects.get(id=member_id)
             print(f"Member found: {member.fname} {member.lname}")
@@ -103,19 +104,30 @@ def members_view(request):
 
     # Update profile picture
     if request.method == 'POST' and request.FILES.get('profile_picture'):
-        member_id_to_update = request.POST.get('member_id')
-        try:
-            member_to_update = Members.objects.get(id=member_id_to_update)
-            profile_picture = request.FILES['profile_picture']
+        member_id_to_update = request.POST.get('member_id')  # Only set during POST request
 
-            # Save the image to the member's profile_picture field
-            member_to_update.profile_picture = profile_picture
-            member_to_update.save()
+        # Check if member_id_to_update exists and handle the profile picture update
+        if member_id_to_update:
+            try:
+                member_to_update = Members.objects.get(id=member_id_to_update)
+                profile_picture = request.FILES['profile_picture']
 
-            print(f"Updated profile picture for {member_to_update.fname} {member_to_update.lname}")
-            return redirect('members')
+                # Allow only the logged-in user or admin to update the profile picture
+                if member_to_update.id == member_id:
+                    # Save the image to the member's profile_picture field
+                    member_to_update.profile_picture = profile_picture
+                    member_to_update.save()
 
-        except ObjectDoesNotExist:
-            print("Member not found.")
+                    print(f"Updated profile picture for {member_to_update.fname} {member_to_update.lname}")
+                    return redirect('members')
+                else:
+                    print("Unauthorized attempt to update profile picture.")
+                    return HttpResponse("Unauthorized", status=403)
+
+            except ObjectDoesNotExist:
+                print("Member not found.")
+        else:
+            print("No member_id provided for profile picture update.")
+
 
     return render(request, 'members.html', context)
