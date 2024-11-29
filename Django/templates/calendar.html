@@ -18,23 +18,112 @@
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>
     <script>
       let calendarEl = document.getElementById("calendar");
-
       let calendar = new FullCalendar.Calendar(calendarEl, {
-        initialView: "dayGridMonth",
-        timeZone: "Asia/Manila",
-        fixedWeekCount: false,
-        events: "/dashboard/get_events/",
-        eventDisplay: "block",
-        eventTimeFormat: {
-          hour: "numeric",
-          minute: "2-digit",
-          meridiem: "short",
-        },
-        eventDidMount: function (info) {
-          info.el.style.backgroundColor = "#8a252c";
-          info.el.style.borderColor = "#8a252c";
-          info.el.style.fontSize = "12px";
-        },
+          initialView: "dayGridMonth",
+          fixedWeekCount: false,
+          events: function(fetchInfo, successCallback, failureCallback) {
+              Promise.all([
+                  fetch('/dashboard/get_events/').then(response => response.json()),
+                  fetch('/dashboard/get_tasks/').then(response => response.json()),
+                  fetch('/dashboard/get_meeting/').then(response => response.json())
+              ]).then(([events, tasks, meetings]) => {
+                  const combinedEvents = [
+                      ...events.map(event => ({
+                          title: event.title,
+                          start: event.start,
+                          backgroundColor: '#fed534', 
+                          borderColor: '#fed534',
+                          textColor: 'black',
+                          type: 'Event'
+                      })),
+                      ...tasks.map(task => ({
+                          title: task.taskTitle,
+                          start: task.dueDate,
+                          backgroundColor: '#FFD1DC', 
+                          borderColor: '#FFD1DC',
+                          textColor: 'white',
+                          type: 'Task'
+                      })),
+                      ...meetings.map(meeting => ({
+                          title: meeting.title,
+                          start: meeting.start,
+                          backgroundColor: '#8a252c',  
+                          borderColor: '#8a252c',
+                          textColor: 'white',
+                          type: 'Meeting'
+                      }))
+                  ];
+                  
+                  successCallback(combinedEvents);
+              }).catch(error => {
+                  console.error('Error fetching events:', error);
+                  failureCallback(error);
+              });
+          },
+          eventDisplay: "block",
+          eventTimeFormat: {
+              hour: "numeric",
+              minute: "2-digit",
+              meridiem: "short",
+          },
+          eventContent: function(arg) {
+              const eventContainer = document.createElement('div');
+              eventContainer.style.display = 'flex';
+              eventContainer.style.flexDirection = 'row';
+              eventContainer.style.alignItems = 'center';
+              eventContainer.style.gap = '5px';
+              
+              if (arg.event.extendedProps.type === 'Event') {
+                  eventContainer.style.color = 'black';
+              } else {
+                  eventContainer.style.color = 'white';
+              }
+              
+              const timeEl = document.createElement('div');
+              timeEl.classList.add('fc-event-time');
+              timeEl.textContent = arg.timeText;
+              timeEl.style.fontSize = '1em';
+              
+              const titleEl = document.createElement('div');
+              titleEl.classList.add('fc-event-title');
+              titleEl.textContent = arg.event.title;
+              titleEl.style.fontSize = '1em';
+              
+              eventContainer.appendChild(timeEl);
+              eventContainer.appendChild(titleEl);
+              
+              return { domNodes: [eventContainer] };
+          },
+          eventDidMount: function (info) {
+              const eventType = info.event.extendedProps.type;
+              
+              switch(eventType) {
+                  case 'Event':
+                      info.el.style.backgroundColor = '#fed534';
+                      info.el.style.borderColor = '#fed534';
+                      info.el.style.color = 'black';
+                      info.el.querySelector('.fc-event-time').style.color = 'black';
+                      info.el.querySelector('.fc-event-title').style.color = 'black';
+                      break;
+                  case 'Task':
+                      info.el.style.backgroundColor = '#FFD1DC';
+                      info.el.style.borderColor = '#FFD1DC';
+                      info.el.style.color = 'white';
+                      break;
+                  case 'Meeting':
+                      info.el.style.backgroundColor = '#8a252c';
+                      info.el.style.borderColor = '#8a252c';
+                      info.el.style.color = 'white';
+                      break;
+                  default:
+                      info.el.style.backgroundColor = '#8a252c';
+                      info.el.style.borderColor = '#8a252c';
+                      info.el.style.color = 'white';
+              }
+              
+              info.el.style.fontSize = "12px";
+              info.el.style.padding = '5px';
+          },
       });
       calendar.render();
     </script>

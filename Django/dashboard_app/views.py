@@ -128,6 +128,19 @@ def addTasks(request):
      members = Members.objects.all() 
      return render(request, 'dashboard.html',{'members': members})
 
+def get_tasks(request):
+    tasks = Task.objects.all()
+    task_data = []
+    for task in tasks:
+        task_data.append({
+        'dateAssigned': task.dateAssigned.isoformat() if task.dateAssigned else None,
+        'taskTitle': task.taskTitle,
+        'taskDescription': task.taskDescription,
+        'dueDate': task.dueDate.isoformat() if task.dueDate else None,
+        'assignTo': task.assignTo.fname if task.assignTo else 'Unassigned'
+        })
+    return JsonResponse(task_data, safe=False)
+
 # Create a new meeting
 def addMeeting(request):
     if request.method == 'POST':

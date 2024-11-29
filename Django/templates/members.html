@@ -17,7 +17,7 @@
           <span class="memberHeader">Manage Members Access</span>
           <div class="members-header">
               <span class="memList">List of Members</span>
-              <span class="member-count">{{ member_count }} members</span>
+              <span class="member-count">{{ member_count }} Members</span>
      
               <form method="get" action="{% url 'members' %}" class="search">
                   <input
@@ -76,10 +76,10 @@
                             <img src="{% static 'images/default_profile_picture.jpg' %}" alt="Default Profile Picture" 
                                  class="profile-pic" 
                                  {% if member.id != user_id %}
-                                     style="cursor: not-allowed;" 
-                                     onclick="showToast('You can only edit your own profile picture.')" 
+                                    style="cursor: not-allowed;" 
+                                    onclick="showToast('You can only edit your own profile picture.')" 
                                  {% else %}
-                                     onclick="openProfilePicModal('{{ member.id }}')" 
+                                    onclick="openProfilePicModal('{{ member.id }}')" 
                                  {% endif %}>
                         {% endif %}
                         <span class="member-name">{{ member.fname }} {{ member.lname }} 
@@ -125,7 +125,7 @@
                     <input type="hidden" name="member_id" id="profile-pic-member-id">
                     <label for="profile_picture">Select New Profile Picture:</label>
                     <input type="file" name="profile_picture" accept="image/*" required>
-                    <button type="submit" class="submit-btn">Upload</button>
+                    <button type="submit" class="submit-btn" onclick="handleProfileSubmit(event)">Upload</button>
                     <button type="button" class="close-btn" onclick="closeProfilePicModal()">Cancel</button>
                 </form>
             </div>
@@ -273,5 +273,17 @@
             stopOnFocus: true
         }).showToast();
     }
+
+    function handleProfileSubmit(event) {
+    event.preventDefault();
+
+    closeProfilePicModal();
+
+    showToast('Profile Picture Changed');
+
+    setTimeout(() => {
+        document.getElementById('editProfilePicForm').submit();
+    }, 2000); 
+}
     </script>
 {% endblock %}

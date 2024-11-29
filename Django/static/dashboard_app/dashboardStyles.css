@@ -300,7 +300,7 @@ textarea:hover{
 }
 
 .fc-day-today {
-  background-color: #fed534 !important;
+  background-color: #F9D77E !important;
   border: 2px solid #8a252c;
 }
 
@@ -538,7 +538,7 @@ textarea:hover{
 
 .taskBox {
   border: 1px solid #ddd; 
-  background-color: #FECB01;
+  background-color: #FFD1DC; /*Change here*/
   border-radius: 8px; 
   padding: 10px; 
   width: calc(50% - 10px); 
@@ -564,7 +564,7 @@ textarea:hover{
 
 .taskDueDate{
   font-size: 10px;
-  color: #8A252C;
+  color: #8a252c;
   margin: 10px;
 }
 

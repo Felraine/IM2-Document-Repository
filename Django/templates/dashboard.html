@@ -211,40 +211,68 @@
 
 {% block scripts %}
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-  
+document.addEventListener("DOMContentLoaded", function () {
     var calendarEl = document.getElementById('calendar');
     var calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'dayGridMonth',
-        timeZone: 'Asia/Manila',
         fixedWeekCount: false,
         showNonCurrentDates: true,
-        events: '/dashboard/get_events/', 
+        events: function(fetchInfo, successCallback, failureCallback) {
+            Promise.all([
+                fetch('/dashboard/get_events/').then(response => response.json()),
+                fetch('/dashboard/get_tasks/').then(response => response.json()),
+                fetch('/dashboard/get_meeting/').then(response => response.json())
+            ]).then(([events, tasks, meetings]) => {
+                const combinedEvents = [
+                    ...events.map(event => ({
+                        title: event.title,
+                        start: event.start,
+                        color: '#fed534',
+                        type: 'Event'
+                    })),
+                    ...tasks.map(task => ({
+                        title: task.taskTitle,
+                        start: task.dueDate,
+                        color: '#FFD1DC', //Change here
+                        type: 'Task'
+                    })),
+                    ...meetings.map(meeting => ({
+                        title: meeting.title,
+                        start: meeting.start,
+                        color: '#8a252c',
+                        type: 'Meeting'
+                    }))
+                ];
+                
+                successCallback(combinedEvents);
+            }).catch(error => {
+                console.error('Error fetching events:', error);
+                failureCallback(error);
+            });
+        },
         eventTimeFormat: { 
             hour: 'numeric',
             minute: '2-digit',
             meridiem: 'short'
         },
         eventContent: function(arg) {
-            // Create the event time element
             const timeEl = document.createElement('div');
             timeEl.classList.add('fc-event-time');
-            timeEl.textContent = arg.timeText; // Display event time only
+            timeEl.textContent = arg.timeText;
 
-            // Create the circle element
             const circleEl = document.createElement('div');
             circleEl.classList.add('fc-event-circle');
             circleEl.style.width = '10px';
             circleEl.style.height = '10px';
             circleEl.style.borderRadius = '50%';
             circleEl.style.marginRight = '5px';
-            circleEl.style.backgroundColor = arg.event.extendedProps.color || '#8a252c'; // Use event color or default to black
+            circleEl.style.backgroundColor = arg.event.backgroundColor || arg.event.extendedProps.color || '#8a252c';
 
             const wrapperEl = document.createElement('div');
             wrapperEl.style.display = 'flex';
             wrapperEl.style.alignItems = 'center';
-            wrapperEl.appendChild(circleEl); // Add the circle
-            wrapperEl.appendChild(timeEl);  // Add the time
+            wrapperEl.appendChild(circleEl);
+            wrapperEl.appendChild(timeEl);
 
             return { domNodes: [wrapperEl] };
         },
@@ -253,7 +281,6 @@
         }
     });
     calendar.render();
-
 });
 
   let edit = false; // if edit btn pressed or nah
