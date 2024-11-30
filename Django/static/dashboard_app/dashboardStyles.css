@@ -630,7 +630,8 @@ textarea:hover{
   text-align: left;
   margin-right: 15px;
   margin-bottom: 10px;
-  color: #333;
+  margin-top: 10px;
+  color: #000000;
 }
 
 .optionMembers{
