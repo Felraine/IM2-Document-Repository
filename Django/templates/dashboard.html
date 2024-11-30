@@ -112,6 +112,7 @@
       <p class="taskDescription">{{task.taskDescription}}.</p>
       <p class="taskDueDate">Due date: {{task.dueDate}}</p>
       {% if user_role == 1 %}
+      <button type="submit" class="deleteTaskBtn">Delete Task</button>
       <button class="editTaskBtn" onclick="openEditTaskForm(
   '{{ task.id }}',   
   '{{ task.taskTitle }}',
@@ -189,6 +190,7 @@
       </select>
       <br><br>
       <button type="submit" class="addTaskBtn">Assign Task</button>
+
     </form>
   </div>
 </div>
@@ -219,8 +221,8 @@
         {% endfor %}
       </select>
       <br><br>
-      <button type="submit" class="saveTaskBtn">Save Changes</button>
-      <button type="submit" class="deleteTaskBtn">Delete Task</button>
+      <button type="submit" class="saveTaskBtn">Save Changes</button> 
+      </form>
     </form>
   </div>
 </div>
@@ -312,7 +314,7 @@ document.addEventListener("DOMContentLoaded", function () {
       return false;
   }
 
-  // delete event
+  // delete event & delete task
   document.getElementById('confirmDeleteBtn').onclick = function() {
   if (deleteForm) {
       deleteForm.submit(); 
