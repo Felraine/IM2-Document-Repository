@@ -6,31 +6,33 @@
     font-size: 2rem;
   }
   
-  .user {
-    width: 50px;
-    height: 50px;
-    border-radius: 100%;
-    border: 1px solid #8a252c;
-    display: flex;
-    align-items: center;
-    margin: 1rem 0;
-  }
+.user {
+  display: inline-flex;         /* Keeps the image and name side by side */
+  align-items: center;          /* Vertically center the image */
+  justify-content: center;      /* Horizontally center the image */
+  width: 50px;                  /* Fixed width for the container */
+  height: 50px;                 /* Fixed height for the container */
+  border-radius: 50%;           /* Makes the container round */
+  overflow: hidden;             /* Ensures the image doesn't spill out of the container */
+}
+
+.user img {
+  width: 100%;                  /* Makes the image fill the container */
+  height: 100%;                 /* Ensures the image height matches the container */
+  object-fit: cover;            /* Prevents the image from stretching/distorting */
+  object-position: center;      /* Keeps the image centered */
+}
+
+.name {
+  margin-left: 10px;            /* Adds space between the profile picture and the name/role */
+}
+
+.username, .role {
+  margin: 0;                    /* Removes default margins around text */
+  font-size: 14px;              /* Adjusts font size for text */
+}
+
   
-  .name {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .username {
-    font-weight: 600;
-    white-space: nowrap;
-  }
-  
-  .role {
-    font-size: 0.85rem;
-    color: #ccc;
-    margin-top: 0.2rem;
-  }
   
   .logo {
     height: 5rem;
