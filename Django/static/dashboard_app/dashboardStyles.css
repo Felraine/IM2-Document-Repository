@@ -375,8 +375,8 @@ textarea:hover{
 
 .modalContent {
   padding: 10px;
+  
 }
-
 .confirmBtn, .cancelBtn,.ok {
   padding: 5px 15px;
   border: none;
@@ -529,7 +529,7 @@ textarea:hover{
   background: #d1a828;
 }
 
-.assignTaskForm{
+.assignTaskForm,.editTaskForm{
   margin: 0 auto;     
   width: 100%;          
   padding: 20px;       
