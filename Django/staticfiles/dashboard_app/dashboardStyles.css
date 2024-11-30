@@ -92,12 +92,30 @@
   right: 8px;
   cursor: pointer;
   margin-bottom: -4px;
-
 }
 
 .editBtn:hover{
   color: white;
 }
+
+.joinBtn{
+  color: white;
+  background-color: #8a252c;
+  padding: 4px;
+  border-radius: 10px;
+  width: 175px;
+  border: transparent;
+  position: absolute; 
+  bottom: 15px; 
+  left: 8px;
+  cursor: pointer;
+  margin-bottom: -4px;
+}
+
+.joinBtn:hover{
+  color: black;
+}
+
 .eventListContainer {   /*EVENT CONTAINER BOX*/
   border: solid #fed534;
   background-color: #fed534;
@@ -120,7 +138,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); 
+  background-color: rgba(0, 0, 0, 0.5);
   z-index: 99;
 }
 
@@ -282,7 +300,7 @@ textarea:hover{
 }
 
 .fc-day-today {
-  background-color: #fed534 !important;
+  background-color: #F9D77E !important;
   border: 2px solid #8a252c;
 }
 
@@ -493,7 +511,6 @@ textarea:hover{
   gap: 10px; 
   box-sizing: border-box;
   width: 100%;
-  height: 100%;
   max-height: 150px; 
   overflow-y: auto;
   margin-top: -10px;
@@ -521,7 +538,7 @@ textarea:hover{
 
 .taskBox {
   border: 1px solid #ddd; 
-  background-color: #FECB01;
+  background-color: #fed534; /*Change here*/
   border-radius: 8px; 
   padding: 10px; 
   width: calc(50% - 10px); 
@@ -547,7 +564,7 @@ textarea:hover{
 
 .taskDueDate{
   font-size: 10px;
-  color: #8A252C;
+  color: #8a252c;
   margin: 10px;
 }
 

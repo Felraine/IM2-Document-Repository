@@ -13,7 +13,6 @@ def dashboard_view(request):
         'lname': '',
         'user_role': None,
         'events': Event.objects.all(), #display events
-        #'tasks': Task.objects.all(), #display tasks
         'tasks': [],
         'meetings': Meeting.objects.all(),
         'members': Members.objects.all()

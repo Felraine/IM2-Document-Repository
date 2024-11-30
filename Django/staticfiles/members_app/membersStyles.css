@@ -30,7 +30,11 @@
   margin-top: 0px;
   width: 100%;
 }
- 
+
+.search{
+  margin-right: 10px;
+}
+
 .member-count {
   color: grey;
   font-size: 1rem;
