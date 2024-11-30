@@ -118,12 +118,12 @@
       <button type="submit" class="deleteTaskBtn">Delete Task</button>
       </form>
       <button class="editTaskBtn" onclick="openEditTaskForm(
-  '{{ task.id }}',   
-  '{{ task.taskTitle }}',
-  '{{ task.taskDescription }}',
-  '{{ task.dueDate }}',
-  '{{ task.assignTo.id }}'
-)">Edit</button>
+        '{{ task.id }}',   
+        '{{ task.taskTitle }}',
+        '{{ task.taskDescription }}',
+        '{{ task.dueDate }}',
+        '{{ task.assignTo.id }}'
+      )">Edit</button>
 </div>
       {% endif %}
     </div>
@@ -178,16 +178,16 @@
     <form id="assignTaskForm" class="assignTaskForm" method="POST" action="{% url 'addTasks' %}">
       {% csrf_token %}
       <label for="taskTitle">Task Title:</label>
-      <input type="text" id="taskTitle" name="taskTitle" placeholder="title"required >
+      <input type="text" id="assignTaskTitle" name="taskTitle" placeholder="title" required>
       <br><br>
       <label for="taskDescription">Task Description:</label>
-      <textarea id="taskDescription" name="taskDescription" placeholder="short description here..."></textarea>
+      <textarea id="assignTaskDescription" name="taskDescription" placeholder="short description here..."></textarea>
       <br><br>
       <label for="dueDate">Due Date:</label>
-      <input type="datetime-local" id="dueDate" name="dueDate" required>
+      <input type="datetime-local" id="assignDueDate" name="dueDate" required>
       <br><br>
-      <label  for="member_id">Assign To:</label>
-      <select id="assignedTo" name="member_id" class="selectMember" required>
+      <label for="member_id">Assign To:</label>
+      <select id="assignAssignedTo" name="member_id" class="selectMember" required>
         <option>Select Member</option>
         {% for member in members %}
         <option class="optionMembers" value="{{ member.id }}">{{ member.fname }} {{ member.lname }}</option>
@@ -195,7 +195,6 @@
       </select>
       <br><br>
       <button type="submit" class="addTaskBtn">Assign Task</button>
-
     </form>
   </div>
 </div>
@@ -210,16 +209,16 @@
       {% csrf_token %}
       <input type="hidden" id="task_id" name="task_id">
       <label for="taskTitle">Task Title:</label>
-      <input type="text" id="taskTitle" name="taskTitle" required>
+      <input type="text" id="editTaskTitle" name="taskTitle" required>
       <br><br>
       <label for="taskDescription">Task Description:</label>
-      <textarea id="taskDescription" name="taskDescription"></textarea>
+      <textarea id="editTaskDescription" name="taskDescription"></textarea>
       <br><br>
       <label for="dueDate">Due Date:</label>
-      <input type="datetime-local" id="dueDate" name="dueDate" required>
+      <input type="datetime-local" id="editDueDate" name="dueDate" required>
       <br><br>
       <label for="member_id">Assign To:</label>
-      <select id="assignedTo" name="member_id" class="selectMember" required>
+      <select id="editAssignedTo" name="member_id" class="selectMember" required>
         <option>Select Member</option>
         {% for member in members %}
         <option class="optionMembers" value="{{ member.id }}">{{ member.fname }} {{ member.lname }}</option>
@@ -227,7 +226,6 @@
       </select>
       <br><br>
       <button type="submit" class="saveTaskBtn">Save Changes</button> 
-      </form>
     </form>
   </div>
 </div>
@@ -470,16 +468,15 @@ document.querySelectorAll('.closeBtn').forEach(function (closeBtn) {
 //update task
 function openEditTaskForm(task_id, taskTitle, taskDescription, dueDate, member_id) {
     document.getElementById('task_id').value = task_id;
-    document.getElementById('taskTitle').value = taskTitle;
-    document.getElementById('taskDescription').value = taskDescription;
-    document.getElementById('dueDate').value = dueDate;
-    document.getElementById('assignedTo').value = member_id;
+    document.getElementById('editTaskTitle').value = taskTitle; // Updated id
+    document.getElementById('editTaskDescription').value = taskDescription; // Updated id
+    document.getElementById('editDueDate').value = dueDate; // Updated id
+    document.getElementById('editAssignedTo').value = member_id; // Updated id
     
     document.getElementById('editTaskModal').style.display = 'block';
     document.getElementById('overlay').style.display = 'block';
     taskModal.style.display = 'block';
-    
-  }
+}
 
   function closeTaskModal() {
     const modal = document.getElementById('assignTaskModal');
