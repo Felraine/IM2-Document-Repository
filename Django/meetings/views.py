@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from register_app.models import Members
-from .models import RoomMember
+from .models import RoomMember, Attendance
 from django.http import JsonResponse
 from agora_token_builder import RtcTokenBuilder
 import random
@@ -89,3 +89,20 @@ def deleteMember(request):
     )
     member.delete()
     return JsonResponse('Member deleted', safe=False)
+
+@csrf_exempt
+def addAttendance(request):
+    data = json.loads(request.body)
+
+    # Check if the attendance record already exists
+    attendance, created = Attendance.objects.get_or_create(
+        name=data['name'],
+        room_name=data['room_name']
+    )
+
+    if created:
+        # If the record was created, return a success message
+        return JsonResponse({'message': 'Attendance added', 'name': data['name']}, status=201)
+    else:
+        # If the record already exists, return a message indicating so
+        return JsonResponse({'message': 'Attendance already exists', 'name': data['name']}, status=200)

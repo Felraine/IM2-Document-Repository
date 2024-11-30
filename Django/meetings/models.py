@@ -12,3 +12,13 @@ class RoomMember(models.Model):
 
     def __str__(self):
         return self.name
+    
+class Attendance(models.Model):
+    name = models.CharField(max_length=200)
+    room_name = models.CharField(max_length=200)
+
+    class Meta:
+        db_table = 'attendance'
+
+    def __str__(self):
+        return self.name

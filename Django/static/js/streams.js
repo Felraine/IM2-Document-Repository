@@ -26,6 +26,8 @@ let joinAndDisplayLocalStream = async () => {
 
     let member = await createMember()
 
+    await addAttendance(member.name, CHANNEL); // Add attendance after creating the member
+
     let player = `<div class="video-container" id="user-container-${UID}">
                     <div class="username-wrapper"><span class="user-name">${member.name}</span></div>
                     <div class="video-player" id="user-${UID}"></div>
@@ -131,6 +133,27 @@ let deleteMember = async () => {
     })
     let member = await response.json()
 }
+
+let addAttendance = async (name, roomName) => {
+    try {
+        let response = await fetch('/meetings/addAttendance/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                'name': name,
+                'room_name': roomName
+            })
+        });
+
+        let data = await response.json();
+        console.log(data.message); // Log the response message (added or already exists)
+    } catch (error) {
+        console.error('Error adding attendance:', error);
+    }
+};
+
 
 joinAndDisplayLocalStream()
 
