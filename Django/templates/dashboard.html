@@ -22,33 +22,33 @@
     {% for event in events %}      
     <div class="eventList">
       <h3>{{ event.title }}</h3>
-      <p>{{ event.description }}</p> 
+      <p>{{ event.description }}</p>
       <p><strong>Location:</strong> {{ event.location }}</p>
       <p style="color: red;">{{ event.dateTime }}</p>
-
+ 
       <!--delete event-->
       {% if user_role == 1 %}
-      <form method="POST" action="{% url 'deleteEvent' event.id %}" onsubmit="return confirmDel(this);"> 
+      <form method="POST" action="{% url 'deleteEvent' event.id %}" onsubmit="return confirmDel(this);">
         {% csrf_token %}
         <button type="submit" class="deleteBtn">Delete</button>
       </form>
-
+ 
       <!--edit event-->
       <button class="editBtn" onclick="openEditForm(
-      '{{ event.id }}',   
+      '{{ event.id }}',  
       '{{ event.title }}',
       '{{ event.description }}',
-      '{{ event.location }}', 
+      '{{ event.location }}',
       '{{ event.dateTime }}')"
       >Edit</button>
       {% endif %}
     </div>
-    
+   
     {% empty %}
     <p>No upcoming events.</p>
     {% endfor %}
   </div>
-
+ 
  <!--Upcoming Meetings Section-->
 <div class="eventHeader">
   <h2 class="upcomingEventsTitle">Upcoming Meetings</h2>
@@ -56,29 +56,29 @@
   <button class="addMeeting" id="addMeetBtn">+ Add Meeting</button> <!--add meeting button-->
   {% endif %}
 </div>
-
+ 
 <div class="meetingListContainer">
   <!-- Meetings List -->
   {% for meeting in meetings %}
     <div class="eventList">
       <h3>{{ meeting.title }}</h3>
-      <p>{{ meeting.description }}</p> 
+      <p>{{ meeting.description }}</p>
       <p><strong>Location:</strong> {{ meeting.location }}</p>
       <p style="color: red;">{{ meeting.dateTime }}</p>
-      
+     
       {% if user_role == 1 %}
         <!-- Delete Meeting -->
         <form method="POST" action="{% url 'deleteMeeting' meeting.id %}" onsubmit="return confirmDel(this);">
           {% csrf_token %}
           <button type="submit" class="deleteBtn">Delete</button>
         </form>
-
+ 
         <!-- Edit Meeting -->
         <button class="editBtn" onclick="openEditMeetingForm(
-          '{{ meeting.id }}',   
+          '{{ meeting.id }}',  
           '{{ meeting.title }}',
           '{{ meeting.description }}',
-          '{{ meeting.location }}', 
+          '{{ meeting.location }}',
           '{{ meeting.dateTime }}')"
         >Edit</button>
       {% else %}
@@ -91,7 +91,7 @@
   {% endfor %}
 </div>
 </div>
-
+ 
 <div class="right-side">
   <div class="calendarContainer">
     <h2 class="calendarTitle">Calendar</h2>
@@ -103,7 +103,7 @@
       <h2 class="tasksTitle">Tasks</h2>
       {% if user_role == 1 %}
       <button class="assignTaskBtn">+ Assign Task</button>
-      {% endif %} 
+      {% endif %}
     </div>
   <div class="tasksList">
     {% for task in tasks %}
@@ -118,7 +118,7 @@
       <button type="submit" class="deleteTaskBtn">Delete Task</button>
       </form>
       <button class="editTaskBtn" onclick="openEditTaskForm(
-        '{{ task.id }}',   
+        '{{ task.id }}',  
         '{{ task.taskTitle }}',
         '{{ task.taskDescription }}',
         '{{ task.dueDate }}',
@@ -130,14 +130,14 @@
     {% endfor %}
   </div>
 </div>
-
-
+ 
+ 
 <!--FORM CONTAINER TO ADD AND EDIT EVENTS-->
 <div id="toast" class="toast"></div>
 <div class="overlay" id="overlay"></div>
 <div class="eventFormContainer" id="eventFormContainer">
 <span class="closeBtn" onclick="closeForm()">&times;</span>
-
+ 
 <h2 class="title" id="formTitle">Add New Event</h2>
 <form class="eventForm" id="eventForm" method="post" action="{% url 'addEvents' %}">
   {% csrf_token %}
@@ -157,20 +157,20 @@
   <button class="saveEventBtn" type="submit" id="saveEventBtn">Save Event</button>
 </form>
   </div>
-
-
-
+ 
+ 
+ 
 <!--HTML MODAL POP UP FOR DELETE-->
 <div id="deleteConfirmationModal" class="modal">
   <div class="modalContent">
-      <p>Are you sure you want to delete?</p>
+      <p>Are you sure you want to delete this event?</p>
       <div class="modalActions">
           <button id="confirmDeleteBtn" class="confirmBtn">DELETE</button>
           <button id="cancelDeleteBtn" class="cancelBtn">Cancel</button>
       </div>
   </div>
 </div>
-
+ 
 <!-- Task Assignment Modal -->
 <div class="modal" id="assignTaskModal" style="display: none;">
   <div class="modalContent">
@@ -199,7 +199,7 @@
     </form>
   </div>
 </div>
-
+ 
 <!-- Task Assignment Modal (Edit Task) -->
 <div class="modal" id="editTaskModal" style="display: none;">
   <div class="overlay" id="overlay"></div>
@@ -226,12 +226,12 @@
         {% endfor %}
       </select>
       <br><br>
-      <button type="submit" class="saveTaskBtn">Save Changes</button> 
+      <button type="submit" class="saveTaskBtn">Save Changes</button>
     </form>
   </div>
 </div>
   {% endblock %}
-
+ 
 {% block scripts %}
 <script>
 document.addEventListener("DOMContentLoaded", function () {
@@ -266,14 +266,14 @@ document.addEventListener("DOMContentLoaded", function () {
                         type: 'Meeting'
                     }))
                 ];
-                
+               
                 successCallback(combinedEvents);
             }).catch(error => {
                 console.error('Error fetching events:', error);
                 failureCallback(error);
             });
         },
-        eventTimeFormat: { 
+        eventTimeFormat: {
             hour: 'numeric',
             minute: '2-digit',
             meridiem: 'short'
@@ -282,7 +282,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const timeEl = document.createElement('div');
             timeEl.classList.add('fc-event-time');
             timeEl.textContent = arg.timeText;
-
+ 
             const circleEl = document.createElement('div');
             circleEl.classList.add('fc-event-circle');
             circleEl.style.width = '10px';
@@ -290,13 +290,13 @@ document.addEventListener("DOMContentLoaded", function () {
             circleEl.style.borderRadius = '50%';
             circleEl.style.marginRight = '5px';
             circleEl.style.backgroundColor = arg.event.backgroundColor || arg.event.extendedProps.color || '#8a252c';
-
+ 
             const wrapperEl = document.createElement('div');
             wrapperEl.style.display = 'flex';
             wrapperEl.style.alignItems = 'center';
             wrapperEl.appendChild(circleEl);
             wrapperEl.appendChild(timeEl);
-
+ 
             return { domNodes: [wrapperEl] };
         },
         windowResize: function(view) {
@@ -305,10 +305,10 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     calendar.render();
 });
-
+ 
   let edit = false; // if edit btn pressed or nah
   let deleteForm = null; //modal form
-  
+ 
   // confirm delete
   function confirmDel(form) {
       deleteForm = form;
@@ -317,39 +317,39 @@ document.addEventListener("DOMContentLoaded", function () {
       document.getElementById('overlay').style.display = 'block';
       return false;
   }
-
+ 
   // delete event & delete task
   document.getElementById('confirmDeleteBtn').onclick = function() {
   if (deleteForm) {
-      deleteForm.submit(); 
+      deleteForm.submit();
   }
-  hideModal(); 
+  hideModal();
 };
-
+ 
   function hideModal() {
   const modal = document.getElementById('deleteConfirmationModal');
   const overlay = document.getElementById('overlay');
-  modal.style.display = 'none';   
-  overlay.style.display = 'none'; 
+  modal.style.display = 'none';  
+  overlay.style.display = 'none';
   }
-
+ 
 document.getElementById('cancelDeleteBtn').onclick = hideModal;
 document.getElementById('overlay').onclick = hideModal;
-  
+ 
 //UPDATING MEETINGS SECTION
 function openEditMeetingForm(id, title, description, location, dateTime) {
     document.getElementById('edit_event_id').value = id;
     document.getElementById('title').value = title;
     document.getElementById('description').value = description;
     document.getElementById('location').value = location;
-    
+   
     let formattedDateTime = '';
     try {
         const dateObj = new Date(dateTime);
-        
+       
         if (isNaN(dateObj.getTime())) {
             console.error('Invalid date:', dateTime);
-            formattedDateTime = ''; 
+            formattedDateTime = '';
         } else {
             const localDate = new Date(dateObj.getTime() - (dateObj.getTimezoneOffset() * 60000));
             formattedDateTime = localDate.toISOString().slice(0,16);
@@ -358,7 +358,7 @@ function openEditMeetingForm(id, title, description, location, dateTime) {
         console.error('Error parsing date:', error);
         formattedDateTime = '';
     }
-
+ 
     document.getElementById('eventFormContainer').style.display = "block";
     document.getElementById('date_time').value = formattedDateTime;
     document.getElementById('formTitle').innerText = "Edit Meeting";
@@ -367,7 +367,7 @@ function openEditMeetingForm(id, title, description, location, dateTime) {
     document.getElementById('overlay').style.display = "block";
     edit = true;
 }
-
+ 
 // EDIT EVENT FORM
 function openEditForm(id, title, description, location, dateTime) {
     document.getElementById('edit_event_id').value = id;
@@ -376,21 +376,21 @@ function openEditForm(id, title, description, location, dateTime) {
     document.getElementById('location').value = location;
     document.getElementById('date_time').value = dateTime;
     document.getElementById('formTitle').innerText = "Edit Event";
-    document.getElementById('eventForm').action = "{% url 'updateEvent' %}"; 
+    document.getElementById('eventForm').action = "{% url 'updateEvent' %}";
     document.getElementById('saveEventBtn').innerText = "Update Event";
-
+ 
     edit = true;
-
+ 
     document.getElementById('eventFormContainer').style.display = "block";
     document.getElementById('overlay').style.display = 'block';
 }
-
+ 
 function showToast(message, isSuccess = true) {
   const toast = document.getElementById("toast");
-  toast.textContent = message; 
-  toast.className = `toast show ${isSuccess ? '' : 'error'}`; 
+  toast.textContent = message;
+  toast.className = `toast show ${isSuccess ? '' : 'error'}`;
   setTimeout(() => {
-      toast.className = "toast"; 
+      toast.className = "toast";
   }, 3000);
 }
 const saveEventBtn = document.getElementById('saveEventBtn');
@@ -400,19 +400,19 @@ saveEventBtn.onclick = function(){
     } else {
         showToast("Please fill out the entire form.",false);
     }
-
+ 
 }
-
+ 
 let joinButtons = document.querySelectorAll('.joinBtn');
-
+ 
 joinButtons.forEach((button) => {
   button.addEventListener('click', async (event) => {
     event.preventDefault(); // Prevent the default button action (like form submission)
-
+ 
     // Get meeting title and create a room name
     let meetingTitle = event.target.closest('.eventList').querySelector('h3').textContent;
     let room = meetingTitle.toUpperCase(); // Use room name (e.g., meeting title)
-
+ 
     // Fetch token from the backend API
     let response = await fetch(`/meetings/get_token/?channel=${room}`);
     if (!response.ok) {
@@ -420,43 +420,43 @@ joinButtons.forEach((button) => {
       console.error("Failed to fetch token");
       return;
     }
-
+ 
     let data = await response.json();
     let UID = data.uid;
     let token = data.token;
     let name = data.name;
-
+ 
     // Store session data (for use in the meeting room)
     sessionStorage.setItem('UID', UID);
     sessionStorage.setItem('token', token);
     sessionStorage.setItem('room', room);
     sessionStorage.setItem('name', name);
-
+ 
     // Redirect to the meeting room page
     window.location.href = '/meetings/room/';
   });
 });
-
+ 
 // Open add event form
 const addEventBtn = document.getElementById('addEventBtn');
 addEventBtn.onclick = function() {
     edit = false;
     document.getElementById('formTitle').innerText = "Add New Event";
     document.getElementById('eventForm').action = "{% url 'addEvents' %}";
-    document.getElementById('eventForm').reset(); 
+    document.getElementById('eventForm').reset();
     document.getElementById('eventFormContainer').style.display = "block";
     document.getElementById('overlay').style.display = "block";
     document.getElementById('saveEventBtn').innerText = "Save Event";
 }
-
+ 
 // Close form
 function closeForm() {
     document.getElementById('eventFormContainer').style.display = "none";
     document.getElementById('overlay').style.display = "none";
     document.getElementById('overlay').onclick = hideModal;
-  
+ 
 }
-
+ 
 document.querySelectorAll('.closeBtn').forEach(function (closeBtn) {
     closeBtn.addEventListener('click', function() {
       const modalId = this.closest('.modal') ? this.closest('.modal').id : null;
@@ -466,7 +466,7 @@ document.querySelectorAll('.closeBtn').forEach(function (closeBtn) {
       }
     });
   });
-
+ 
 //update task
 function openEditTaskForm(task_id, taskTitle, taskDescription, dueDate, member_id) {
     document.getElementById('task_id').value = task_id;
@@ -474,67 +474,67 @@ function openEditTaskForm(task_id, taskTitle, taskDescription, dueDate, member_i
     document.getElementById('editTaskDescription').value = taskDescription; // Updated id
     document.getElementById('editDueDate').value = dueDate; // Updated id
     document.getElementById('editAssignedTo').value = member_id; // Updated id
-    
+   
     document.getElementById('editTaskModal').style.display = 'block';
     document.getElementById('overlay').style.display = 'block';
     taskModal.style.display = 'block';
 }
-
+ 
   function closeTaskModal() {
     const modal = document.getElementById('assignTaskModal');
     const form = document.getElementById('assignTaskForm');
     modal.style.display = 'none';
     document.getElementById('editTaskModal').style.display = 'none';
     taskModal.style.display = 'none';
-    form.reset(); 
+    form.reset();
   }
-  
+ 
 document.querySelector('.closeBtn').addEventListener('click', closeTaskModal);
-
+ 
 const addMeetBtn = document.getElementById('addMeetBtn');
 addMeetBtn.onclick = function() {
     // Set the form to "Add New Meeting" mode
     document.getElementById('formTitle').innerText = "Add New Meeting";
-    
+   
     // Set the form action to the correct URL for adding meetings
     document.getElementById('eventForm').action = "{% url 'addMeeting' %}";
-    
+   
     // Reset the form fields for a new meeting
-    document.getElementById('eventForm').reset(); 
-    
+    document.getElementById('eventForm').reset();
+   
     // Show the form and the overlay
     document.getElementById('eventFormContainer').style.display = "block";
     document.getElementById('overlay').style.display = "block";
     document.getElementById('saveEventBtn').innerText = "Save Meeting";
 }
-
+ 
 // Close the form when the overlay is clicked
 document.getElementById('overlay').onclick = function() {
     closeForm();
 }
-
+ 
 function closeEditTaskModal() {
     document.getElementById('editTaskModal').style.display = 'none';
     document.getElementById('overlay').style.display = 'none';
   }
-
+ 
 // Close the form function
 function closeForm() {
     document.getElementById('eventFormContainer').style.display = "none";
     document.getElementById('overlay').style.display = "none";
 }
-
+ 
 // Open Assign Task Modal
 const assignTaskBtn = document.querySelector('.assignTaskBtn');
 const assignTaskModal = document.getElementById('assignTaskModal');
 const overlay = document.getElementById('overlay');
-
+ 
 assignTaskBtn.addEventListener('click', () => {
   assignTaskModal.style.display = 'block';
   overlay.style.display = 'block';
 });
-
+ 
 overlay.addEventListener('click', closeTaskModal);
-
+ 
 </script>
 {% endblock %}
