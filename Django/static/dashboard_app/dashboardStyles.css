@@ -583,22 +583,26 @@ textarea:hover{
 }
 
 .editTaskBtn{
-  color: rgb(255, 255, 255);
+  color: white;
   background-color: #8a252c;
   padding: 4px;
   border-radius: 10px;
-  width: 80px;
+  width: 70px;
   border: transparent;
   cursor: pointer;
-  display: inline-block;  
-  margin-right: 10px;
 }
 
 .editTaskBtn:hover {
   color: #000000;
 }
 
-.deleteTaskBtn{
+.button-container {
+  display: flex;
+  justify-content: flex-end; 
+  gap: 10px;  
+}
+
+.deleteTaskBtn {
   color: white;
   background-color: #8a252c;
   padding: 4px;
@@ -606,10 +610,7 @@ textarea:hover{
   width: 95px;
   border: transparent;
   cursor: pointer;
-  display: inline-block;
-  margin-left: 140px;
 }
-
 .deleteTaskBtn:hover {
   color: #000000;
 }
@@ -617,7 +618,7 @@ textarea:hover{
   position: relative;
   width: 400px;
   height: 230px;
-  padding: 20px;
+  padding: 15px;
   background: #ffffff;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
