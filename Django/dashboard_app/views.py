@@ -13,7 +13,8 @@ def dashboard_view(request):
         'lname': '',
         'user_role': None,
         'events': Event.objects.all(), #display events
-        'tasks': Task.objects.all(), #display tasks
+        #'tasks': Task.objects.all(), #display tasks
+        'tasks': [],
         'meetings': Meeting.objects.all(),
         'members': Members.objects.all()
     }
@@ -27,6 +28,15 @@ def dashboard_view(request):
             context['lname'] = member.lname
             context['user_role'] = member.user_role
             context['member'] = member
+
+
+             # Show all tasks to admins
+            if member.user_role == 1:  
+                context['tasks'] = Task.objects.all()
+            else:
+                # Show only tasks assigned to members
+                context['tasks'] = Task.objects.filter(assignTo=member)
+
         except Members.DoesNotExist:
             print("Member does not exist")
 
