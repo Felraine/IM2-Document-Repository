@@ -111,7 +111,9 @@
       <h3 class="taskTitle">{{ task.taskTitle }}</h3>
       <p class="taskDescription">{{task.taskDescription}}.</p>
       <p class="taskDueDate">Due date: {{task.dueDate}}</p>
+      {% if user_role == 1 %}
       <button class="editTaskBtn" id="editTaskBtn"> Edit</button>
+      {% endif %}
     </div>
     {% endfor %}
   </div>
