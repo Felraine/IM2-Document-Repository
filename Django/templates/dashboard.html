@@ -131,6 +131,7 @@
   </div>
 </div>
 
+
 <!--FORM CONTAINER TO ADD AND EDIT EVENTS-->
 <div id="toast" class="toast"></div>
 <div class="overlay" id="overlay"></div>
@@ -156,7 +157,7 @@
   <button class="saveEventBtn" type="submit" id="saveEventBtn">Save Event</button>
 </form>
   </div>
-</div>
+
 
 
 <!--HTML MODAL POP UP FOR DELETE-->
@@ -358,12 +359,13 @@ function openEditMeetingForm(id, title, description, location, dateTime) {
         formattedDateTime = '';
     }
 
+    document.getElementById('eventFormContainer').style.display = "block";
     document.getElementById('date_time').value = formattedDateTime;
     document.getElementById('formTitle').innerText = "Edit Meeting";
     document.getElementById('saveEventBtn').innerText = "Save Meeting";
     document.getElementById('eventForm').action = `/dashboard/updateMeeting/${id}/`;
+    document.getElementById('overlay').style.display = "block";
     edit = true;
-    document.getElementById('eventFormContainer').style.display = "block";
 }
 
 // EDIT EVENT FORM
