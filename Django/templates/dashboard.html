@@ -112,7 +112,11 @@
       <p class="taskDescription">{{task.taskDescription}}.</p>
       <p class="taskDueDate">Due date: {{task.dueDate}}</p>
       {% if user_role == 1 %}
+      <div class="button-container">
+      <form method="POST" action="{% url 'deleteTask' task.id %}" onsubmit="return confirmDel(this);">
+        {% csrf_token %}
       <button type="submit" class="deleteTaskBtn">Delete Task</button>
+      </form>
       <button class="editTaskBtn" onclick="openEditTaskForm(
   '{{ task.id }}',   
   '{{ task.taskTitle }}',
@@ -120,6 +124,7 @@
   '{{ task.dueDate }}',
   '{{ task.assignTo.id }}'
 )">Edit</button>
+</div>
       {% endif %}
     </div>
     {% endfor %}

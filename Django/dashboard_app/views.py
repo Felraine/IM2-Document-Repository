@@ -168,14 +168,15 @@ def updateTask(request):
     return render(request, 'dashboard.html', {'members': members, 'tasks': tasks})
 
 #DELETE TASK
-def deleteTask(request):
-   if request.method == 'POST':
-        task_id = request.POST.get('task_id') 
-        if not task_id:
-            return JsonResponse({"error": "Task ID is required."}, status=400)
-        task = get_object_or_404(Task, id=task_id)
+def deleteTask(request,task_id):
+    task = get_object_or_404(Task, id=task_id)
+
+    if request.method == 'POST':
+        # Delete the task
         task.delete()
         return redirect('dashboard')
+
+    return render(request, 'dashboard.html', {'task': task})
 
 def get_tasks(request):
     tasks = Task.objects.all()
