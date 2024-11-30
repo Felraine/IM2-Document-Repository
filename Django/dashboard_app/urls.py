@@ -10,6 +10,7 @@ urlpatterns = [
     path('addTasks/', addTasks, name='addTasks'),
     path('get_tasks/', get_tasks, name='getTask'),
     
+    
     #meeting routes
     path('addMeeting/', addMeeting, name='addMeeting'),
     path('deleteMeeting/<int:meeting_id>/', deleteMeeting, name='deleteMeeting'),
