@@ -107,7 +107,7 @@
     </div>
   <div class="tasksList">
     {% for task in tasks %}
-    <div class="taskBox" data-task-id="{{ task.id }}>
+    <div class="taskBox" data-task-id="{{ task.id }}">
       <h3 class="taskTitle">{{ task.taskTitle }}</h3>
       <p class="taskDescription">{{task.taskDescription}}.</p>
       <p class="taskDueDate">Due date: {{task.dueDate}}</p>
@@ -249,7 +249,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     ...tasks.map(task => ({
                         title: task.taskTitle,
                         start: task.dueDate,
-                        color: '#FFD1DC', //Change here
+                        color: '#0484D1', //Change here
                         type: 'Task'
                     })),
                     ...meetings.map(meeting => ({
@@ -470,6 +470,7 @@ function openEditTaskForm(task_id, taskTitle, taskDescription, dueDate, member_i
     document.getElementById('editTaskModal').style.display = 'block';
     document.getElementById('overlay').style.display = 'block';
     taskModal.style.display = 'block';
+    
   }
 
   function closeTaskModal() {

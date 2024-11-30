@@ -560,12 +560,14 @@ textarea:hover{
   font-size: 12px; 
   color: #000000;
   margin: 10px;
+  margin-left: 14px;
 }
 
 .taskDueDate{
   font-size: 10px;
   color: #8a252c;
   margin: 10px;
+  margin-left: 14px;
 }
 
 .editTaskBtn{
