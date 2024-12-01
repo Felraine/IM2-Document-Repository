@@ -595,6 +595,15 @@ textarea:hover{
 .editTaskBtn:hover {
   color: #000000;
 }
+.markCompleteBtn{
+  color: white;
+  background-color: #8a252c;
+  padding: 4px;
+  border-radius: 10px;
+  width: 120px;
+  border: transparent;
+  cursor: pointer;
+}
 
 .button-container {
   display: flex;

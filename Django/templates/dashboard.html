@@ -98,39 +98,43 @@
     <div id="calendar"></div>
   </div>
   <!--TASK SECTION-->
-  <div class="tasksContainer">
-    <div class="tasksHeader">
-      <h2 class="tasksTitle">Tasks</h2>
-      {% if user_role == 1 %}
-      <button class="assignTaskBtn">+ Assign Task</button>
-      {% endif %}
-    </div>
+<div class="tasksContainer">
+  <div class="tasksHeader">
+    <h2 class="tasksTitle">Tasks</h2>
+    {% if user_role == 1 %}
+    <button class="assignTaskBtn">+ Assign Task</button>
+    {% endif %}
+  </div>
   <div class="tasksList">
     {% for task in tasks %}
     <div class="taskBox" data-task-id="{{ task.id }}">
       <h3 class="taskTitle">{{ task.taskTitle }}</h3>
-      <p class="taskDescription">{{task.taskDescription}}.</p>
-      <p class="taskDueDate">Due date: {{task.dueDate}}</p>
+      <p class="taskDescription">{{ task.taskDescription }}.</p>
+      <p class="taskDueDate">Due date: {{ task.dueDate }}</p>
       {% if user_role == 1 %}
       <div class="button-container">
-      <form method="POST" action="{% url 'deleteTask' task.id %}" onsubmit="return confirmDel(this);">
-        {% csrf_token %}
-      <button type="submit" class="deleteTaskBtn">Delete Task</button>
-      </form>
-      <button class="editTaskBtn" onclick="openEditTaskForm(
-        '{{ task.id }}',  
-        '{{ task.taskTitle }}',
-        '{{ task.taskDescription }}',
-        '{{ task.dueDate }}',
-        '{{ task.assignTo.id }}'
-      )">Edit</button>
-</div>
+        <form method="POST" action="{% url 'deleteTask' task.id %}" onsubmit="return confirmDel(this);">
+          {% csrf_token %}
+          <button type="submit" class="deleteTaskBtn">Delete Task</button>
+        </form>
+        <button class="editTaskBtn" onclick="openEditTaskForm(
+          '{{ task.id }}',  
+          '{{ task.taskTitle }}',
+          '{{ task.taskDescription }}',
+          '{{ task.dueDate }}',
+          '{{ task.assignTo.id }}'
+        )">Edit</button>
+      </div>
+      {% elif user_role == 0 %}
+      <div class="button-container">
+        <button class="markCompleteBtn" onclick="markTaskComplete('{{ task.id }}')">Mark Complete</button>
+      </div>
       {% endif %}
     </div>
     {% endfor %}
   </div>
 </div>
- 
+
  
 <!--FORM CONTAINER TO ADD AND EDIT EVENTS-->
 <div id="toast" class="toast"></div>
@@ -157,8 +161,6 @@
   <button class="saveEventBtn" type="submit" id="saveEventBtn">Save Event</button>
 </form>
   </div>
- 
- 
  
 <!--HTML MODAL POP UP FOR DELETE-->
 <div id="deleteConfirmationModal" class="modal">
@@ -378,9 +380,7 @@ function openEditForm(id, title, description, location, dateTime) {
     document.getElementById('formTitle').innerText = "Edit Event";
     document.getElementById('eventForm').action = "{% url 'updateEvent' %}";
     document.getElementById('saveEventBtn').innerText = "Update Event";
- 
     edit = true;
- 
     document.getElementById('eventFormContainer').style.display = "block";
     document.getElementById('overlay').style.display = 'block';
 }
@@ -407,7 +407,7 @@ let joinButtons = document.querySelectorAll('.joinBtn');
  
 joinButtons.forEach((button) => {
   button.addEventListener('click', async (event) => {
-    event.preventDefault(); // Prevent the default button action (like form submission)
+    event.preventDefault(); 
  
     // Get meeting title and create a room name
     let meetingTitle = event.target.closest('.eventList').querySelector('h3').textContent;
@@ -470,10 +470,10 @@ document.querySelectorAll('.closeBtn').forEach(function (closeBtn) {
 //update task
 function openEditTaskForm(task_id, taskTitle, taskDescription, dueDate, member_id) {
     document.getElementById('task_id').value = task_id;
-    document.getElementById('editTaskTitle').value = taskTitle; // Updated id
-    document.getElementById('editTaskDescription').value = taskDescription; // Updated id
-    document.getElementById('editDueDate').value = dueDate; // Updated id
-    document.getElementById('editAssignedTo').value = member_id; // Updated id
+    document.getElementById('editTaskTitle').value = taskTitle; 
+    document.getElementById('editTaskDescription').value = taskDescription; 
+    document.getElementById('editDueDate').value = dueDate; 
+    document.getElementById('editAssignedTo').value = member_id; 
    
     document.getElementById('editTaskModal').style.display = 'block';
     document.getElementById('overlay').style.display = 'block';
@@ -493,22 +493,14 @@ document.querySelector('.closeBtn').addEventListener('click', closeTaskModal);
  
 const addMeetBtn = document.getElementById('addMeetBtn');
 addMeetBtn.onclick = function() {
-    // Set the form to "Add New Meeting" mode
     document.getElementById('formTitle').innerText = "Add New Meeting";
-   
-    // Set the form action to the correct URL for adding meetings
     document.getElementById('eventForm').action = "{% url 'addMeeting' %}";
-   
-    // Reset the form fields for a new meeting
     document.getElementById('eventForm').reset();
-   
-    // Show the form and the overlay
     document.getElementById('eventFormContainer').style.display = "block";
     document.getElementById('overlay').style.display = "block";
     document.getElementById('saveEventBtn').innerText = "Save Meeting";
 }
  
-// Close the form when the overlay is clicked
 document.getElementById('overlay').onclick = function() {
     closeForm();
 }
@@ -518,7 +510,6 @@ function closeEditTaskModal() {
     document.getElementById('overlay').style.display = 'none';
   }
  
-// Close the form function
 function closeForm() {
     document.getElementById('eventFormContainer').style.display = "none";
     document.getElementById('overlay').style.display = "none";
@@ -535,6 +526,11 @@ assignTaskBtn.addEventListener('click', () => {
 });
  
 overlay.addEventListener('click', closeTaskModal);
+
+//task complete
+function markTaskComplete(taskId) {
+  alert(`Task ${taskId} marked as complete!`);
+}
  
 </script>
 {% endblock %}
