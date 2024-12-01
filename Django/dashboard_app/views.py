@@ -30,12 +30,12 @@ def dashboard_view(request):
             context['member'] = member
 
 
-             # Show all tasks to admins
+             # Show pending tasks to admins
             if member.user_role == 1:  
-                context['tasks'] = Task.objects.all()
+                context['tasks'] = Task.objects.filter(completion_status=False)
             else:
                 # Show only tasks assigned to members
-                context['tasks'] = Task.objects.filter(assignTo=member)
+                 context['tasks'] = Task.objects.filter(assignTo=member, completion_status=False)
 
         except Members.DoesNotExist:
             print("Member does not exist")
@@ -201,7 +201,7 @@ def completeTask(request):
 
 
 def get_tasks(request):
-    tasks = Task.objects.all()
+    tasks = Task.objects.filter(completion_status=False) #gets incomplete tasks only
     task_data = []
     for task in tasks:
         task_data.append({
