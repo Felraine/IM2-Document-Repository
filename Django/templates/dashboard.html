@@ -232,6 +232,17 @@
     </form>
   </div>
 </div>
+
+<!--HTML MODAL POP UP FOR TASK COMPLETION ON MEMBER SCREEN-->
+<div id="taskCompleteConfirmationModal" class="modal">
+  <div class="modalContent">
+      <p>Mark task as completed?</p>
+      <div class="modalActions">
+          <button id="confirmCompleteBtn" class="confirmBtn">Completed</button>
+          <button id="cancelTaskBtn" class="cancelBtn">Cancel</button>
+      </div>
+  </div>
+</div>
   {% endblock %}
  
 {% block scripts %}
@@ -527,10 +538,47 @@ assignTaskBtn.addEventListener('click', () => {
  
 overlay.addEventListener('click', closeTaskModal);
 
-//task complete
 function markTaskComplete(taskId) {
-  alert(`Task ${taskId} marked as complete!`);
+  const modal = document.getElementById('taskCompleteConfirmationModal');
+  modal.setAttribute('data-task-id', taskId);  
+  modal.style.display = 'block';  
+  document.getElementById('overlay').style.display = 'block';  
 }
+
+// Hide the modal
+function hideModal() {
+  document.getElementById('taskCompleteConfirmationModal').style.display = 'none';
+  document.getElementById('overlay').style.display = 'none';
+}
+
+// COMPLETE TASK SECTION
+document.getElementById('confirmCompleteBtn').onclick = function () {
+  const modal = document.getElementById('taskCompleteConfirmationModal');
+  const taskId = modal.getAttribute('data-task-id'); 
  
+  fetch('/completeTask/', {  
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ task_id: taskId })
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.success) {
+      alert('Task marked as complete!');
+      hideModal(); 
+    } else {
+      alert('Error: ' + data.error);
+    }
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    alert('An error occurred while completing the task.');
+  });
+};
+
+document.getElementById('cancelTaskBtn').onclick = hideModal;
+document.getElementById('overlay').onclick = hideModal;
 </script>
 {% endblock %}
