@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import dashboard_view, addEvent,deleteEvent, get_events,updateEvent,addTasks, get_tasks, addMeeting, deleteMeeting, updateMeeting, get_meeting,updateTask,deleteTask
+from .views import dashboard_view,completeTask,addEvent,deleteEvent,get_events,updateEvent,addTasks, get_tasks, addMeeting, deleteMeeting, updateMeeting, get_meeting,updateTask,deleteTask
 
 urlpatterns = [
     path('', dashboard_view, name='dashboard'), 
@@ -15,6 +15,7 @@ urlpatterns = [
     path('updateTask/', updateTask, name='updateTask'),
     path('get_tasks/', get_tasks, name='getTask'),
     path('deleteTask/<int:task_id>/',deleteTask, name='deleteTask'),
+    path('completeTask/',completeTask, name='completeTask'),
     
     #meeting routes
     path('addMeeting/', addMeeting, name='addMeeting'),
