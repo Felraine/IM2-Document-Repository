@@ -171,7 +171,7 @@
   <div class="modalContent">
       <p>Are you sure you want to delete this event?</p>
       <div class="modalActions">
-          <button id="confirmDeleteBtn" class="confirmBtn">DELETE</button>
+          <button id="confirmDeleteBtn" class="confirmBtn">Delete</button>
           <button id="cancelDeleteBtn" class="cancelBtn">Cancel</button>
       </div>
   </div>
@@ -389,14 +389,14 @@ function openEditForm(id, title, description, location, dateTime) {
  
     document.getElementById('eventFormContainer').style.display = "block";
     document.getElementById('overlay').style.display = 'block';
+    
 }
- 
  
 let joinButtons = document.querySelectorAll('.joinBtn');
  
 joinButtons.forEach((button) => {
   button.addEventListener('click', async (event) => {
-    event.preventDefault(); // Prevent the default button action (like form submission)
+    event.preventDefault(); 
  
     // Get meeting title and create a room name
     let meetingTitle = event.target.closest('.eventList').querySelector('h3').textContent;
@@ -405,7 +405,7 @@ joinButtons.forEach((button) => {
     // Fetch token from the backend API
     let response = await fetch(`/meetings/get_token/?channel=${room}`);
     if (!response.ok) {
-      // Handle failed response
+ 
       console.error("Failed to fetch token");
       return;
     }
@@ -421,7 +421,6 @@ joinButtons.forEach((button) => {
     sessionStorage.setItem('room', room);
     sessionStorage.setItem('name', name);
  
-    // Redirect to the meeting room page
     window.location.href = '/meetings/room/';
   });
 });
@@ -459,10 +458,10 @@ document.querySelectorAll('.closeBtn').forEach(function (closeBtn) {
 //update task
 function openEditTaskForm(task_id, taskTitle, taskDescription, dueDate, member_id) {
     document.getElementById('task_id').value = task_id;
-    document.getElementById('editTaskTitle').value = taskTitle; // Updated id
-    document.getElementById('editTaskDescription').value = taskDescription; // Updated id
-    document.getElementById('editDueDate').value = dueDate; // Updated id
-    document.getElementById('editAssignedTo').value = member_id; // Updated id
+    document.getElementById('editTaskTitle').value = taskTitle;
+    document.getElementById('editTaskDescription').value = taskDescription; 
+    document.getElementById('editDueDate').value = dueDate; 
+    document.getElementById('editAssignedTo').value = member_id; 
    
     document.getElementById('editTaskModal').style.display = 'block';
     document.getElementById('overlay').style.display = 'block';
@@ -482,22 +481,14 @@ document.querySelector('.closeBtn').addEventListener('click', closeTaskModal);
  
 const addMeetBtn = document.getElementById('addMeetBtn');
 addMeetBtn.onclick = function() {
-    // Set the form to "Add New Meeting" mode
     document.getElementById('formTitle').innerText = "Add New Meeting";
-   
-    // Set the form action to the correct URL for adding meetings
-    document.getElementById('eventForm').action = "{% url 'addMeeting' %}";
-   
-    // Reset the form fields for a new meeting
-    document.getElementById('eventForm').reset();
-   
-    // Show the form and the overlay
-    document.getElementById('eventFormContainer').style.display = "block";
+       document.getElementById('eventForm').action = "{% url 'addMeeting' %}";
+       document.getElementById('eventForm').reset();
+       document.getElementById('eventFormContainer').style.display = "block";
     document.getElementById('overlay').style.display = "block";
     document.getElementById('saveEventBtn').innerText = "Save Meeting";
 }
  
-// Close the form when the overlay is clicked
 document.getElementById('overlay').onclick = function() {
     closeForm();
 }
@@ -507,8 +498,7 @@ function closeEditTaskModal() {
     document.getElementById('overlay').style.display = 'none';
   }
  
-// Close the form function
-function closeForm() {
+  function closeForm() {
     document.getElementById('eventFormContainer').style.display = "none";
     document.getElementById('overlay').style.display = "none";
 }
@@ -525,6 +515,7 @@ assignTaskBtn.addEventListener('click', () => {
  
 overlay.addEventListener('click', closeTaskModal);
 
+//TASK COMPLETION SECTION FOR MEMBERS 
 function markTaskComplete(taskId) {
   fetch("{% url 'completeTask' %}", {
     method: "POST",
