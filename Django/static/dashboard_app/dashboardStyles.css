@@ -243,7 +243,7 @@ textarea:hover{
 
 .saveTaskBtn{
   color:#ffffff;
-    background-color: #d1a828;
+    background-color: #721f25;
     font-size: 14px; 
     cursor: pointer;
     width: 100%;
@@ -603,6 +603,7 @@ textarea:hover{
   width: 120px;
   border: transparent;
   cursor: pointer;
+  float: right;
 }
 
 .button-container {
