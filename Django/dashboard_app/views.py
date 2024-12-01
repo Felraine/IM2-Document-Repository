@@ -1,3 +1,4 @@
+import json
 from django.utils import timezone
 from django.shortcuts import get_object_or_404, redirect, render
 from register_app.models import Members
@@ -178,17 +179,23 @@ def deleteTask(request,task_id):
 
     return render(request, 'dashboard.html', {'task': task})
 
+#COMPLETE TASK
 def completeTask(request):
     if request.method == 'POST':
-        task_id = request.POST.get('task_id')
-        if not task_id:
-            return JsonResponse({'error': 'Task ID is required'}, status=400)
+        try:
+            # Parse JSON body
+            data = json.loads(request.body)  
+            task_id = data.get('task_id')
 
-        task = get_object_or_404(Task, id=task_id)
-        task.completion_status = True  # Mark the task as complete
-        task.save()
+            if not task_id:
+                return JsonResponse({'error': 'Task ID is required'}, status=400)
+            task = get_object_or_404(Task, id=task_id)
+            task.completion_status = True  # Mark the task as complete
+            task.save()
 
-        return JsonResponse({'success': 'Task marked as complete'})
+            return JsonResponse({'success': 'Task marked as complete'})
+        except json.JSONDecodeError:
+            return JsonResponse({'error': 'Invalid JSON data'}, status=400)
     
     return JsonResponse({'error': 'Invalid request method'}, status=405)
 
