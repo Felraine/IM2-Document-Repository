@@ -140,7 +140,6 @@
 <div id="snackbar">Task Completed!</div>
  
 <!--FORM CONTAINER TO ADD AND EDIT EVENTS-->
-<div id="toast" class="toast"></div>
 <div class="overlay" id="overlay"></div>
 <div class="eventFormContainer" id="eventFormContainer">
 <span class="closeBtn" onclick="closeForm()">&times;</span>
@@ -392,23 +391,6 @@ function openEditForm(id, title, description, location, dateTime) {
     document.getElementById('overlay').style.display = 'block';
 }
  
-function showToast(message, isSuccess = true) {
-  const toast = document.getElementById("toast");
-  toast.textContent = message;
-  toast.className = `toast show ${isSuccess ? '' : 'error'}`;
-  setTimeout(() => {
-      toast.className = "toast";
-  }, 3000);
-}
-const saveEventBtn = document.getElementById('saveEventBtn');
-saveEventBtn.onclick = function(){
-  if (edit && document.getElementById('date_time').value) {
-        showToast("Event details changed successfully!");
-    } else {
-        showToast("Please fill out the entire form.",false);
-    }
- 
-}
  
 let joinButtons = document.querySelectorAll('.joinBtn');
  
@@ -555,12 +537,11 @@ function markTaskComplete(taskId) {
     .then(response => response.json())
     .then(data => {
       if (data.success) {
-        // Find and remove the task box from the DOM
         const taskBox = document.querySelector(`[data-task-id="${taskId}"]`);
         if (taskBox) {
           taskBox.remove();
         }
-        showSnackbar(); // Show a success message
+        showSnackbar(); 
       } else {
         console.error(data.error || "An error occurred");
       }
@@ -572,7 +553,7 @@ function markTaskComplete(taskId) {
     snackbar.classList.add("show");
     setTimeout(() => {
       snackbar.classList.remove("show");
-    }, 3000); // Snackbar visible for 3 seconds
+    }, 3000);
   }
  
 </script>
