@@ -1,3 +1,4 @@
+import json
 from django.utils import timezone
 from django.shortcuts import get_object_or_404, redirect, render
 from register_app.models import Members
@@ -29,12 +30,12 @@ def dashboard_view(request):
             context['member'] = member
 
 
-             # Show all tasks to admins
+             # Show pending tasks to admins
             if member.user_role == 1:  
-                context['tasks'] = Task.objects.all()
+                context['tasks'] = Task.objects.filter(completion_status=False)
             else:
                 # Show only tasks assigned to members
-                context['tasks'] = Task.objects.filter(assignTo=member)
+                 context['tasks'] = Task.objects.filter(assignTo=member, completion_status=False)
 
         except Members.DoesNotExist:
             print("Member does not exist")
@@ -178,8 +179,29 @@ def deleteTask(request,task_id):
 
     return render(request, 'dashboard.html', {'task': task})
 
+#COMPLETE TASK
+def completeTask(request):
+    if request.method == 'POST':
+        try:
+            # Parse JSON body
+            data = json.loads(request.body)  
+            task_id = data.get('task_id')
+
+            if not task_id:
+                return JsonResponse({'error': 'Task ID is required'}, status=400)
+            task = get_object_or_404(Task, id=task_id)
+            task.completion_status = True  # Mark the task as complete
+            task.save()
+
+            return JsonResponse({'success': 'Task marked as complete'})
+        except json.JSONDecodeError:
+            return JsonResponse({'error': 'Invalid JSON data'}, status=400)
+    
+    return JsonResponse({'error': 'Invalid request method'}, status=405)
+
+
 def get_tasks(request):
-    tasks = Task.objects.all()
+    tasks = Task.objects.filter(completion_status=False) #gets incomplete tasks only
     task_data = []
     for task in tasks:
         task_data.append({

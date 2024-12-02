@@ -243,7 +243,7 @@ textarea:hover{
 
 .saveTaskBtn{
   color:#ffffff;
-    background-color: #d1a828;
+    background-color: #721f25;
     font-size: 14px; 
     cursor: pointer;
     width: 100%;
@@ -408,37 +408,6 @@ textarea:hover{
   color: white;
 }
 
-
-/*bootleg toast*/
-.toast {
-  visibility: hidden; 
-  min-width: 200px;
-  background-color: #4CAF50;
-  color: white; 
-  text-align: center;
-  border-radius: 5px;
-  padding: 12px 16px;
-  position: fixed;
-  z-index: 1000;
-  left: 50%; 
-  top: 20px; 
-  transform: translateX(-50%);
-  opacity: 0; 
-  transition: opacity 0.5s ease-in-out, top 0.5s ease-in-out;
-}
-
-.toast.show {
-  visibility: visible; 
-  opacity: 1; 
-  top: 50px; 
-}
-
-.toast.error {
-  background-color: #f44336; 
-  
-}
-
-
 /*UPCOMING MEETING SECTION*/
 
 .meetings{
@@ -595,6 +564,16 @@ textarea:hover{
 .editTaskBtn:hover {
   color: #000000;
 }
+.markCompleteBtn{
+  color: white;
+  background-color: #8a252c;
+  padding: 4px;
+  border-radius: 10px;
+  width: 120px;
+  border: transparent;
+  cursor: pointer;
+  float: right;
+}
 
 .button-container {
   display: flex;
@@ -653,4 +632,27 @@ textarea:hover{
 #assignedTo option:checked {
   background-color: #f0d9a8; 
   color: #8a252c; 
+}
+
+#snackbar {
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -125px;
+  background-color: #0CCD33;
+  color: #fff;
+  text-align: center;
+  border-radius: 4px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  bottom: 30px;
+  font-size: 14px;
+  opacity: 0; 
+  transition: visibility 0s, opacity 0.5s ease-in-out; 
+}
+
+#snackbar.show {
+  visibility: visible;
+  opacity: 1; 
 }
