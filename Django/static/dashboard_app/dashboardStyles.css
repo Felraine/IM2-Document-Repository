@@ -265,7 +265,7 @@ textarea:hover{
 .right-side {
   display: flex;
   flex-direction: column;
-  width: 30%; 
+  width: 40%; 
 }
 
 
@@ -351,8 +351,8 @@ textarea:hover{
 /*scroll decors*/
 
 .eventListContainer::-webkit-scrollbar {
-  height: 8px; 
-  width: auto;  
+  height: 0;  
+  width: 0;
 }
 
 .eventListContainer::-webkit-scrollbar-track {
@@ -473,23 +473,25 @@ textarea:hover{
 /*Meeting scroll design*/
 
 .meetingListContainer::-webkit-scrollbar {
-  height: 8px; 
-  width: auto;  
+  height: 0;  
+  width: 0;
 }
 
 .meetingListContainer::-webkit-scrollbar-track {
   background: #f1f1f1; 
   border-radius: 10px; 
+  width: 0;
 }
 
 .meetingListContainer::-webkit-scrollbar-thumb {
   background: #8a252c; 
   border-radius: 10px; 
-
+  width: 0;
 }
 
 .meetingListContainer::-webkit-scrollbar-thumb:hover {
   background: #721f25; 
+  
 }
 
 /*TASK SECTION*/
@@ -653,4 +655,11 @@ textarea:hover{
 #assignedTo option:checked {
   background-color: #f0d9a8; 
   color: #8a252c; 
+}
+
+button:disabled {
+  background-color: #d3d3d3; /* Gray background */
+  color: #000; /* Optional: Change text color for better visibility */
+  cursor: not-allowed; /* Optional: Change cursor to indicate disabled state */
+  opacity: 0.6; /* Optional: Slight transparency for disabled effect */
 }

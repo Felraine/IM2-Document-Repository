@@ -83,7 +83,7 @@
         >Edit</button>
       {% else %}
         <!-- Join Meeting Button (for non-admins) -->
-        <button class="joinBtn">Join Meeting</button>
+        <button class="joinBtn" data-datetime="{{ meeting.dateTime|date:'Y-m-d H:i:s' }}">Join Meeting</button>
       {% endif %}
     </div>
   {% empty %}
@@ -256,7 +256,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     ...tasks.map(task => ({
                         title: task.taskTitle,
                         start: task.dueDate,
-                        color: '#fed534', //Change here
+                        color: '#89CFF0', //Change here
                         type: 'Task'
                     })),
                     ...meetings.map(meeting => ({
@@ -403,38 +403,66 @@ saveEventBtn.onclick = function(){
 
 }
 
-let joinButtons = document.querySelectorAll('.joinBtn');
+document.addEventListener('DOMContentLoaded', () => {
+  const joinButtons = document.querySelectorAll('.joinBtn');
 
-joinButtons.forEach((button) => {
-  button.addEventListener('click', async (event) => {
-    event.preventDefault(); // Prevent the default button action (like form submission)
+  // Function to check meeting time and update button states
+  const updateButtonStates = () => {
+    const currentTime = new Date();
 
-    // Get meeting title and create a room name
-    let meetingTitle = event.target.closest('.eventList').querySelector('h3').textContent;
-    let room = meetingTitle.toUpperCase(); // Use room name (e.g., meeting title)
+    joinButtons.forEach((button) => {
+      const meetingTime = new Date(button.getAttribute('data-datetime'));
 
-    // Fetch token from the backend API
-    let response = await fetch(`/meetings/get_token/?channel=${room}`);
-    if (!response.ok) {
-      // Handle failed response
-      console.error("Failed to fetch token");
-      return;
+      if (currentTime >= meetingTime && button.disabled) {
+        button.disabled = false; // Enable the button
+        button.textContent = 'Join Meeting'; // Reset button text
+      }
+    });
+  };
+
+  // Initial setup of buttons
+  joinButtons.forEach((button) => {
+    const meetingTime = new Date(button.getAttribute('data-datetime'));
+    const currentTime = new Date();
+
+    if (currentTime < meetingTime) {
+      button.disabled = true; // Disable the button if the meeting hasn't started
+      button.textContent = 'Meeting Not Started'; // Update button text
     }
 
-    let data = await response.json();
-    let UID = data.uid;
-    let token = data.token;
-    let name = data.name;
+    button.addEventListener('click', async (event) => {
+      event.preventDefault();
 
-    // Store session data (for use in the meeting room)
-    sessionStorage.setItem('UID', UID);
-    sessionStorage.setItem('token', token);
-    sessionStorage.setItem('room', room);
-    sessionStorage.setItem('name', name);
+      // Recheck the meeting time before proceeding
+      const latestTime = new Date();
+      const meetingTime = new Date(button.getAttribute('data-datetime'));
+      if (latestTime < meetingTime) {
+        alert('Meeting has not started yet.');
+        return;
+      }
 
-    // Redirect to the meeting room page
-    window.location.href = '/meetings/room/';
+      // Proceed with join logic
+      let meetingTitle = event.target.closest('.eventList').querySelector('h3').textContent;
+      let room = meetingTitle.toUpperCase();
+
+      let response = await fetch(`/meetings/get_token/?channel=${room}`);
+      if (!response.ok) {
+        console.error('Failed to fetch token');
+        return;
+      }
+
+      let data = await response.json();
+      sessionStorage.setItem('UID', data.uid);
+      sessionStorage.setItem('token', data.token);
+      sessionStorage.setItem('room', room);
+      sessionStorage.setItem('name', data.name);
+
+      window.location.href = '/meetings/room/';
+    });
   });
+
+  // Check button states every 30 seconds
+  setInterval(updateButtonStates, 30000); // Adjust interval as needed
 });
 
 // Open add event form
